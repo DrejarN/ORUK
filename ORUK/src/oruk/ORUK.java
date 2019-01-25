@@ -16,6 +16,13 @@ public class ORUK {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        //Kobben
+        //Mats
+        //hej 
+        //ämändä
+        //Frippinho
+        //Soffan
     }
     
 }

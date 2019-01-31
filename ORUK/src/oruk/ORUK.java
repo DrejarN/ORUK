@@ -1,31 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package oruk;
+
+import oru.inf.InfDB;
 
 /**
  *
  * @author Jamie
  */
 public class ORUK {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        //Kobben
-        //Mats
-        //hej 
-        //ämändä
-        //Frippinho
-        //Soffan
-        //Johan
-        //mats test
-        //DBTEST
+    //fält
+    private final InfDB db;
+   
+    //construktor
+    public ORUK(InfDB db) {
+       
+        this.db = db;
+       
     }
     
 }

@@ -10,12 +10,12 @@ package oruk;
  *
  * @author Laptop
  */
-public class LoggaUt extends javax.swing.JFrame {
+public class MittFlodeInformell extends javax.swing.JFrame {
 
     /**
      * Creates new form MittFlode
      */
-    public LoggaUt() {
+    public MittFlodeInformell() {
         initComponents();
     }
 
@@ -30,9 +30,12 @@ public class LoggaUt extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        btnUtloggas = new javax.swing.JButton();
-        btnAvbryt = new javax.swing.JButton();
+        btnFormell = new javax.swing.JButton();
+        btnInformell = new javax.swing.JButton();
+        btnForskning = new javax.swing.JButton();
+        panel_Inlagg = new javax.swing.JPanel();
+        btnKommentera = new javax.swing.JButton();
+        textArea2 = new java.awt.TextArea();
         menyBar = new javax.swing.JMenuBar();
         btnMittFlode = new javax.swing.JMenu();
         btnMinProfil = new javax.swing.JMenu();
@@ -44,46 +47,74 @@ public class LoggaUt extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(203, 217, 241));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(237, 237, 255), new java.awt.Color(162, 162, 197), new java.awt.Color(125, 125, 162), new java.awt.Color(125, 125, 162)));
+        jPanel2.setBackground(new java.awt.Color(176, 203, 247));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Vill du logga ut?");
+        btnFormell.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnFormell.setText("Formell blogg");
 
-        btnUtloggas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnUtloggas.setText("Logga ut");
-        btnUtloggas.addActionListener(new java.awt.event.ActionListener() {
+        btnInformell.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnInformell.setText("Informell blogg");
+        btnInformell.setPreferredSize(new java.awt.Dimension(230, 40));
+
+        btnForskning.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnForskning.setText("Forskning & Utbildning");
+        btnForskning.setPreferredSize(new java.awt.Dimension(230, 40));
+        btnForskning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUtloggasActionPerformed(evt);
+                btnForskningActionPerformed(evt);
             }
         });
-
-        btnAvbryt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnAvbryt.setText("Avbryt");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUtloggas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAvbryt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnFormell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(86, 86, 86)
+                .addComponent(btnInformell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(btnForskning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addComponent(btnUtloggas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAvbryt)
-                .addGap(23, 23, 23))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFormell)
+                    .addComponent(btnInformell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnForskning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panel_Inlagg.setBackground(new java.awt.Color(176, 203, 247));
+
+        btnKommentera.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnKommentera.setText("Kommentera inlägg");
+
+        javax.swing.GroupLayout panel_InlaggLayout = new javax.swing.GroupLayout(panel_Inlagg);
+        panel_Inlagg.setLayout(panel_InlaggLayout);
+        panel_InlaggLayout.setHorizontalGroup(
+            panel_InlaggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_InlaggLayout.createSequentialGroup()
+                .addContainerGap(352, Short.MAX_VALUE)
+                .addComponent(btnKommentera)
+                .addGap(325, 325, 325))
+            .addGroup(panel_InlaggLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textArea2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panel_InlaggLayout.setVerticalGroup(
+            panel_InlaggLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_InlaggLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textArea2, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnKommentera)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -91,18 +122,27 @@ public class LoggaUt extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addComponent(panel_Inlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(panel_Inlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        menyBar.setBackground(new java.awt.Color(47, 92, 168));
         menyBar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         btnMittFlode.setText("Mitt flöde");
@@ -172,6 +212,8 @@ public class LoggaUt extends javax.swing.JFrame {
 
     private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
         // TODO add your handling code here:
+        new MinProfil().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnMinProfilActionPerformed
 
     private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
@@ -186,9 +228,9 @@ public class LoggaUt extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
-    private void btnUtloggasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtloggasActionPerformed
+    private void btnForskningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForskningActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUtloggasActionPerformed
+    }//GEN-LAST:event_btnForskningActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,13 +249,13 @@ public class LoggaUt extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoggaUt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MittFlodeInformell.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoggaUt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MittFlodeInformell.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoggaUt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MittFlodeInformell.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoggaUt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MittFlodeInformell.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -221,22 +263,25 @@ public class LoggaUt extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoggaUt().setVisible(true);
+                new MittFlodeInformell().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAvbryt;
     private javax.swing.JMenu btnDoodle;
+    private javax.swing.JButton btnFormell;
+    private javax.swing.JButton btnForskning;
+    private javax.swing.JButton btnInformell;
+    private javax.swing.JButton btnKommentera;
     private javax.swing.JMenu btnLoggaUt;
     private javax.swing.JMenu btnMeddelanden;
     private javax.swing.JMenu btnMinProfil;
     private javax.swing.JMenu btnMittFlode;
-    private javax.swing.JButton btnUtloggas;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JMenuBar menyBar;
+    private javax.swing.JPanel panel_Inlagg;
+    private java.awt.TextArea textArea2;
     // End of variables declaration//GEN-END:variables
 }

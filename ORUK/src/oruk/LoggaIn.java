@@ -50,7 +50,6 @@ public class LoggaIn extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtAnvandarnamn.setEditable(false);
         txtAnvandarnamn.setBackground(new java.awt.Color(176, 203, 247));
         txtAnvandarnamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtAnvandarnamn.addActionListener(new java.awt.event.ActionListener() {

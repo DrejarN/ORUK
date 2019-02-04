@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-
+import javax.swing.JFileChooser;
 /**
  *
  * @author Christian Rudolphi & Mats Nilsson
@@ -20,9 +20,6 @@ public class Validering {
     private static InfDB db;
     private static ArrayList svar;
 
-    /**
-     * Sätter ett värde på fälten.
-     */
     public Validering(InfDB db) {
         this.lista = new ArrayList<>();
         this.svar = new ArrayList();
@@ -302,35 +299,6 @@ public class Validering {
     }
 
     /**
-     * Kontrollmetod som tar två JTextFields som parameter och kollar om den är
-     * en föreståndare i databasen.
-     */
-    public static boolean finnsForestondare(JTextField ruta1, JTextField ruta2) {
-        boolean finnsinte = true;
-
-        String namn = ruta1.getText();
-        String efternamn = ruta2.getText();
-        String fraga = "SELECT FORESTANDARE FROM ELEVHEM join LARARE on LARAR_ID = FORESTANDARE WHERE FORNAMN = '" + namn + "' and EFTERNAMN = '" + efternamn + "'";
-        String fraga2 = "SELECT ELEVHEMSNAMN FROM ELEVHEM join LARARE on LARAR_ID = FORESTANDARE WHERE FORNAMN = '" + namn + "' and EFTERNAMN = '" + efternamn + "'";
-        String svar = "";
-
-        try {
-            lista = db.fetchRows(fraga);
-            if (lista == null) {
-
-            } else {
-                svar = db.fetchSingle(fraga2);
-
-                JOptionPane.showMessageDialog(null, "Läraren är elevhemsföreståndare för " + svar + ".\nByt till en annan elevhemsföreståndare och försök igen");
-                finnsinte = false;
-            }
-        } catch (InfException ex) {
-        }
-        return finnsinte;
-
-    }
-
-    /**
      * Kontrollmetod som tar en JTextField som parameter och kollar om den är
      * tom eller om det man skriver in börjar med stor bokstav.
      */
@@ -483,57 +451,98 @@ public class Validering {
         return finnsinte;
 
     }
-
-    /**
-     * Kontrollmetod som tar två JTextFields som parameter och kollar om datum
-     * är skrivet i rätt format och att angivet slutdatum kommer efter
-     * startdatum.
-     */
-    public static boolean arSlutDatumStorre(JTextField ruta1, JTextField ruta2) {
-        boolean resultat = true;
-        String startDatum = ruta1.getText();
-        String slutDatum = ruta2.getText();
-
-        LocalDate date1 = LocalDate.parse(startDatum);
-        LocalDate date2 = LocalDate.parse(slutDatum);
-
-        if (date1.isBefore(date2)) {
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Ditt angivna slutdatum kommer före startdatum.\nVar vänligen kontrollera.");
-            resultat = false;
+  
+    //Validerings metod som undersöker om det angivna värdet är ett heltal
+    public static boolean heltal(JTextField enruta){
+        boolean searching = true;
+        
+        try{
+            String enString = enruta.getText();
+            Integer.parseInt(enString);
+            enruta.requestFocus();
         }
-
-        return resultat;
-
-    }
-
-    /**
-     * Kontrollmetod som tar fyra JTextFields som parameter och kollar om en
-     * lärare har kurser mellan två angivna datum.
-     */
-    public static boolean arDetFelDatum(JTextField ruta1, JTextField ruta2, JTextField ruta3, JTextField ruta4) {
-
-        boolean resultat = true;
-
-        try {
-
-            String startDatum = ruta1.getText();
-            String slutDatum = ruta2.getText();
-            String fornamn = ruta3.getText();
-            String efternamn = ruta4.getText();
-            String fraga = "SELECT KURSNAMN FROM KURS JOIN LARARE ON KURS.KURSLARARE=LARARE.LARAR_ID WHERE KURSSTART>=" + "'" + startDatum + "'" + "AND KURSSLUT<=" + "'" + slutDatum + "'" + "AND FORNAMN=" + "'" + fornamn + "'" + "AND EFTERNAMN=" + "'" + efternamn + "'";
-            lista = db.fetchRows(fraga);
-            if (lista == null) {
-                resultat = false;
-                JOptionPane.showMessageDialog(null, "Läraren har inga kurser mellan angivna datum");
-
-            }
-
-        } catch (InfException ex) {
-
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Ange ett heltal");
+            searching = false;
         }
-        return resultat;
+        return searching;
     }
-
+    //Validerings metod som undersöker om det angivna värdet är en String
+    public static boolean positivtTal(JTextField enruta){
+        boolean searching = true;
+        if(enruta.getText().substring(0,1).equals("-")){
+           searching = false;
+           enruta.requestFocus();  
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Endast positiva värden");
+        }
+        return searching;
+    }
+    
+    //Validerings metod som undersöker om det angivna int talet är positivt
+    public static boolean enString(JTextField enruta){
+        boolean searching = true;
+        if(!enruta.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(null, "Endast bokstäver mellan A-Z tillåtna");
+            searching = false;
+        }
+        return searching;
+    }
+    
+    //Validerings metod som undersöker om metoden retunerar ett svar eller inte.
+    public static boolean kollaNullAL(ArrayList<String> resultat){
+        boolean searching = true;
+        if(resultat.isEmpty()){
+          searching = false;
+          JOptionPane.showMessageDialog(null, "Din sökning gav inga träffar. Försök med andra värden");
+        }
+        return searching;
+    }
+    //Valderings metod som kolla om en ArrayList<HaskMap<String,String>> är tom eller inte.
+    public static boolean kollaNullSS(ArrayList<HashMap<String,String>> resultat){
+        boolean searching = true;
+        if(resultat.isEmpty()){
+            searching = false;
+            JOptionPane.showMessageDialog(null, "Din sökning gav inga träffar. Försök med andra värden");
+        }
+        return searching;
+    }
+    //Validerings metod 
+    public static boolean kollaStringVarde(String enstring){
+        boolean searching = true;
+        if(enstring == null){
+           searching = false;
+        }
+        return searching;
+    }
+    
+    public static String toUpperCase(String enstring){ 
+        StringBuffer s = new StringBuffer(); 
+        char ch = ' '; 
+        for(int i = 0; i < enstring.length(); i++) { 
+            if (ch == ' ' && enstring.charAt(i) != ' ') 
+                s.append(Character.toUpperCase(enstring.charAt(i))); 
+            else
+                s.append(enstring.charAt(i)); 
+            ch = enstring.charAt(i); 
+        } 
+        return s.toString().trim(); 
+    }
+    
+    public static boolean file(JFileChooser fil){
+        boolean searching = true;
+        if(fil.getName().isEmpty()){
+            searching = false;
+        }
+        return searching;
+    }
+    
+    public static boolean file2(JFileChooser fil){
+        boolean searching = true;
+        if(fil.getSelectedFile() == null){
+            searching = false;
+        }
+        return searching;
+    }
 }

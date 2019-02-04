@@ -1,22 +1,16 @@
 package oruk;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import oru.inf.*;
+import javax.swing.*;
+import java.util.*;
 
-/**
- *
- * @author Laptop
- */
 public class LoggaIn extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoggaIn
-     */
-    public LoggaIn() {
+    private static InfDB db;
+    
+    public LoggaIn(InfDB db) {
         initComponents();
+        this.db = db;
     }
 
     /**
@@ -31,8 +25,8 @@ public class LoggaIn extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        txtAnvandarnamn = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        anvandarnamn = new javax.swing.JTextField();
+        losenord = new javax.swing.JPasswordField();
         lblAnvandarnamn = new javax.swing.JLabel();
         lblLosenord = new javax.swing.JLabel();
         btnLoggaIn = new javax.swing.JButton();
@@ -50,20 +44,20 @@ public class LoggaIn extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtAnvandarnamn.setBackground(new java.awt.Color(176, 203, 247));
-        txtAnvandarnamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        txtAnvandarnamn.addActionListener(new java.awt.event.ActionListener() {
+        anvandarnamn.setBackground(new java.awt.Color(176, 203, 247));
+        anvandarnamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        anvandarnamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAnvandarnamnActionPerformed(evt);
+                anvandarnamnActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setBackground(new java.awt.Color(176, 203, 247));
-        jPasswordField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPasswordField1.setText("00000000000");
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        losenord.setBackground(new java.awt.Color(176, 203, 247));
+        losenord.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        losenord.setText("00000000000");
+        losenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                losenordActionPerformed(evt);
             }
         });
 
@@ -76,6 +70,11 @@ public class LoggaIn extends javax.swing.JFrame {
         btnLoggaIn.setBackground(new java.awt.Color(49, 100, 184));
         btnLoggaIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnLoggaIn.setText("Logga in");
+        btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoggaInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,8 +85,8 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblLosenord)
                     .addComponent(lblAnvandarnamn)
-                    .addComponent(txtAnvandarnamn)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addComponent(anvandarnamn)
+                    .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                     .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
@@ -97,11 +96,11 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addGap(209, 209, 209)
                 .addComponent(lblAnvandarnamn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(anvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(lblLosenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(losenord, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(btnLoggaIn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(138, Short.MAX_VALUE))
@@ -142,24 +141,47 @@ public class LoggaIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void txtAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnvandarnamnActionPerformed
+    private void anvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anvandarnamnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAnvandarnamnActionPerformed
+    }//GEN-LAST:event_anvandarnamnActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void losenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_losenordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_losenordActionPerformed
+
+    private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
+        try{
+           ArrayList<String> lista = db.fetchColumn("SELECT FORNAMN FROM ANVANDARE");
+           for(int i = 0; i < lista.size(); i++){
+               if(lista.get(i).equalsIgnoreCase(anvandarnamn.getText())){
+                   try{
+                       String yaho = db.fetchSingle("SELECT LOSENORD FROM ANVANDARE WHERE FORNAMN = '" + anvandarnamn.getText()+"'");
+                       if(yaho.equalsIgnoreCase(losenord.getText())){
+                           new MinProfil(db).setVisible(true);
+                           dispose();
+                       }
+                   }
+                   catch(InfException e){
+                       JOptionPane.showMessageDialog(null, "Fel lösenord");
+                   }
+               }
+           }
+       }
+       catch(InfException e){
+           JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
+       }
+    }//GEN-LAST:event_btnLoggaInActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField anvandarnamn;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblAnvandarnamn;
     private javax.swing.JLabel lblLosenord;
-    private javax.swing.JTextField txtAnvandarnamn;
+    private javax.swing.JPasswordField losenord;
     // End of variables declaration//GEN-END:variables
 }

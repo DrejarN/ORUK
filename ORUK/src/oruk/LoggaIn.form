@@ -84,8 +84,8 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblLosenord" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAnvandarnamn" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtAnvandarnamn" max="32767" attributes="0"/>
-                          <Component id="jPasswordField1" pref="326" max="32767" attributes="0"/>
+                          <Component id="anvandarnamn" max="32767" attributes="0"/>
+                          <Component id="losenord" pref="326" max="32767" attributes="0"/>
                           <Component id="btnLoggaIn" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="82" max="32767" attributes="0"/>
@@ -98,11 +98,11 @@
                       <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
                       <Component id="lblAnvandarnamn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtAnvandarnamn" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="anvandarnamn" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="lblLosenord" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPasswordField1" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="losenord" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="btnLoggaIn" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace pref="138" max="32767" attributes="0"/>
@@ -111,7 +111,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="txtAnvandarnamn">
+            <Component class="javax.swing.JTextField" name="anvandarnamn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f7" green="cb" red="b0" type="rgb"/>
@@ -121,10 +121,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtAnvandarnamnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anvandarnamnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+            <Component class="javax.swing.JPasswordField" name="losenord">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f7" green="cb" red="b0" type="rgb"/>
@@ -135,7 +135,7 @@
                 <Property name="text" type="java.lang.String" value="00000000000"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordField1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="losenordActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAnvandarnamn">
@@ -164,6 +164,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Logga in"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoggaInActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

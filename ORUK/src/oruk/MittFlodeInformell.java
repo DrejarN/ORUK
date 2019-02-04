@@ -10,10 +10,10 @@ package oruk;
  *
  * @author Laptop
  */
-public class MittFlodeInformell extends javax.swing.JFrame {
+public class MittFlodeInformell extends javax.swing.JPanel {
 
     /**
-     * Creates new form MittFlode
+     * Creates new form MittFlodeInformell2
      */
     public MittFlodeInformell() {
         initComponents();
@@ -36,14 +36,6 @@ public class MittFlodeInformell extends javax.swing.JFrame {
         panel_Inlagg = new javax.swing.JPanel();
         btnKommentera = new javax.swing.JButton();
         textArea2 = new java.awt.TextArea();
-        menyBar = new javax.swing.JMenuBar();
-        btnMittFlode = new javax.swing.JMenu();
-        btnMinProfil = new javax.swing.JMenu();
-        btnMeddelanden = new javax.swing.JMenu();
-        btnDoodle = new javax.swing.JMenu();
-        btnLoggaUt = new javax.swing.JMenu();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -128,7 +120,7 @@ public class MittFlodeInformell extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panel_Inlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))))
         );
@@ -139,61 +131,11 @@ public class MittFlodeInformell extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panel_Inlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menyBar.setBackground(new java.awt.Color(47, 92, 168));
-        menyBar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        btnMittFlode.setText("Mitt flöde");
-        btnMittFlode.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMittFlode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMittFlodeActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMittFlode);
-
-        btnMinProfil.setText("Min profil");
-        btnMinProfil.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMinProfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinProfilActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMinProfil);
-
-        btnMeddelanden.setText("Meddelanden");
-        btnMeddelanden.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMeddelanden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMeddelandenActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMeddelanden);
-
-        btnDoodle.setText("Doodle");
-        btnDoodle.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnDoodle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoodleActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnDoodle);
-
-        btnLoggaUt.setText("Logga ut");
-        btnLoggaUt.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoggaUtActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnLoggaUt);
-
-        setJMenuBar(menyBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -202,51 +144,20 @@ public class MittFlodeInformell extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMittFlodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMittFlodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMittFlodeActionPerformed
-
-    private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
-        // TODO add your handling code here:
-        new MinProfil().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnMinProfilActionPerformed
-
-    private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMeddelandenActionPerformed
-
-    private void btnDoodleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoodleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDoodleActionPerformed
-
-    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     private void btnForskningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForskningActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnForskningActionPerformed
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu btnDoodle;
     private javax.swing.JButton btnFormell;
     private javax.swing.JButton btnForskning;
     private javax.swing.JButton btnInformell;
     private javax.swing.JButton btnKommentera;
-    private javax.swing.JMenu btnLoggaUt;
-    private javax.swing.JMenu btnMeddelanden;
-    private javax.swing.JMenu btnMinProfil;
-    private javax.swing.JMenu btnMittFlode;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JMenuBar menyBar;
     private javax.swing.JPanel panel_Inlagg;
     private java.awt.TextArea textArea2;
     // End of variables declaration//GEN-END:variables

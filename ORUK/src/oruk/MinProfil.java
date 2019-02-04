@@ -1,20 +1,18 @@
-
-package oruk;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package oruk;
 
 /**
  *
  * @author Laptop
  */
-public class MinProfil extends javax.swing.JFrame {
+public class MinProfil extends javax.swing.JPanel {
 
     /**
-     * Creates new form MittFlode
+     * Creates new form MinProfil1
      */
     public MinProfil() {
         initComponents();
@@ -41,14 +39,6 @@ public class MinProfil extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnNyttInlagg = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        menyBar = new javax.swing.JMenuBar();
-        btnMittFlode = new javax.swing.JMenu();
-        btnMinProfil = new javax.swing.JMenu();
-        btnMeddelanden = new javax.swing.JMenu();
-        btnDoodle = new javax.swing.JMenu();
-        btnLoggaUt = new javax.swing.JMenu();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,7 +95,7 @@ public class MinProfil extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 408, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 396, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNyttInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSeInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,11 +139,12 @@ public class MinProfil extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,58 +156,8 @@ public class MinProfil extends javax.swing.JFrame {
                 .addContainerGap(216, Short.MAX_VALUE))
         );
 
-        menyBar.setBackground(new java.awt.Color(47, 92, 168));
-        menyBar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        btnMittFlode.setText("Mitt flöde");
-        btnMittFlode.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMittFlode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMittFlodeActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMittFlode);
-
-        btnMinProfil.setText("Min profil");
-        btnMinProfil.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMinProfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinProfilActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMinProfil);
-
-        btnMeddelanden.setText("Meddelanden");
-        btnMeddelanden.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMeddelanden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMeddelandenActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMeddelanden);
-
-        btnDoodle.setText("Doodle");
-        btnDoodle.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnDoodle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoodleActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnDoodle);
-
-        btnLoggaUt.setText("Logga ut");
-        btnLoggaUt.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoggaUtActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnLoggaUt);
-
-        setJMenuBar(menyBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -227,42 +168,11 @@ public class MinProfil extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMittFlodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMittFlodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMittFlodeActionPerformed
-
-    private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMinProfilActionPerformed
-
-    private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMeddelandenActionPerformed
-
-    private void btnDoodleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoodleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDoodleActionPerformed
-
-    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLoggaUtActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu btnDoodle;
     private javax.swing.JButton btnInstallningar;
-    private javax.swing.JMenu btnLoggaUt;
-    private javax.swing.JMenu btnMeddelanden;
-    private javax.swing.JMenu btnMinProfil;
-    private javax.swing.JMenu btnMittFlode;
     private javax.swing.JButton btnNyttInlagg;
     private javax.swing.JButton btnSeInlagg;
     private javax.swing.JLabel jLabel1;
@@ -274,6 +184,5 @@ public class MinProfil extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JMenuBar menyBar;
     // End of variables declaration//GEN-END:variables
 }

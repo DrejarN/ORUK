@@ -10,10 +10,10 @@ package oruk;
  *
  * @author Laptop
  */
-public class LoggaUt extends javax.swing.JFrame {
+public class LoggaUt extends javax.swing.JPanel {
 
     /**
-     * Creates new form MittFlode
+     * Creates new form LoggaUt2
      */
     public LoggaUt() {
         initComponents();
@@ -28,21 +28,10 @@ public class LoggaUt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnUtloggas = new javax.swing.JButton();
         btnAvbryt = new javax.swing.JButton();
-        menyBar = new javax.swing.JMenuBar();
-        btnMittFlode = new javax.swing.JMenu();
-        btnMinProfil = new javax.swing.JMenu();
-        btnMeddelanden = new javax.swing.JMenu();
-        btnDoodle = new javax.swing.JMenu();
-        btnLoggaUt = new javax.swing.JMenu();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(203, 217, 241));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(237, 237, 255), new java.awt.Color(162, 162, 197), new java.awt.Color(125, 125, 162), new java.awt.Color(125, 125, 162)));
@@ -86,123 +75,27 @@ public class LoggaUt extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
-        );
-
-        menyBar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        btnMittFlode.setText("Mitt flöde");
-        btnMittFlode.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMittFlode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMittFlodeActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMittFlode);
-
-        btnMinProfil.setText("Min profil");
-        btnMinProfil.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMinProfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMinProfilActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMinProfil);
-
-        btnMeddelanden.setText("Meddelanden");
-        btnMeddelanden.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnMeddelanden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMeddelandenActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnMeddelanden);
-
-        btnDoodle.setText("Doodle");
-        btnDoodle.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnDoodle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoodleActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnDoodle);
-
-        btnLoggaUt.setText("Logga ut");
-        btnLoggaUt.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoggaUtActionPerformed(evt);
-            }
-        });
-        menyBar.add(btnLoggaUt);
-
-        setJMenuBar(menyBar);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnMittFlodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMittFlodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMittFlodeActionPerformed
-
-    private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMinProfilActionPerformed
-
-    private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMeddelandenActionPerformed
-
-    private void btnDoodleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoodleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDoodleActionPerformed
-
-    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     private void btnUtloggasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtloggasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUtloggasActionPerformed
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvbryt;
-    private javax.swing.JMenu btnDoodle;
-    private javax.swing.JMenu btnLoggaUt;
-    private javax.swing.JMenu btnMeddelanden;
-    private javax.swing.JMenu btnMinProfil;
-    private javax.swing.JMenu btnMittFlode;
     private javax.swing.JButton btnUtloggas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JMenuBar menyBar;
     // End of variables declaration//GEN-END:variables
 }

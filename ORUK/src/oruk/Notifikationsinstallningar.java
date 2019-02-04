@@ -187,6 +187,28 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
+    private void btnMittFlodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMittFlodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMittFlodeActionPerformed
+
+    private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMinProfilActionPerformed
+
+    private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMeddelandenActionPerformed
+
+    private void btnDoodleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoodleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDoodleActionPerformed
+
+    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLoggaUtActionPerformed
+
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNotifikation;
     private javax.swing.JButton btnProfil;

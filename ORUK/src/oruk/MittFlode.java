@@ -5,6 +5,8 @@
  */
 package oruk;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Laptop
@@ -27,7 +29,7 @@ public class MittFlode extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelFlode = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnFormell = new javax.swing.JButton();
         btnInformell = new javax.swing.JButton();
@@ -36,12 +38,17 @@ public class MittFlode extends javax.swing.JPanel {
         btnKommentera = new javax.swing.JButton();
         textArea2 = new java.awt.TextArea();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        panelFlode.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(176, 203, 247));
 
         btnFormell.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnFormell.setText("Formell blogg");
+        btnFormell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFormellActionPerformed(evt);
+            }
+        });
 
         btnInformell.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnInformell.setText("Informell blogg");
@@ -108,24 +115,24 @@ public class MittFlode extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelFlodeLayout = new javax.swing.GroupLayout(panelFlode);
+        panelFlode.setLayout(panelFlodeLayout);
+        panelFlodeLayout.setHorizontalGroup(
+            panelFlodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFlodeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelFlodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFlodeLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFlodeLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panel_Inlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelFlodeLayout.setVerticalGroup(
+            panelFlodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFlodeLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -137,11 +144,11 @@ public class MittFlode extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelFlode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelFlode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,14 +156,26 @@ public class MittFlode extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnForskningActionPerformed
 
+    private void btnFormellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormellActionPerformed
+        // TODO add your handling code here:
+         JPanel importeradPanel = new MittFlodeFormell();
+        importeradPanel.setBounds(panelFlode.getBounds());
+
+        panelFlode.removeAll();
+        panelFlode.revalidate();
+        panelFlode.repaint();
+        panelFlode.add(importeradPanel);
+        importeradPanel.setLocation(1,1);
+    }//GEN-LAST:event_btnFormellActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormell;
     private javax.swing.JButton btnForskning;
     private javax.swing.JButton btnInformell;
     private javax.swing.JButton btnKommentera;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel panelFlode;
     private javax.swing.JPanel panel_Inlagg;
     private java.awt.TextArea textArea2;
     // End of variables declaration//GEN-END:variables

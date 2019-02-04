@@ -6,6 +6,7 @@
 package oruk;
 
 import javax.swing.JPanel;
+import oru.inf.InfDB;
 
 /**
  *
@@ -13,11 +14,14 @@ import javax.swing.JPanel;
  */
 public class Huvudfonster extends javax.swing.JFrame {
 
+    private final InfDB db;
+
     /**
      * Creates new form Huvudfönster
      */
-    public Huvudfonster() {
+    public Huvudfonster(InfDB db) {
         initComponents();
+        this.db=db;
     }
 
     /**
@@ -155,6 +159,14 @@ public class Huvudfonster extends javax.swing.JFrame {
 
     private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
         // TODO add your handling code here:
+        JPanel importeradPanel = new MinProfil(db);
+        importeradPanel.setBounds(panelMain.getBounds());
+
+        panelMain.removeAll();
+        panelMain.revalidate();
+        panelMain.repaint();
+        panelMain.add(importeradPanel);
+        importeradPanel.setLocation(1,1);
     }//GEN-LAST:event_btnMinProfilActionPerformed
 
     private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
@@ -167,44 +179,17 @@ public class Huvudfonster extends javax.swing.JFrame {
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
         // TODO add your handling code here:
+         JPanel importeradPanel = new LoggaUt();
+        importeradPanel.setBounds(panelMain.getBounds());
+
+        panelMain.removeAll();
+        panelMain.revalidate();
+        panelMain.repaint();
+        panelMain.add(importeradPanel);
+        importeradPanel.setLocation(1,1);
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Huvudfonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Huvudfonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Huvudfonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Huvudfonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Huvudfonster().setVisible(true);
-            }
-        });
-    }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoodle;
     private javax.swing.JButton btnLoggaUt;

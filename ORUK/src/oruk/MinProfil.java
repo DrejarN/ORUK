@@ -5,17 +5,23 @@
  */
 package oruk;
 
+import javax.swing.JPanel;
+import oru.inf.InfDB;
+
 /**
  *
  * @author Laptop
  */
 public class MinProfil extends javax.swing.JPanel {
 
+    private final InfDB db;
+
     /**
      * Creates new form MinProfil1
      */
-    public MinProfil() {
+    public MinProfil(InfDB db) {
         initComponents();
+        this.db=db;
     }
 
     /**
@@ -27,7 +33,7 @@ public class MinProfil extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelMinProfil = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnSeInlagg = new javax.swing.JButton();
         btnInstallningar = new javax.swing.JButton();
@@ -40,7 +46,7 @@ public class MinProfil extends javax.swing.JPanel {
         btnNyttInlagg = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        panelMinProfil.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(203, 217, 241));
 
@@ -49,6 +55,11 @@ public class MinProfil extends javax.swing.JPanel {
 
         btnInstallningar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnInstallningar.setText("Inställningar");
+        btnInstallningar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInstallningarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel2.setText("Namn:");
@@ -132,23 +143,23 @@ public class MinProfil extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel1.setText("Aktivitetsflöde");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelMinProfilLayout = new javax.swing.GroupLayout(panelMinProfil);
+        panelMinProfil.setLayout(panelMinProfilLayout);
+        panelMinProfilLayout.setHorizontalGroup(
+            panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMinProfilLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMinProfilLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelMinProfilLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelMinProfilLayout.setVerticalGroup(
+            panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMinProfilLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
@@ -160,15 +171,27 @@ public class MinProfil extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelMinProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelMinProfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInstallningarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstallningarActionPerformed
+        // TODO add your handling code here:
+        JPanel importeradPanel = new Profilinstallningar(db);
+        importeradPanel.setBounds(panelMinProfil.getBounds());
+
+        panelMinProfil.removeAll();
+        panelMinProfil.revalidate();
+        panelMinProfil.repaint();
+        panelMinProfil.add(importeradPanel);
+        importeradPanel.setLocation(1,1);
+    }//GEN-LAST:event_btnInstallningarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,8 +204,8 @@ public class MinProfil extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel panelMinProfil;
     // End of variables declaration//GEN-END:variables
 }

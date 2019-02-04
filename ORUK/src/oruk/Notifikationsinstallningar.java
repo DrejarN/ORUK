@@ -5,17 +5,22 @@
  */
 package oruk;
 
+import oru.inf.InfDB;
+
 /**
  *
  * @author Laptop
  */
 public class Notifikationsinstallningar extends javax.swing.JPanel {
 
+    private final InfDB db;
+
     /**
      * Creates new form Notifikationsinstallningar2
      */
-    public Notifikationsinstallningar() {
+    public Notifikationsinstallningar(InfDB db) {
         initComponents();
+        this.db=db;
     }
 
     /**

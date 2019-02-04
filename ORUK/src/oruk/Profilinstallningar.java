@@ -131,9 +131,6 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProfilInstallningarLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnSpara, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -150,8 +147,10 @@ public class Profilinstallningar extends javax.swing.JPanel {
                             .addComponent(txtEpost)
                             .addComponent(txtTitel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLaddaUpp)
-                        .addGap(81, 81, 81))))
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLaddaUpp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSpara, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(17, 17, 17))))
         );
         panelProfilInstallningarLayout.setVerticalGroup(
             panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +165,8 @@ public class Profilinstallningar extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSpara))
                 .addGap(18, 18, 18)
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -175,9 +175,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(btnSpara)
-                .addContainerGap())
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -21,7 +21,10 @@ public class MinProfil extends javax.swing.JPanel {
      */
     public MinProfil(InfDB db) {
         initComponents();
-        this.db=db;
+        this.db = db;
+        bild.setIcon(Profilinstallningar.getBild());
+        
+
     }
 
     /**
@@ -73,8 +76,6 @@ public class MinProfil extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        bild.setText("Ingen bild");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -115,7 +116,7 @@ public class MinProfil extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 396, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNyttInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSeInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +200,7 @@ public class MinProfil extends javax.swing.JPanel {
         panelMinProfil.revalidate();
         panelMinProfil.repaint();
         panelMinProfil.add(importeradPanel);
-        importeradPanel.setLocation(1,1);
+        importeradPanel.setLocation(1, 1);
     }//GEN-LAST:event_btnInstallningarActionPerformed
 
 

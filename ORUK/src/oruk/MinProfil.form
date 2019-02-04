@@ -88,7 +88,7 @@
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="396" max="32767" attributes="0"/>
+                      <EmptySpace pref="459" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnNyttInlagg" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
                           <Component id="btnSeInlagg" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
@@ -206,9 +206,6 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="bild">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Ingen bild"/>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

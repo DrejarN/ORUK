@@ -5,9 +5,11 @@
  */
 package oruk;
 
+import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import oru.inf.InfDB;
 
@@ -18,7 +20,7 @@ import oru.inf.InfDB;
 public class Profilinstallningar extends javax.swing.JPanel {
 
     private final InfDB db;
-    public String filename;
+    private static String filename;
     private byte[] photo;
 
     /**
@@ -27,6 +29,17 @@ public class Profilinstallningar extends javax.swing.JPanel {
     public Profilinstallningar(InfDB db) {
         initComponents();
         this.db = db;
+    }
+    
+    public static ImageIcon getBild()
+    {
+        ImageIcon icon = new ImageIcon(filename);
+        Image img = icon.getImage().getScaledInstance(255, 255, 255);
+        ImageIcon image = new ImageIcon(img);
+        
+        return image;
+        
+    
     }
 
     /**
@@ -260,3 +273,5 @@ public class Profilinstallningar extends javax.swing.JPanel {
     private javax.swing.JTextField txtTitel;
     // End of variables declaration//GEN-END:variables
 }
+
+

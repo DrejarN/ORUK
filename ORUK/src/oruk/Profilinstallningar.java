@@ -5,6 +5,10 @@
  */
 package oruk;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import javax.swing.JFileChooser;
 import oru.inf.InfDB;
 
 /**
@@ -14,13 +18,15 @@ import oru.inf.InfDB;
 public class Profilinstallningar extends javax.swing.JPanel {
 
     private final InfDB db;
+    private String filename;
+    private byte[] photo;
 
     /**
      * Creates new form Profilinstallningar2
      */
     public Profilinstallningar(InfDB db) {
         initComponents();
-        this.db=db;
+        this.db = db;
     }
 
     /**
@@ -120,6 +126,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
         btnLaddaUpp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnLaddaUpp.setText("Ladda upp profilbild");
+        btnLaddaUpp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaddaUppActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelProfilInstallningarLayout = new javax.swing.GroupLayout(panelProfilInstallningar);
         panelProfilInstallningar.setLayout(panelProfilInstallningarLayout);
@@ -193,6 +204,36 @@ public class Profilinstallningar extends javax.swing.JPanel {
     private void txtEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEpostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEpostActionPerformed
+
+    private void btnLaddaUppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaddaUppActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        filename = f.getAbsolutePath();
+
+        try {
+
+            File image = new File(filename);
+            FileInputStream fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+
+            }
+            photo = bos.toByteArray();
+
+            String query = "INSERT INTO BILD VALUES(2, '" + photo + "')";
+            db.insert(query);
+            
+            
+            
+           
+
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_btnLaddaUppActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

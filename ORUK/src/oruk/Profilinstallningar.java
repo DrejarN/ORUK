@@ -18,7 +18,7 @@ import oru.inf.InfDB;
 public class Profilinstallningar extends javax.swing.JPanel {
 
     private final InfDB db;
-    private String filename;
+    public String filename;
     private byte[] photo;
 
     /**
@@ -123,6 +123,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
         btnSpara.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnSpara.setText("Spara ändringar");
+        btnSpara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSparaActionPerformed(evt);
+            }
+        });
 
         btnLaddaUpp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnLaddaUpp.setText("Ladda upp profilbild");
@@ -212,7 +217,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
         filename = f.getAbsolutePath();
 
         try {
-
+            String id = db.getAutoIncrement("BILD", "BID");
             File image = new File(filename);
             FileInputStream fis = new FileInputStream(image);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -223,17 +228,18 @@ public class Profilinstallningar extends javax.swing.JPanel {
             }
             photo = bos.toByteArray();
 
-            String query = "INSERT INTO BILD VALUES(2, '" + photo + "')";
+            String query = "INSERT INTO BILD VALUES(" + id + ", '" + photo + "')";
+
             db.insert(query);
-            
-            
-            
-           
 
         } catch (Exception ex) {
 
         }
     }//GEN-LAST:event_btnLaddaUppActionPerformed
+
+    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+
+    }//GEN-LAST:event_btnSparaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

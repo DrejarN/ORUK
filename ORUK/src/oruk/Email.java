@@ -28,7 +28,7 @@ public Email (InfDB db) {
 public void skickaMail(String mottagarMail, String amne, String body) {
     
         try{
-            String host ="smtp.gmail.com" ;
+            String host = "smtp.gmail.com";
             String user = "orukadm1n@gmail.com";
             String pass = "Adm1n123";
             String to = mottagarMail;

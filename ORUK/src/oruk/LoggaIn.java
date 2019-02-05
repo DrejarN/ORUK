@@ -1,5 +1,7 @@
 package oruk;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import oru.inf.*;
 import javax.swing.*;
 import java.util.*;
@@ -157,7 +159,7 @@ public class LoggaIn extends javax.swing.JFrame {
                    try{
                        String yaho = db.fetchSingle("SELECT LOSENORD FROM ANVANDARE WHERE FORNAMN = '" + anvandarnamn.getText()+"'");
                        if(yaho.equalsIgnoreCase(losenord.getText())){
-                           new MinProfil(db).setVisible(true);
+                           new Huvudfonster(db).setVisible(true);
                            dispose();
                        }
                    }
@@ -171,7 +173,6 @@ public class LoggaIn extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
        }
     }//GEN-LAST:event_btnLoggaInActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

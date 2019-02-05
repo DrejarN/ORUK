@@ -53,6 +53,11 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         btnPublicera.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnPublicera.setText("Publicera inlägg");
+        btnPublicera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPubliceraActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("X");
@@ -104,6 +109,10 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPubliceraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPubliceraActionPerformed
 
 
 

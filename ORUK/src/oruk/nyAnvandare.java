@@ -116,7 +116,7 @@ public class nyAnvandare extends javax.swing.JFrame {
         }
         
         try{
-            db.insert("INSERT INTO ANVANDARE (AID, FORNAMN, EFTERNAMN, TELEFONNUMMER, MAILADRESS, GRAD, LOSENORD) VALUES ("+nextID+", '"+fnamn1.getText() +"', '"+enamn1.getText() +"', '" + telnmr1.getText() + "', '"+mail1.getText() + "', '"+engrad+"', 'Login123')");
+            db.insert("INSERT INTO ANVANDARE (AID, FORNAMN, EFTERNAMN, TELEFONNUMMER, MAILADRESS, GRAD, LOSENORD) VALUES ("+nextID+", '"+fnamn1.getText() +"', '"+enamn1.getText() +"', '" + telnmr1.getText() + "', '"+mail1.getText() + "', '"+engrad+"', 'Login123');");
             JOptionPane.showMessageDialog(null, "Ny användare har registrerats");
         }
         catch(InfException e){

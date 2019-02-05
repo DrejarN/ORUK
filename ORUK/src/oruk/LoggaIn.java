@@ -165,6 +165,10 @@ public class LoggaIn extends javax.swing.JFrame {
                        JOptionPane.showMessageDialog(null, "Fel lösenord");
                    }
                }
+               else{
+                   JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
+                   break;
+               }
            }
        }
        catch(InfException e){

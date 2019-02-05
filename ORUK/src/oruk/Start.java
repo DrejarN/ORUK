@@ -38,9 +38,10 @@ public class Start {
                            // ska få en anslutning till databasen och vara redo att validera våra metoder.
         new Huvudfonster(db).setVisible(true);
         new LoggaIn(db).setVisible(true);
+        new nyAnvandare(db).setVisible(true);
         
         new Validering(db); // Här öppnar vi ett objekt av klassen Validering för att den klassen 
-        new Filhantering(db); // Öppnar objekt av klassen Filhantering
+        new Filhantering(db);// Öppnar objekt av klassen Filhantering
     }
 
 }

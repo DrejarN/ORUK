@@ -251,7 +251,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLaddaUppActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-
+       
     }//GEN-LAST:event_btnSparaActionPerformed
 
 

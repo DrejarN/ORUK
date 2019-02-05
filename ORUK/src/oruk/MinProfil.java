@@ -172,9 +172,9 @@ public class MinProfil extends javax.swing.JPanel {
             .addGroup(panelMinProfilLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -192,15 +192,8 @@ public class MinProfil extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInstallningarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstallningarActionPerformed
-        // TODO add your handling code here:
-        JPanel importeradPanel = new Profilinstallningar(db);
-        importeradPanel.setBounds(panelMinProfil.getBounds());
-
-        panelMinProfil.removeAll();
-        panelMinProfil.revalidate();
-        panelMinProfil.repaint();
-        panelMinProfil.add(importeradPanel);
-        importeradPanel.setLocation(1, 1);
+        Installningar installningar = new Installningar();
+        installningar.setVisible(true);
     }//GEN-LAST:event_btnInstallningarActionPerformed
 
 

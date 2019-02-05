@@ -6,6 +6,7 @@
 package oruk;
 
 import javax.swing.JPanel;
+import oru.inf.InfDB;
 
 /**
  *
@@ -184,7 +185,7 @@ public class MittFlode extends javax.swing.JPanel {
     }//GEN-LAST:event_btnInformellActionPerformed
 
     private void btnSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaInlaggActionPerformed
-        SkapaInlagg skapaInlagg = new SkapaInlagg();
+        SkapaInlagg skapaInlagg = new SkapaInlagg(db);
         skapaInlagg.setVisible(true);
     }//GEN-LAST:event_btnSkapaInlaggActionPerformed
 
@@ -192,7 +193,7 @@ public class MittFlode extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnKommenteraActionPerformed
 
-
+    private InfDB db;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormell;
     private javax.swing.JButton btnForskning;

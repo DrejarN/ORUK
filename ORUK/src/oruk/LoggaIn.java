@@ -1,7 +1,5 @@
 package oruk;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import oru.inf.*;
 import javax.swing.*;
 import java.util.*;
@@ -9,7 +7,7 @@ import java.util.*;
 public class LoggaIn extends javax.swing.JFrame {
 
     private static InfDB db;
-    
+
     public LoggaIn(InfDB db) {
         initComponents();
         this.db = db;
@@ -57,7 +55,6 @@ public class LoggaIn extends javax.swing.JFrame {
 
         losenord.setBackground(new java.awt.Color(176, 203, 247));
         losenord.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        losenord.setText("00000000000");
         losenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 losenordActionPerformed(evt);
@@ -78,8 +75,6 @@ public class LoggaIn extends javax.swing.JFrame {
                 btnLoggaInActionPerformed(evt);
             }
         });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Laptop\\Pictures\\oruklogostorre.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,30 +155,25 @@ public class LoggaIn extends javax.swing.JFrame {
     }//GEN-LAST:event_losenordActionPerformed
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        try{
-           ArrayList<String> lista = db.fetchColumn("SELECT FORNAMN FROM ANVANDARE");
-           for(int i = 0; i < lista.size(); i++){
-               if(lista.get(i).equalsIgnoreCase(anvandarnamn.getText())){
-                   try{
-                       String yaho = db.fetchSingle("SELECT LOSENORD FROM ANVANDARE WHERE FORNAMN = '" + anvandarnamn.getText()+"'");
-                       if(yaho.equalsIgnoreCase(losenord.getText())){
-                           new Huvudfonster(db).setVisible(true);
-                           dispose();
-                       }
-                   }
-                   catch(InfException e){
-                       JOptionPane.showMessageDialog(null, "Fel lösenord");
-                   }
-               }
-               else{
-                   JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
-                   break;
-               }
-           }
-       }
-       catch(InfException e){
-           JOptionPane.showMessageDialog(null, "Fel användarnamn eller lösenord");
-       }
+        try {
+
+            String anvandarnamnet = anvandarnamn.getText();
+            String losenordet = losenord.getText();
+            String sokStrang1 = "SELECT LOSENORD FROM ANVANDARE WHERE FORNAMN='" + anvandarnamnet + "'";
+            String rattLosenord = db.fetchSingle(sokStrang1);
+
+            if (losenordet.equals(rattLosenord)) {
+                new Huvudfonster(db).setVisible(true);
+                dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Felaktigt lösenord eller användarnamn försök igen");
+            }
+        } catch (InfException e) {
+
+        }
+
+
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
 

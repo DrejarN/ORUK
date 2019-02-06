@@ -145,12 +145,9 @@ public class SkapaInlagg extends javax.swing.JFrame {
          }
          catch(InfException e){
              JOptionPane.showConfirmDialog(null, "Hoppla");
-         }
-         System.out.println(ettid);
-         System.out.println(katid);
-         
+         }         
          try{
-             db.insert("INSERT INTO INLAGG VALUES ("+3+", '"+txtTitel.getText()+"', '"+txtInlagg.getText()+"', "+katid+", '"+date+"', '"+time+"')");
+             db.insert("INSERT INTO INLAGG VALUES ("+ettid+", '"+txtTitel.getText()+"', '"+txtInlagg.getText()+"', "+katid+", '"+date+"', '"+time+"')");
              JOptionPane.showMessageDialog(null, "Inlägget har publicerats");
          }
          catch(InfException e){

@@ -17,8 +17,9 @@ public class MittFlode extends javax.swing.JPanel {
     /**
      * Creates new form MittFlode1
      */
-    public MittFlode() {
+    public MittFlode(InfDB db) {
         initComponents();
+        this.db = db;
     }
 
     /**

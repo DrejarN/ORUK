@@ -156,7 +156,7 @@ public class Huvudfonster extends javax.swing.JFrame {
 
     private void btnMittFlodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMittFlodeActionPerformed
         // TODO add your handling code here:
-        JPanel importeradPanel = new MittFlode();
+        JPanel importeradPanel = new MittFlode(db);
         importeradPanel.setBounds(panelMain.getBounds());
         
         panelMain.removeAll();

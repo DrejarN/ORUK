@@ -15,7 +15,7 @@ import oru.inf.InfDB;
  */
 public class Huvudfonster extends javax.swing.JFrame {
 
-    private final InfDB db;
+    private static InfDB db;
     private String anvandarnamn;
 
     /**

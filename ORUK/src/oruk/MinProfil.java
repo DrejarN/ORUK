@@ -5,7 +5,6 @@
  */
 package oruk;
 
-import javax.swing.JPanel;
 import oru.inf.InfDB;
 
 /**
@@ -14,7 +13,7 @@ import oru.inf.InfDB;
  */
 public class MinProfil extends javax.swing.JPanel {
 
-    private final InfDB db;
+    private static InfDB db;
 
     /**
      * Creates new form MinProfil1
@@ -192,7 +191,7 @@ public class MinProfil extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInstallningarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstallningarActionPerformed
-        Installningar installningar = new Installningar();
+        Installningar installningar = new Installningar(db);
         installningar.setVisible(true);
     }//GEN-LAST:event_btnInstallningarActionPerformed
 

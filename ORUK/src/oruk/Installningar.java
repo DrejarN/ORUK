@@ -13,12 +13,14 @@ import oru.inf.InfDB;
  * @author carlf
  */
 public class Installningar extends javax.swing.JFrame {
+     private InfDB db;
 
     /**
      * Creates new form Installningar
      */
-    public Installningar() {
+    public Installningar(InfDB db) {
         initComponents();
+        this.db=db;
     }
 
     /**
@@ -179,7 +181,7 @@ public class Installningar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSekretessActionPerformed
 
 
-    private InfDB db;
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNotifikation;
     private javax.swing.JButton btnProfil;

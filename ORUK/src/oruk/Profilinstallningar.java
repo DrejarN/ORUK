@@ -32,16 +32,14 @@ public class Profilinstallningar extends javax.swing.JPanel {
         initComponents();
         this.db = db;
     }
-    
-    public static ImageIcon getBild()
-    {
+
+    public static ImageIcon getBild() {
         ImageIcon icon = new ImageIcon(filename);
         Image img = icon.getImage().getScaledInstance(255, 255, 255);
         ImageIcon image = new ImageIcon(img);
-        
+
         return image;
-        
-    
+
     }
 
     /**
@@ -218,8 +216,8 @@ public class Profilinstallningar extends javax.swing.JPanel {
         filename = f.getAbsolutePath();
 
         try {
-          //  String id = db.getAutoIncrement("BILD", "BID");
-            String id = "1";
+            String id = db.getAutoIncrement("BILD", "BID");
+
             File image = new File(filename);
             FileInputStream fis = new FileInputStream(image);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -240,31 +238,23 @@ public class Profilinstallningar extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLaddaUppActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-       if(Validering.sakertLosenord(txtLosenord))
-       { 
-           try {
-               String fornamn = txtFornamn.getText();
-               String efternamn = txtEfternamn.getText();
-               String titel = txtTitel.getText();
-               String ePost = txtEpost.getText();
-               String teleNR = txtTelefon.getText();
-               String losenord = txtLosenord.getText();
-               
-               String andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "', EFTERNAMN='" + efternamn + "', TELEFONNUMMER='" + teleNR + "', MAILADRESS='" + ePost + "', LOSENORD='" + losenord + "' where AID=4";
-               db.update(andraData);
-               JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
-           } catch (InfException ex) {
-               
-           }
+        if (Validering.sakertLosenord(txtLosenord)) {
+            try {
+                String fornamn = txtFornamn.getText();
+                String efternamn = txtEfternamn.getText();
+                String titel = txtTitel.getText();
+                String ePost = txtEpost.getText();
+                String teleNR = txtTelefon.getText();
+                String losenord = txtLosenord.getText();
 
-           
+                String andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "', EFTERNAMN='" + efternamn + "', TELEFONNUMMER='" + teleNR + "', MAILADRESS='" + ePost + "', LOSENORD='" + losenord + "' where AID=4";
+                db.update(andraData);
+                JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
+            } catch (InfException ex) {
 
-           
+            }
 
-           
-           
-       
-       }
+        }
     }//GEN-LAST:event_btnSparaActionPerformed
 
 
@@ -286,5 +276,3 @@ public class Profilinstallningar extends javax.swing.JPanel {
     private javax.swing.JTextField txtTitel;
     // End of variables declaration//GEN-END:variables
 }
-
-

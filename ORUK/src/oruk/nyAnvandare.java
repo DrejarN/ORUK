@@ -106,7 +106,7 @@ public class nyAnvandare extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaAnvandareActionPerformed
-        String engrad = (String) grad1.getSelectedItem();
+            String engrad = (String) grad1.getSelectedItem();
         String nextID = "";
         try{
               nextID = db.getAutoIncrement("ANVANDARE", "AID");

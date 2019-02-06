@@ -16,13 +16,15 @@ import oru.inf.InfDB;
 public class Huvudfonster extends javax.swing.JFrame {
 
     private final InfDB db;
+    private String anvandarnamn;
 
     /**
      * Creates new form Huvudfönster
      */
-    public Huvudfonster(InfDB db) {
+    public Huvudfonster(InfDB db, String anvandarnamn) {
         initComponents();
         this.db=db;
+        this.anvandarnamn = anvandarnamn;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
@@ -180,6 +182,10 @@ public class Huvudfonster extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnMeddelandenActionPerformed
 
+    public String getAnvandarnamn() {
+        return anvandarnamn;
+    }
+    
     private void btnDoodleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoodleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDoodleActionPerformed

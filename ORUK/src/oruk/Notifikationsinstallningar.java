@@ -45,10 +45,16 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         jCheckBox8 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jCheckBox9 = new javax.swing.JCheckBox();
+        btnSpara = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jCheckBox1.setText("Vid varje ny kommentar på ett inlägg jag skrivit");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Jag önskar få notifikationer:");
@@ -75,6 +81,13 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
 
         jCheckBox9.setText("Ja");
 
+        btnSpara.setText("Spara ändringar");
+        btnSpara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSparaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,24 +95,29 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6)
-                    .addComponent(jLabel1))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox8)
-                            .addComponent(jCheckBox7)
-                            .addComponent(jLabel3)
-                            .addComponent(jCheckBox9))
+                            .addComponent(jCheckBox1)
+                            .addComponent(jCheckBox2)
+                            .addComponent(jCheckBox3)
+                            .addComponent(jCheckBox4)
+                            .addComponent(jCheckBox5)
+                            .addComponent(jCheckBox6)
+                            .addComponent(jLabel1))
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addContainerGap(12, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox8)
+                                    .addComponent(jCheckBox7)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jCheckBox9))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSpara)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,7 +147,9 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                     .addComponent(jCheckBox9))
                 .addGap(18, 18, 18)
                 .addComponent(jCheckBox6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btnSpara)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -167,9 +187,19 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+        // TODO add your handling code here:
+        //  Hello.
+    }//GEN-LAST:event_btnSparaActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSpara;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;

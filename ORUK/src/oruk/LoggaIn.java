@@ -159,11 +159,11 @@ public class LoggaIn extends javax.swing.JFrame {
 
             String anvandarnamnet = anvandarnamn.getText();
             String losenordet = losenord.getText();
-            String sokStrang1 = "SELECT LOSENORD FROM ANVANDARE WHERE FORNAMN='" + anvandarnamnet + "'";
+            String sokStrang1 = "SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamnet + "'";
             String rattLosenord = db.fetchSingle(sokStrang1);
 
             if (losenordet.equals(rattLosenord)) {
-                new Huvudfonster(db).setVisible(true);
+                new Huvudfonster(db, anvandarnamnet).setVisible(true);
                 dispose();
 
             } else {

@@ -62,6 +62,8 @@ public class Profilinstallningar extends javax.swing.JPanel {
         txtTelefon = new javax.swing.JTextField();
         btnSpara = new javax.swing.JButton();
         btnLaddaUpp = new javax.swing.JButton();
+        txtLosenord = new javax.swing.JTextField();
+        jblLosenord = new javax.swing.JLabel();
 
         panelProfilInstallningar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -110,6 +112,12 @@ public class Profilinstallningar extends javax.swing.JPanel {
             }
         });
 
+        txtLosenord.setBackground(new java.awt.Color(203, 217, 241));
+        txtLosenord.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jblLosenord.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jblLosenord.setText("Lösenord:");
+
         javax.swing.GroupLayout panelProfilInstallningarLayout = new javax.swing.GroupLayout(panelProfilInstallningar);
         panelProfilInstallningar.setLayout(panelProfilInstallningarLayout);
         panelProfilInstallningarLayout.setHorizontalGroup(
@@ -122,13 +130,15 @@ public class Profilinstallningar extends javax.swing.JPanel {
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jblLosenord))
                         .addGap(79, 79, 79)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNamn)
                             .addComponent(txtTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                             .addComponent(txtEpost)
-                            .addComponent(txtTitel))
+                            .addComponent(txtTitel)
+                            .addComponent(txtLosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnLaddaUpp)
@@ -156,7 +166,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jblLosenord))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -203,7 +217,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLaddaUppActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+       if(Validering.sakertLosenord(txtLosenord))
+       {
+           
        
+       }
     }//GEN-LAST:event_btnSparaActionPerformed
 
 
@@ -214,8 +232,10 @@ public class Profilinstallningar extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jblLosenord;
     private javax.swing.JPanel panelProfilInstallningar;
     private javax.swing.JTextField txtEpost;
+    private javax.swing.JTextField txtLosenord;
     private javax.swing.JTextField txtNamn;
     private javax.swing.JTextField txtTelefon;
     private javax.swing.JTextField txtTitel;

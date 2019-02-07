@@ -5,7 +5,9 @@
  */
 package oruk;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -192,8 +194,120 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        // TODO add your handling code here:
-        //  Hello.
+    //Skapa SQL frågor för alla notiser.
+    
+    String AID = "";
+    
+    try {
+        String mailadress = Huvudfonster.getAnvandarnamn(); //Hämta userhelvetet
+        AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + mailadress + "' ");
+    
+    } catch(InfException ex) {
+        System.out.println("Kunde ej hitta AID");
+    }
+    
+    //NID#1, Jag vill ha notiser vid nya mötesinbjudningar
+    try {
+        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 1;  ");
+        System.out.println(query); 
+            if(query == null){
+                if(jCheckBox1.isSelected()) {
+                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 1); ");
+                }
+                    } else {
+                        if(!jCheckBox1.isSelected()) {
+                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 1; ");
+                        }
+                    }     
+    } catch(InfException ex) {
+        System.out.println("Något gick fel vid hanteringen av den första notisen i listan.");
+    }
+    
+    //NID#2, Jag vill ha notiser vi nya inlägg i informellabloggen
+    try {
+        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 2;  ");
+        System.out.println(query); 
+            if(query == null){
+                if(jCheckBox1.isSelected()) {
+                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 2); ");
+                }
+                    } else {
+                        if(!jCheckBox1.isSelected()) {
+                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 2; ");
+                        }
+                    }     
+    } catch(InfException ex) {
+        System.out.println("Något gick fel vid hanteringen av den andra notisen i listan.");
+    }
+    
+    //NID#3, Jag vill ha notiser vid ny mötesinbjudan
+    try {
+        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 3;  ");
+        System.out.println(query); 
+            if(query == null){
+                if(jCheckBox1.isSelected()) {
+                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 3); ");
+                }
+                    } else {
+                        if(!jCheckBox1.isSelected()) {
+                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 3; ");
+                        }
+                    }     
+    } catch(InfException ex) {
+        System.out.println("Något gick fel vid hanteringen av den tredje notisen i listan.");
+    }
+    
+    //NID#4, Jag vill ha notiser vid nytt meddelande
+    try {
+        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 4;  ");
+        System.out.println(query); 
+            if(query == null){
+                if(jCheckBox1.isSelected()) {
+                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 4); ");
+                }
+                    } else {
+                        if(!jCheckBox1.isSelected()) {
+                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 4; ");
+                        }
+                    }     
+    } catch(InfException ex) {
+        System.out.println("Något gick fel vid hanteringen av den fjärde notisen i listan.");
+    }
+    
+    //NID#5, Jag vill ha notiser vid nya inlägg från tagg jag följer
+    try {
+        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 5;  ");
+        System.out.println(query); 
+            if(query == null){
+                if(jCheckBox1.isSelected()) {
+                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 5); ");
+                }
+                    } else {
+                        if(!jCheckBox1.isSelected()) {
+                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 5; ");                           JOptionPane.showMessageDialog(null, "Dina ändringar har sparats.");
+                        }
+                    }     
+    } catch(InfException ex) {
+        System.out.println("Något gick fel vid hanteringen av den femte notisen i listan.");
+    }
+    
+    //NID#6, Jag vill ha notiser vid nya inlägg från blogg jag följer
+    try {
+        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 6;  ");
+        System.out.println(query); 
+            if(query == null){
+                if(jCheckBox1.isSelected()) {
+                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 6); ");
+                }
+                    } else {
+                        if(!jCheckBox1.isSelected()) {
+                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 6; ");
+                        }
+                    }     
+    } catch(InfException ex) {
+        System.out.println("Något gick fel vid hanteringen av den sjätte notisen i listan.");
+    }
+    JOptionPane.showMessageDialog(null, "Dina ändringar har sparats.");
     }//GEN-LAST:event_btnSparaActionPerformed
 
 

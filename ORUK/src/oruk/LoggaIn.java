@@ -1,5 +1,6 @@
 package oruk;
 
+import java.awt.Toolkit;
 import oru.inf.*;
 import javax.swing.*;
 import java.util.*;
@@ -11,6 +12,8 @@ public class LoggaIn extends javax.swing.JFrame {
     public LoggaIn(InfDB db) {
         initComponents();
         this.db = db;
+        fyllAnvandarnamnsLista();
+        setTitle("ORUK - Logga in");
     }
 
     /**
@@ -25,12 +28,13 @@ public class LoggaIn extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        anvandarnamn = new javax.swing.JTextField();
         losenord = new javax.swing.JPasswordField();
         lblAnvandarnamn = new javax.swing.JLabel();
         lblLosenord = new javax.swing.JLabel();
         btnLoggaIn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        cmbxAnvandarnamn = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,16 +49,14 @@ public class LoggaIn extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        anvandarnamn.setBackground(new java.awt.Color(176, 203, 247));
-        anvandarnamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        anvandarnamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anvandarnamnActionPerformed(evt);
-            }
-        });
-
         losenord.setBackground(new java.awt.Color(176, 203, 247));
         losenord.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        losenord.setText("qwerty12345");
+        losenord.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                losenordFocusGained(evt);
+            }
+        });
         losenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 losenordActionPerformed(evt);
@@ -76,6 +78,15 @@ public class LoggaIn extends javax.swing.JFrame {
             }
         });
 
+        cmbxAnvandarnamn.setEditable(true);
+        cmbxAnvandarnamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbxAnvandarnamnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oruk/icons/oruklogostorre.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -83,26 +94,30 @@ public class LoggaIn extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblLosenord)
-                    .addComponent(lblAnvandarnamn)
-                    .addComponent(anvandarnamn)
-                    .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel1)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cmbxAnvandarnamn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblLosenord)
+                        .addComponent(lblAnvandarnamn)
+                        .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                        .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(8, 8, 8)
+                            .addComponent(jLabel1))))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(53, 53, 53)
                 .addComponent(lblAnvandarnamn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(anvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(lblLosenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(losenord, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,18 +161,15 @@ public class LoggaIn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void anvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anvandarnamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_anvandarnamnActionPerformed
-
+    //Gör att btnLoggIn blir klickad om man trycker enter medan fokus är i lösenordstextfältet
     private void losenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_losenordActionPerformed
-        // TODO add your handling code here:
+        btnLoggaIn.doClick();
     }//GEN-LAST:event_losenordActionPerformed
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         try {
 
-            String anvandarnamnet = anvandarnamn.getText();
+            String anvandarnamnet = cmbxAnvandarnamn.getSelectedItem().toString();
             String losenordet = losenord.getText();
             String sokStrang1 = "SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamnet + "'";
             String rattLosenord = db.fetchSingle(sokStrang1);
@@ -172,16 +184,45 @@ public class LoggaIn extends javax.swing.JFrame {
         } catch (InfException e) {
 
         }
-
-
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
+    //Metod som gör så att rutan blir tom när fokus ges
+    private void losenordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_losenordFocusGained
+        losenord.setText("");
+    }//GEN-LAST:event_losenordFocusGained
+
+    //Metod som gör att fokus ges till lösenordstextrutan om man trycker enter i användarnamnsrutan
+    private void cmbxAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnActionPerformed
+        losenord.requestFocus();
+    }//GEN-LAST:event_cmbxAnvandarnamnActionPerformed
+
+    //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
+    private void fyllAnvandarnamnsLista() {
+        try {
+            ArrayList listan = new ArrayList();
+            listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");
+
+            for (Object mailadress : listan) {
+                String anvandare = mailadress.toString();
+                cmbxAnvandarnamn.addItem(anvandare);
+            }
+            cmbxAnvandarnamn.setSelectedIndex(-1);
+            lblAnvandarnamn.requestFocus();
+            losenord.setText("SkrivLösenord");
+            
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField anvandarnamn;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLoggaIn;
+    private javax.swing.JComboBox<String> cmbxAnvandarnamn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAnvandarnamn;

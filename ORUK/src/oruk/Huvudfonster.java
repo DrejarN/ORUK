@@ -6,8 +6,10 @@
 package oruk;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -26,6 +28,7 @@ public class Huvudfonster extends javax.swing.JFrame {
         this.db=db;
         this.anvandarnamn = anvandarnamn;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setThisTitle();
     }
 
     /**
@@ -201,6 +204,18 @@ public class Huvudfonster extends javax.swing.JFrame {
         importeradPanel.setLocation(1,1);
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
+    //Metod för att sätta text i huvudet på fönstret 
+    private void setThisTitle(){
+        try {
+            String fornamn = db.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamn + "'");
+            String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamn+ "'");
+            setTitle("ORUK - Inloggad som " + fornamn + " " + efternamn);
+            
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
+        }
+    }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoodle;

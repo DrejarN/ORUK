@@ -165,13 +165,13 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addComponent(btnLaddaUpp))
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(59, 59, 59))
-                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSpara)
+                            .addComponent(jLabel5)
                             .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55))
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addComponent(btnSpara)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,9 +214,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
+        String anvandare = Huvudfonster.getAnvandarnamn();
 
         try {
-            String id = db.getAutoIncrement("BILD", "BID");
+            String id1 = db.getAutoIncrement("BILD", "BID");
+            String id2 = db.getAutoIncrement("PROFIL_BILD", "BID");
 
             File image = new File(filename);
             FileInputStream fis = new FileInputStream(image);
@@ -228,10 +230,14 @@ public class Profilinstallningar extends javax.swing.JPanel {
             }
             photo = bos.toByteArray();
 
-            String query = "INSERT INTO BILD VALUES(" + id + ", '" + photo + "')";
+            String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
+            String query2 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id2 + ")";
 
-            db.insert(query);
 
+            
+
+            db.insert(query1);
+            db.insert(query2);
         } catch (Exception ex) {
 
         }

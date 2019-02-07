@@ -81,6 +81,16 @@ public class LoggaIn extends javax.swing.JFrame {
         });
 
         cmbxAnvandarnamn.setEditable(true);
+        cmbxAnvandarnamn.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbxAnvandarnamnItemStateChanged(evt);
+            }
+        });
+        cmbxAnvandarnamn.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cmbxAnvandarnamnFocusGained(evt);
+            }
+        });
         cmbxAnvandarnamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbxAnvandarnamnActionPerformed(evt);
@@ -97,15 +107,14 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cmbxAnvandarnamn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblLosenord)
-                        .addComponent(lblAnvandarnamn)
-                        .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                        .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(8, 8, 8)
-                            .addComponent(jLabel1))))
+                    .addComponent(cmbxAnvandarnamn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLosenord)
+                    .addComponent(lblAnvandarnamn)
+                    .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel1)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -207,6 +216,14 @@ public class LoggaIn extends javax.swing.JFrame {
     private void losenordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_losenordFocusGained
         losenord.setText("");
     }//GEN-LAST:event_losenordFocusGained
+
+    private void cmbxAnvandarnamnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnFocusGained
+        //
+    }//GEN-LAST:event_cmbxAnvandarnamnFocusGained
+
+    private void cmbxAnvandarnamnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnItemStateChanged
+        ComboBoxAutoComplete.enable(cmbxAnvandarnamn);
+    }//GEN-LAST:event_cmbxAnvandarnamnItemStateChanged
 
     //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
     private void fyllAnvandarnamnsLista() {        

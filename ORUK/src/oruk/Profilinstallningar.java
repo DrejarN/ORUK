@@ -238,24 +238,69 @@ public class Profilinstallningar extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLaddaUppActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        if (Validering.sakertLosenord(txtLosenord)) {
-            try {
-                String fornamn = txtFornamn.getText();
-                String efternamn = txtEfternamn.getText();
-                String titel = txtTitel.getText();
-                String ePost = txtEpost.getText();
-                String teleNR = txtTelefon.getText();
-                String losenord = txtLosenord.getText();
-                String anvandare = Huvudfonster.getAnvandarnamn();
+        
+        
+        try {
+            String fornamn = txtFornamn.getText();
+            String efternamn = txtEfternamn.getText();
+            String titel = txtTitel.getText();
+            String ePost = txtEpost.getText();
+            String teleNR = txtTelefon.getText();
+            String losenord = txtLosenord.getText();
+            String anvandare = Huvudfonster.getAnvandarnamn();
+            String andraData = "";
 
-                String andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "', EFTERNAMN='" + efternamn + "', TELEFONNUMMER='" + teleNR + "', MAILADRESS='" + ePost + "', LOSENORD='" + losenord + "', TITEL='" + titel + "' where MAILADRESS='" + anvandare + "'";
+            if (fornamn.isEmpty()) {
+
+            } else {
+
+                andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "' WHERE MAILADRESS='" + anvandare + "'";
                 db.update(andraData);
-                JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
-            } catch (InfException ex) {
+            }
+
+            if (efternamn.isEmpty()) {
+
+            } else {
+                andraData = "UPDATE ANVANDARE SET EFTERNAMN='" + efternamn + "' WHERE MAILADRESS='" + anvandare + "'";
+                db.update(andraData);
 
             }
 
+            if (titel.isEmpty()) {
+
+            } else {
+                andraData = "UPDATE ANVANDARE SET TITEL='" + titel + "' WHERE MAILADRESS='" + anvandare + "'";
+                db.update(andraData);
+
+            }
+
+            if (ePost.isEmpty()) {
+            } else {
+                andraData = "UPDATE ANVANDARE SET MAILADRESS='" + ePost + "' WHERE MAILADRESS='" + anvandare + "'";
+                db.update(andraData);
+
+            }
+
+            if (teleNR.isEmpty()) {
+            } else {
+                andraData = "UPDATE ANVANDARE SET TELEFONNUMMER='" + teleNR + "' WHERE MAILADRESS='" + anvandare + "'";
+                db.update(andraData);
+
+            }
+
+            if (losenord.isEmpty()) {
+            } else if (Validering.sakertLosenord(txtLosenord)) {
+                andraData = "UPDATE ANVANDARE SET LOSENORD='" + losenord + "' WHERE MAILADRESS='" + anvandare + "'";
+                db.update(andraData);
+
+            }
+
+         //JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
+        } catch (InfException ex) {
+
         }
+
+
     }//GEN-LAST:event_btnSparaActionPerformed
 
 

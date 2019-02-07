@@ -165,13 +165,13 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addComponent(btnLaddaUpp))
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(59, 59, 59))
-                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSpara)
+                            .addComponent(jLabel5)
                             .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55))
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addComponent(btnSpara)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,9 +214,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
+        String anvandare = Huvudfonster.getAnvandarnamn();
 
         try {
-            String id = db.getAutoIncrement("BILD", "BID");
+            String id1 = db.getAutoIncrement("BILD", "BID");
+            String id2 = db.getAutoIncrement("PROFIL_BILD", "BID");
 
             File image = new File(filename);
             FileInputStream fis = new FileInputStream(image);
@@ -228,17 +230,22 @@ public class Profilinstallningar extends javax.swing.JPanel {
             }
             photo = bos.toByteArray();
 
-            String query = "INSERT INTO BILD VALUES(" + id + ", '" + photo + "')";
+            String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
+            String query2 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id2 + ")";
 
-            db.insert(query);
 
+            
+
+            db.insert(query1);
+            db.insert(query2);
         } catch (Exception ex) {
 
         }
     }//GEN-LAST:event_btnLaddaUppActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        if (Validering.sakertLosenord(txtLosenord)) {
+        if (Validering.arRutornaTomma(txtFornamn, txtEfternamn, txtTitel, txtEpost, txtTelefon, txtLosenord)) {
+        } else {
             try {
                 String fornamn = txtFornamn.getText();
                 String efternamn = txtEfternamn.getText();
@@ -246,15 +253,67 @@ public class Profilinstallningar extends javax.swing.JPanel {
                 String ePost = txtEpost.getText();
                 String teleNR = txtTelefon.getText();
                 String losenord = txtLosenord.getText();
+                String anvandare = Huvudfonster.getAnvandarnamn();
+                String andraData = "";
 
-                String andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "', EFTERNAMN='" + efternamn + "', TELEFONNUMMER='" + teleNR + "', MAILADRESS='" + ePost + "', LOSENORD='" + losenord + "' where AID=4";
-                db.update(andraData);
-                JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
+                if (fornamn.isEmpty()) {
+
+                } else {
+
+                    andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtFornamn.setText(null);
+                }
+
+                if (efternamn.isEmpty()) {
+
+                } else {
+                    andraData = "UPDATE ANVANDARE SET EFTERNAMN='" + efternamn + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtEfternamn.setText(null);
+
+                }
+
+                if (titel.isEmpty()) {
+
+                } else {
+                    andraData = "UPDATE ANVANDARE SET TITEL='" + titel + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtTitel.setText(null);
+
+                }
+
+                if (ePost.isEmpty()) {
+                } else {
+                    andraData = "UPDATE ANVANDARE SET MAILADRESS='" + ePost + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtEpost.setText(null);
+
+                }
+
+                if (teleNR.isEmpty()) {
+                } else {
+                    andraData = "UPDATE ANVANDARE SET TELEFONNUMMER='" + teleNR + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtTelefon.setText(null);
+
+                }
+
+                if (losenord.isEmpty()) {
+                } else if (Validering.sakertLosenord(txtLosenord)) {
+                    andraData = "UPDATE ANVANDARE SET LOSENORD='" + losenord + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtLosenord.setText(null);
+
+                }
+
+              JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
             } catch (InfException ex) {
 
             }
-
         }
+
+
     }//GEN-LAST:event_btnSparaActionPerformed
 
 

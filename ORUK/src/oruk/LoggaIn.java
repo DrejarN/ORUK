@@ -14,6 +14,8 @@ public class LoggaIn extends javax.swing.JFrame {
         this.db = db;
         fyllAnvandarnamnsLista();
         setTitle("ORUK - Logga in");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -26,7 +28,6 @@ public class LoggaIn extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnClose = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         losenord = new javax.swing.JPasswordField();
         lblAnvandarnamn = new javax.swing.JLabel();
@@ -40,16 +41,9 @@ public class LoggaIn extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(47, 92, 168));
 
-        btnClose.setText("X");
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
-            }
-        });
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        losenord.setBackground(new java.awt.Color(176, 203, 247));
+        losenord.setBackground(new java.awt.Color(204, 204, 204));
         losenord.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         losenord.setText("qwerty12345");
         losenord.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -69,7 +63,7 @@ public class LoggaIn extends javax.swing.JFrame {
         lblLosenord.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblLosenord.setText("Lösenord:");
 
-        btnLoggaIn.setBackground(new java.awt.Color(49, 100, 184));
+        btnLoggaIn.setBackground(new java.awt.Color(204, 204, 204));
         btnLoggaIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnLoggaIn.setText("Logga in");
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
@@ -109,11 +103,11 @@ public class LoggaIn extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(68, 68, 68)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
+                .addGap(18, 18, 18)
                 .addComponent(lblAnvandarnamn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,24 +117,18 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addComponent(losenord, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(btnLoggaIn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnClose))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnClose)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,20 +139,16 @@ public class LoggaIn extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCloseActionPerformed
-
-    //Gör att btnLoggIn blir klickad om man trycker enter medan fokus är i lösenordstextfältet
-    private void losenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_losenordActionPerformed
-        btnLoggaIn.doClick();
-    }//GEN-LAST:event_losenordActionPerformed
+    //Metod som gör att fokus ges till lösenordstextrutan om man trycker enter i användarnamnsrutan
+    private void cmbxAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnActionPerformed
+        losenord.requestFocus();
+    }//GEN-LAST:event_cmbxAnvandarnamnActionPerformed
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         try {
@@ -186,15 +170,15 @@ public class LoggaIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
+    //Gör att btnLoggIn blir klickad om man trycker enter medan fokus är i lösenordstextfältet
+    private void losenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_losenordActionPerformed
+        btnLoggaIn.doClick();
+    }//GEN-LAST:event_losenordActionPerformed
+
     //Metod som gör så att rutan blir tom när fokus ges
     private void losenordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_losenordFocusGained
         losenord.setText("");
     }//GEN-LAST:event_losenordFocusGained
-
-    //Metod som gör att fokus ges till lösenordstextrutan om man trycker enter i användarnamnsrutan
-    private void cmbxAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnActionPerformed
-        losenord.requestFocus();
-    }//GEN-LAST:event_cmbxAnvandarnamnActionPerformed
 
     //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
     private void fyllAnvandarnamnsLista() {
@@ -218,7 +202,6 @@ public class LoggaIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JComboBox<String> cmbxAnvandarnamn;
     private javax.swing.JLabel jLabel1;

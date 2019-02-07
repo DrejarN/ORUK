@@ -239,7 +239,6 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         
-        
         try {
             String fornamn = txtFornamn.getText();
             String efternamn = txtEfternamn.getText();
@@ -295,7 +294,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
             }
 
-         //JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
+            //JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
         } catch (InfException ex) {
 
         }

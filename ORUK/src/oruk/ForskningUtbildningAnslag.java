@@ -1,7 +1,11 @@
 package oruk;
 
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,9 +17,10 @@ import oru.inf.InfDB;
  *
  * @author Amanda
  */
-public class ForskningUtbildning extends javax.swing.JPanel {
+public class ForskningUtbildningAnslag extends javax.swing.JPanel {
 
     private final InfDB db;
+    private ArrayList<String> enLista;
 
     
 
@@ -23,9 +28,12 @@ public class ForskningUtbildning extends javax.swing.JPanel {
      * Creates new form ForskningUtbildning
      * @param db
      */
-    public ForskningUtbildning(InfDB db) {
+    public ForskningUtbildningAnslag(InfDB db) {
         initComponents();
         this.db=db;
+        enLista = new ArrayList<>(); 
+        fyllLista();
+       
     }
 
     /**
@@ -40,8 +48,7 @@ public class ForskningUtbildning extends javax.swing.JPanel {
         panelForskning = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSe = new javax.swing.JButton();
 
         panelForskning.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -50,19 +57,17 @@ public class ForskningUtbildning extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
-
-        jButton2.setText("Uppdatera");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(jList1);
 
-        jButton3.setText("Se projekt");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSe.setText("Se projekt");
+        btnSe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSeActionPerformed(evt);
             }
         });
 
@@ -74,23 +79,16 @@ public class ForskningUtbildning extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addComponent(btnSe)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         panelForskningLayout.setVerticalGroup(
             panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelForskningLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
                 .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelForskningLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelForskningLayout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jButton2)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton3)))
+                    .addComponent(btnSe)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
 
@@ -106,18 +104,34 @@ public class ForskningUtbildning extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSeActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+        String selected = jList1.getSelectedValue().toString();
+        
+        
+    }//GEN-LAST:event_jList1MouseClicked
+    private void fyllLista() {
+        DefaultListModel model = new DefaultListModel();
+        try {
+            enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG");
+            String svar = "";
+            for (int i = 0; i < enLista.size(); i++) {
+                svar += enLista.get(i) + "\n";
+                model.addElement(svar);
+            }
+            
+            jList1.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnSe;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelForskning;

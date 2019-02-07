@@ -182,8 +182,10 @@ public class LoggaIn extends javax.swing.JFrame {
            for(int i = 0; i < bytes.length; i++){
                String str = new String(crypto.encrypt(bytes));
                if(str.contains(enc)){
+                   dispose();
                    new Huvudfonster(db, anv).setVisible(true);
                    break;
+                   
                }
                else{
                    JOptionPane.showMessageDialog(null, "Fel lösenord!");

@@ -66,6 +66,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
         jblLosenord = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtEfternamn = new javax.swing.JTextField();
+        btnLaddaUpp1 = new javax.swing.JButton();
 
         panelProfilInstallningar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -107,7 +108,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
         });
 
         btnLaddaUpp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnLaddaUpp.setText("Ladda upp profilbild");
+        btnLaddaUpp.setText("Välj profilbild");
         btnLaddaUpp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaddaUppActionPerformed(evt);
@@ -126,6 +127,14 @@ public class Profilinstallningar extends javax.swing.JPanel {
         txtEfternamn.setBackground(new java.awt.Color(203, 217, 241));
         txtEfternamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
+        btnLaddaUpp1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnLaddaUpp1.setText("Spara profilbild");
+        btnLaddaUpp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaddaUpp1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelProfilInstallningarLayout = new javax.swing.GroupLayout(panelProfilInstallningar);
         panelProfilInstallningar.setLayout(panelProfilInstallningarLayout);
         panelProfilInstallningarLayout.setHorizontalGroup(
@@ -141,18 +150,18 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(39, 39, 39)
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
-                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLaddaUpp)
-                            .addComponent(btnSpara, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSpara, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnLaddaUpp)
+                        .addComponent(btnLaddaUpp1)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelProfilInstallningarLayout.setVerticalGroup(
@@ -171,8 +180,9 @@ public class Profilinstallningar extends javax.swing.JPanel {
                             .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55))
                     .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
-                        .addComponent(btnSpara)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLaddaUpp1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -181,14 +191,19 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jblLosenord))
-                .addContainerGap())
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblLosenord))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProfilInstallningarLayout.createSequentialGroup()
+                        .addComponent(btnSpara)
+                        .addGap(23, 23, 23))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -316,9 +331,14 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSparaActionPerformed
 
+    private void btnLaddaUpp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaddaUpp1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Din valda profilbild har sparats");
+    }//GEN-LAST:event_btnLaddaUpp1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaddaUpp;
+    private javax.swing.JButton btnLaddaUpp1;
     private javax.swing.JButton btnSpara;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

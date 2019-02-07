@@ -246,8 +246,9 @@ public class Profilinstallningar extends javax.swing.JPanel {
                 String ePost = txtEpost.getText();
                 String teleNR = txtTelefon.getText();
                 String losenord = txtLosenord.getText();
+                String anvandare = Huvudfonster.getAnvandarnamn();
 
-                String andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "', EFTERNAMN='" + efternamn + "', TELEFONNUMMER='" + teleNR + "', MAILADRESS='" + ePost + "', LOSENORD='" + losenord + "' where AID=4";
+                String andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "', EFTERNAMN='" + efternamn + "', TELEFONNUMMER='" + teleNR + "', MAILADRESS='" + ePost + "', LOSENORD='" + losenord + "', TITEL='" + titel + "' where MAILADRESS='" + anvandare + "'";
                 db.update(andraData);
                 JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
             } catch (InfException ex) {

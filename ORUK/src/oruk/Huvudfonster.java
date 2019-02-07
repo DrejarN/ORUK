@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class Huvudfonster extends javax.swing.JFrame {
 
     private static InfDB db;
-    private String anvandarnamn;
+    private static String anvandarnamn;
 
     /**
      * Creates new form Huvudfönster
@@ -185,7 +185,7 @@ public class Huvudfonster extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnMeddelandenActionPerformed
 
-    public String getAnvandarnamn() {
+    public static String getAnvandarnamn() {
         return anvandarnamn;
     }
     

@@ -1,13 +1,21 @@
 package oruk;
 
 import java.awt.Toolkit;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import static java.nio.file.Files.list;
+import static java.rmi.Naming.list;
 import oru.inf.*;
 import javax.swing.*;
 import java.util.*;
 
+
 public class LoggaIn extends javax.swing.JFrame {
 
     private static InfDB db;
+    private ArrayList<String> lista;
 
     public LoggaIn(InfDB db) {
         initComponents();
@@ -151,23 +159,43 @@ public class LoggaIn extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbxAnvandarnamnActionPerformed
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        try {
-
-            String anvandarnamnet = cmbxAnvandarnamn.getSelectedItem().toString();
-            String losenordet = losenord.getText();
-            String sokStrang1 = "SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamnet + "'";
-            String rattLosenord = db.fetchSingle(sokStrang1);
-
-            if (losenordet.equals(rattLosenord)) {
-                new Huvudfonster(db, anvandarnamnet).setVisible(true);
-                dispose();
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Felaktigt lösenord eller användarnamn försök igen");
-            }
-        } catch (InfException e) {
-
+        Crypto crypto = new BasicEncrypt();
+        String losen = losenord.getText();
+        String enc = new String(crypto.encrypt(losen.getBytes()));
+        String dec = new String(crypto.decrypt(enc.getBytes()));
+        String anv = (String) cmbxAnvandarnamn.getSelectedItem();
+        byte[] bytes = null;
+        
+        try{
+           lista = db.fetchColumn("SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS = '" + anv + "'");
+        }  catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Användaren finns ej");
         }
+        
+        try{
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            DataOutputStream out = new DataOutputStream(baos);
+          for (String element : lista) {
+             out.writeUTF(element);
+             }
+           bytes = baos.toByteArray();
+           for(int i = 0; i < bytes.length; i++){
+               String str = new String(crypto.encrypt(bytes));
+               if(str.contains(enc)){
+                   dispose();
+                   new Huvudfonster(db, anv).setVisible(true);
+                   break;
+                   
+               }
+               else{
+                   JOptionPane.showMessageDialog(null, "Fel lösenord!");
+                   break;
+               }
+           }
+        }
+        catch(IOException ex){
+           JOptionPane.showConfirmDialog(null, "Hoppla!");
+         } 
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     //Gör att btnLoggIn blir klickad om man trycker enter medan fokus är i lösenordstextfältet
@@ -181,7 +209,7 @@ public class LoggaIn extends javax.swing.JFrame {
     }//GEN-LAST:event_losenordFocusGained
 
     //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
-    private void fyllAnvandarnamnsLista() {
+    private void fyllAnvandarnamnsLista() {        
         try {
             ArrayList listan = new ArrayList();
             listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");

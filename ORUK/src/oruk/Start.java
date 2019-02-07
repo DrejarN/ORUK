@@ -16,7 +16,7 @@ public class Start {
      
     //Här är startmetoden för hela systemet, den skapar anslutning till databasen och öppnar vårt huvudfönster.
     public static void main(String[] args) {
-        
+       
         //Skapar en string med den relativa sökvägen till vår databas
         String relativa = "/ORUK.FDB";
         //Skapar en temporär fil som låter oss köra metoden för att hitta den absoluta sökvägen till vår databas.

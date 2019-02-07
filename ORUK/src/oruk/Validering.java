@@ -568,4 +568,21 @@ public class Validering {
         return ratt;
 
     }
+    public static boolean arRutornaTomma(JTextField ruta1, JTextField ruta2, JTextField ruta3, JTextField ruta4, JTextField ruta5, JTextField ruta6) {
+        boolean resultat = false;
+        String enString1 = ruta1.getText();
+        String enString2 = ruta2.getText();
+        String enString3 = ruta3.getText();
+        String enString4 = ruta4.getText();
+        String enString5 = ruta5.getText();
+        String enString6 = ruta6.getText();
+
+        if (enString1.isEmpty() && enString2.isEmpty() && enString3.isEmpty() && enString4.isEmpty() && enString5.isEmpty() && enString6.isEmpty()) {
+            resultat = true;
+            JOptionPane.showMessageDialog(null, "Rutorna är tom");
+
+        }
+
+        return resultat;
+    }
 }

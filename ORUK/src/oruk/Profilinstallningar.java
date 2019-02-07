@@ -66,6 +66,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
         jblLosenord = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtEfternamn = new javax.swing.JTextField();
+        btnLaddaUpp1 = new javax.swing.JButton();
 
         panelProfilInstallningar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -107,7 +108,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
         });
 
         btnLaddaUpp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnLaddaUpp.setText("Ladda upp profilbild");
+        btnLaddaUpp.setText("Välj profilbild");
         btnLaddaUpp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaddaUppActionPerformed(evt);
@@ -126,6 +127,14 @@ public class Profilinstallningar extends javax.swing.JPanel {
         txtEfternamn.setBackground(new java.awt.Color(203, 217, 241));
         txtEfternamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
+        btnLaddaUpp1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnLaddaUpp1.setText("Spara profilbild");
+        btnLaddaUpp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaddaUpp1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelProfilInstallningarLayout = new javax.swing.GroupLayout(panelProfilInstallningar);
         panelProfilInstallningar.setLayout(panelProfilInstallningarLayout);
         panelProfilInstallningarLayout.setHorizontalGroup(
@@ -141,18 +150,18 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(39, 39, 39)
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
-                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLaddaUpp)
-                            .addComponent(btnSpara, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSpara, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnLaddaUpp)
+                        .addComponent(btnLaddaUpp1)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelProfilInstallningarLayout.setVerticalGroup(
@@ -165,14 +174,15 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addComponent(btnLaddaUpp))
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(59, 59, 59))
-                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSpara)
+                            .addComponent(jLabel5)
                             .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55))
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLaddaUpp1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -181,14 +191,19 @@ public class Profilinstallningar extends javax.swing.JPanel {
                     .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jblLosenord))
-                .addContainerGap())
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblLosenord))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProfilInstallningarLayout.createSequentialGroup()
+                        .addComponent(btnSpara)
+                        .addGap(23, 23, 23))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,9 +229,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
+        String anvandare = Huvudfonster.getAnvandarnamn();
 
         try {
-            String id = db.getAutoIncrement("BILD", "BID");
+            String id1 = db.getAutoIncrement("BILD", "BID");
+            String id2 = db.getAutoIncrement("PROFIL_BILD", "BID");
 
             File image = new File(filename);
             FileInputStream fis = new FileInputStream(image);
@@ -228,17 +245,22 @@ public class Profilinstallningar extends javax.swing.JPanel {
             }
             photo = bos.toByteArray();
 
-            String query = "INSERT INTO BILD VALUES(" + id + ", '" + photo + "')";
+            String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
+            String query2 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id2 + ")";
 
-            db.insert(query);
 
+            
+
+            db.insert(query1);
+            db.insert(query2);
         } catch (Exception ex) {
 
         }
     }//GEN-LAST:event_btnLaddaUppActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        if (Validering.sakertLosenord(txtLosenord)) {
+        if (Validering.arRutornaTomma(txtFornamn, txtEfternamn, txtTitel, txtEpost, txtTelefon, txtLosenord)) {
+        } else {
             try {
                 String fornamn = txtFornamn.getText();
                 String efternamn = txtEfternamn.getText();
@@ -247,20 +269,76 @@ public class Profilinstallningar extends javax.swing.JPanel {
                 String teleNR = txtTelefon.getText();
                 String losenord = txtLosenord.getText();
                 String anvandare = Huvudfonster.getAnvandarnamn();
+                String andraData = "";
 
-                String andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "', EFTERNAMN='" + efternamn + "', TELEFONNUMMER='" + teleNR + "', MAILADRESS='" + ePost + "', LOSENORD='" + losenord + "', TITEL='" + titel + "' where MAILADRESS='" + anvandare + "'";
-                db.update(andraData);
-                JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
+                if (fornamn.isEmpty()) {
+
+                } else {
+
+                    andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtFornamn.setText(null);
+                }
+
+                if (efternamn.isEmpty()) {
+
+                } else {
+                    andraData = "UPDATE ANVANDARE SET EFTERNAMN='" + efternamn + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtEfternamn.setText(null);
+
+                }
+
+                if (titel.isEmpty()) {
+
+                } else {
+                    andraData = "UPDATE ANVANDARE SET TITEL='" + titel + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtTitel.setText(null);
+
+                }
+
+                if (ePost.isEmpty()) {
+                } else {
+                    andraData = "UPDATE ANVANDARE SET MAILADRESS='" + ePost + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtEpost.setText(null);
+
+                }
+
+                if (teleNR.isEmpty()) {
+                } else {
+                    andraData = "UPDATE ANVANDARE SET TELEFONNUMMER='" + teleNR + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtTelefon.setText(null);
+
+                }
+
+                if (losenord.isEmpty()) {
+                } else if (Validering.sakertLosenord(txtLosenord)) {
+                    andraData = "UPDATE ANVANDARE SET LOSENORD='" + losenord + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtLosenord.setText(null);
+
+                }
+
+              JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
             } catch (InfException ex) {
 
             }
-
         }
+
+
     }//GEN-LAST:event_btnSparaActionPerformed
+
+    private void btnLaddaUpp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaddaUpp1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Din valda profilbild har sparats");
+    }//GEN-LAST:event_btnLaddaUpp1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaddaUpp;
+    private javax.swing.JButton btnLaddaUpp1;
     private javax.swing.JButton btnSpara;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

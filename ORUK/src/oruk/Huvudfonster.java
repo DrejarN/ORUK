@@ -5,6 +5,7 @@
  */
 package oruk;
 
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,10 +26,12 @@ public class Huvudfonster extends javax.swing.JFrame {
      */
     public Huvudfonster(InfDB db, String anvandarnamn) {
         initComponents();
-        this.db=db;
+        this.db = db;
         this.anvandarnamn = anvandarnamn;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setThisTitle();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
+        setValkomstText();
     }
 
     /**
@@ -47,10 +50,11 @@ public class Huvudfonster extends javax.swing.JFrame {
         btnDoodle = new javax.swing.JButton();
         btnLoggaUt = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(47, 92, 168));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
         btnMittFlode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnMittFlode.setText("Mitt flöde");
@@ -94,15 +98,23 @@ public class Huvudfonster extends javax.swing.JFrame {
 
         panelMain.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
         panelMain.setLayout(panelMainLayout);
         panelMainLayout.setHorizontalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelMainLayout.setVerticalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 777, Short.MAX_VALUE)
+            .addGroup(panelMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(712, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -137,8 +149,8 @@ public class Huvudfonster extends javax.swing.JFrame {
                     .addComponent(btnDoodle)
                     .addComponent(btnLoggaUt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,9 +161,7 @@ public class Huvudfonster extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -161,12 +171,12 @@ public class Huvudfonster extends javax.swing.JFrame {
         // TODO add your handling code here:
         JPanel importeradPanel = new MittFlode(db);
         importeradPanel.setBounds(panelMain.getBounds());
-        
+
         panelMain.removeAll();
         panelMain.revalidate();
         panelMain.repaint();
         panelMain.add(importeradPanel);
-        importeradPanel.setLocation(1,1);
+        importeradPanel.setLocation(1, 1);
     }//GEN-LAST:event_btnMittFlodeActionPerformed
 
     private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
@@ -178,17 +188,17 @@ public class Huvudfonster extends javax.swing.JFrame {
         panelMain.revalidate();
         panelMain.repaint();
         panelMain.add(importeradPanel);
-        importeradPanel.setLocation(1,1);
+        importeradPanel.setLocation(1, 1);
     }//GEN-LAST:event_btnMinProfilActionPerformed
 
     private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
-        
+
     }//GEN-LAST:event_btnMeddelandenActionPerformed
 
     public static String getAnvandarnamn() {
         return anvandarnamn;
     }
-    
+
     private void btnDoodleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoodleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDoodleActionPerformed
@@ -201,28 +211,41 @@ public class Huvudfonster extends javax.swing.JFrame {
         panelMain.revalidate();
         panelMain.repaint();
         panelMain.add(importeradPanel);
-        importeradPanel.setLocation(1,1);
+        importeradPanel.setLocation(1, 1);
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     //Metod för att sätta text i huvudet på fönstret 
-    private void setThisTitle(){
+    private void setThisTitle() {
         try {
             String fornamn = db.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamn + "'");
-            String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamn+ "'");
+            String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamn + "'");
             setTitle("ORUK - Inloggad som " + fornamn + " " + efternamn);
-            
+
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
     }
-   
+
+    private void setValkomstText() {
+        try {
+            String fornamn = db.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamn + "'");
+            String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandarnamn + "'");
+            jLabel1.setText("Du är nu inloggad som " + fornamn + " " + efternamn + ", Välkommen!");
+
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoodle;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnMeddelanden;
     private javax.swing.JButton btnMinProfil;
     private javax.swing.JButton btnMittFlode;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelMain;
     // End of variables declaration//GEN-END:variables

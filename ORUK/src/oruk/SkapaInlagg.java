@@ -1,5 +1,8 @@
 package oruk;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import oru.inf.*;
@@ -9,12 +12,17 @@ import java.util.*;
 public class SkapaInlagg extends javax.swing.JFrame {
  
     private static InfDB db;
-    private String yaho;
+    private String mailadress;
+    private static String filename;
+    private byte[] photo;
+    private String query1;
+    private String query3;
 
     public SkapaInlagg(InfDB db) {
         initComponents();
         this.db = db;
         fylllista();
+        this.mailadress = Huvudfonster.getAnvandarnamn();
     }
     
     
@@ -31,6 +39,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         kategori = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +74,13 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         jLabel2.setText("Kategori");
 
+        jButton2.setText("Bifoga fil");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,8 +96,11 @@ public class SkapaInlagg extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(37, 37, 37))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPublicera, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -101,7 +120,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -143,17 +163,22 @@ public class SkapaInlagg extends javax.swing.JFrame {
          String time = now.toString().substring(11,19);
          
          String valdkategori = (String) kategori.getSelectedItem();
-         String ettid = "";
          String katid = "";
+         String ettid = "";
+         String ettaid = "";
          try{
              katid = db.fetchSingle("SELECT KID FROM KATEGORI WHERE NAMN = '"+valdkategori+"'");
              ettid = db.getAutoIncrement("INLAGG", "IID");
+             ettaid = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '"+Huvudfonster.getAnvandarnamn()+"'");
          }
          catch(InfException e){
              JOptionPane.showConfirmDialog(null, "Hoppla");
          }         
          try{
              db.insert("INSERT INTO INLAGG VALUES ("+ettid+", '"+txtTitel.getText()+"', '"+txtInlagg.getText()+"', "+katid+", '"+date+"', '"+time+"')");
+             db.insert(query1);
+             db.insert(query3);
+             db.insert("INSERT INTO GORA_INLAGG VALUES ("+ettaid+", "+ettid+")");
              JOptionPane.showMessageDialog(null, "Inlägget har publicerats");
          }
          catch(InfException e){
@@ -162,14 +187,52 @@ public class SkapaInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Huvudfonster(db, yaho).setVisible(true);
+        new Huvudfonster(db, mailadress).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        filename = f.getAbsolutePath();
+        String anvandare = Huvudfonster.getAnvandarnamn();
+        String ettid = "";
+        
+        try{
+             ettid = db.getAutoIncrement("INLAGG", "IID");
+        }
+        catch(InfException e){
+            JOptionPane.showMessageDialog(null, "fel");
+        }
+        
+        try {
+            String id1 = db.getAutoIncrement("BILD", "BID");
+
+            File image = new File(filename);
+            FileInputStream fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+
+            }
+            photo = bos.toByteArray();
+
+            query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
+            query3 = "INSERT INTO INLAGG_BILD VALUES(" + id1 + ", "+ettid+")";
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPublicera;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

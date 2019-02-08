@@ -8,15 +8,15 @@ import oru.inf.*;
 import javax.swing.*;
 import java.util.*;
 
-
 public class LoggaIn extends javax.swing.JFrame {
-
+    
     private static InfDB db;
     private ArrayList<String> lista;
-
+    
     public LoggaIn(InfDB db) {
         initComponents();
         this.db = db;
+        ComboBoxAutoComplete.enable(cmbxAnvandarnamn);
         fyllCmbxAnvandarnamn();
         setTitle("ORUK - Logga in");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
@@ -40,7 +40,7 @@ public class LoggaIn extends javax.swing.JFrame {
         btnLoggaIn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cmbxAnvandarnamn = new com.jidesoft.swing.AutoCompletionComboBox();
+        cmbxAnvandarnamn = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,11 +79,7 @@ public class LoggaIn extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oruk/icons/oruklogostorre.png"))); // NOI18N
 
-        cmbxAnvandarnamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbxAnvandarnamnActionPerformed(evt);
-            }
-        });
+        cmbxAnvandarnamn.setEditable(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,7 +88,7 @@ public class LoggaIn extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addComponent(cmbxAnvandarnamn, 0, 326, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                         .addComponent(lblLosenord)
@@ -114,8 +110,8 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblAnvandarnamn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(lblLosenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(losenord, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,36 +153,34 @@ public class LoggaIn extends javax.swing.JFrame {
         String anv = (String) cmbxAnvandarnamn.getSelectedItem();
         byte[] bytes = null;
         
-        try{
-           lista = db.fetchColumn("SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS = '" + anv + "'");
-        }  catch (InfException ex) {
+        try {
+            lista = db.fetchColumn("SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS = '" + anv + "'");
+        } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Användaren finns ej");
         }
         
-        try{
+        try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(baos);
-          for (String element : lista) {
-             out.writeUTF(element);
-             }
-           bytes = baos.toByteArray();
-           for(int i = 0; i < bytes.length; i++){
-               String str = new String(crypto.encrypt(bytes));
-               if(str.contains(enc)){
-                   dispose();
-                   new Huvudfonster(db, anv).setVisible(true);
-                   break;
-                   
-               }
-               else{
-                   JOptionPane.showMessageDialog(null, "Fel lösenord!");
-                   break;
-               }
-           }
-        }
-        catch(IOException ex){
-           JOptionPane.showConfirmDialog(null, "Hoppla!");
-         } 
+            for (String element : lista) {
+                out.writeUTF(element);
+            }
+            bytes = baos.toByteArray();
+            for (int i = 0; i < bytes.length; i++) {
+                String str = new String(crypto.encrypt(bytes));
+                if (str.contains(enc)) {
+                    dispose();
+                    new Huvudfonster(db, anv).setVisible(true);
+                    break;
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fel lösenord!");
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            JOptionPane.showConfirmDialog(null, "Hoppla!");
+        }        
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     //Gör att btnLoggIn blir klickad om man trycker enter medan fokus är i lösenordstextfältet
@@ -205,39 +199,31 @@ public class LoggaIn extends javax.swing.JFrame {
 
     //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
     private void fyllCmbxAnvandarnamn() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-
-                try {
-                    ArrayList listan = new ArrayList();
-                    listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");
-                    ArrayList<String> allaAnvandare = new ArrayList<>();
-                    
-                    cmbxAnvandarnamn.setStrict(false);
-                    for (Object mailadress : listan) {
-                        String anvandare = mailadress.toString();
-                        allaAnvandare.add(anvandare);
-                    }
-                    allaAnvandare.sort(String::compareToIgnoreCase);
-
-                    for (String namn : allaAnvandare) {
-                        cmbxAnvandarnamn.addItem(namn);
-                    }
-                    cmbxAnvandarnamn.setSelectedIndex(-1);
-
-                } catch (InfException ex) {
-                    JOptionPane.showMessageDialog(null, "Något gick fel!");
-                    System.out.println("Internt felmeddelande" + ex.getMessage());
-
-                }
-
+        try {
+            ArrayList listan = new ArrayList();
+            listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");
+            ArrayList<String> allaAnvandare = new ArrayList<>();
+            
+            for (Object mailadress : listan) {
+                String anvandare = mailadress.toString();
+                allaAnvandare.add(anvandare);
             }
-        });
+            allaAnvandare.sort(String::compareToIgnoreCase);
+            
+            for (String namn : allaAnvandare) {
+                cmbxAnvandarnamn.addItem(namn);
+            }
+            cmbxAnvandarnamn.setSelectedIndex(-1);
+            
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());           
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
-    private com.jidesoft.swing.AutoCompletionComboBox cmbxAnvandarnamn;
+    private javax.swing.JComboBox<String> cmbxAnvandarnamn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

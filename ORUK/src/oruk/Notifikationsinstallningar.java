@@ -3,6 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+//Att lägga till: 
+//1. Om man vill stänga av alla notiser.
+//2. Hur man vill ha notiser (bara Email..)
+
 package oruk;
 
 import javax.swing.JOptionPane;

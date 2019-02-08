@@ -228,11 +228,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 2;  ");
         System.out.println(query); 
             if(query == null){
-                if(jCheckBox1.isSelected()) {
+                if(jCheckBox2.isSelected()) {
                     db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 2); ");
                 }
                     } else {
-                        if(!jCheckBox1.isSelected()) {
+                        if(!jCheckBox2.isSelected()) {
                             db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 2; ");
                         }
                     }     
@@ -245,11 +245,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 3;  ");
         System.out.println(query); 
             if(query == null){
-                if(jCheckBox1.isSelected()) {
+                if(jCheckBox3.isSelected()) {
                     db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 3); ");
                 }
                     } else {
-                        if(!jCheckBox1.isSelected()) {
+                        if(!jCheckBox3.isSelected()) {
                             db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 3; ");
                         }
                     }     
@@ -262,11 +262,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 4;  ");
         System.out.println(query); 
             if(query == null){
-                if(jCheckBox1.isSelected()) {
+                if(jCheckBox4.isSelected()) {
                     db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 4); ");
                 }
                     } else {
-                        if(!jCheckBox1.isSelected()) {
+                        if(!jCheckBox4.isSelected()) {
                             db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 4; ");
                         }
                     }     
@@ -279,11 +279,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 5;  ");
         System.out.println(query); 
             if(query == null){
-                if(jCheckBox1.isSelected()) {
+                if(jCheckBox5.isSelected()) {
                     db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 5); ");
                 }
                     } else {
-                        if(!jCheckBox1.isSelected()) {
+                        if(!jCheckBox5.isSelected()) {
                             db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 5; ");                           JOptionPane.showMessageDialog(null, "Dina ändringar har sparats.");
                         }
                     }     
@@ -296,11 +296,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 6;  ");
         System.out.println(query); 
             if(query == null){
-                if(jCheckBox1.isSelected()) {
+                if(jCheckBox6.isSelected()) {
                     db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 6); ");
                 }
                     } else {
-                        if(!jCheckBox1.isSelected()) {
+                        if(!jCheckBox6.isSelected()) {
                             db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 6; ");
                         }
                     }     

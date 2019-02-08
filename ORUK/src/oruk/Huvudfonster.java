@@ -51,11 +51,11 @@ public class Huvudfonster extends javax.swing.JFrame {
         btnLoggaUt = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnSkrivInlagg = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
 
         btnMittFlode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnMittFlode.setText("Mitt flöde");
@@ -115,13 +115,14 @@ public class Huvudfonster extends javax.swing.JFrame {
             .addGroup(panelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(712, Short.MAX_VALUE))
+                .addContainerGap(714, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Skapa inlägg");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSkrivInlagg.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnSkrivInlagg.setText("Skriv inlägg");
+        btnSkrivInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSkrivInlaggActionPerformed(evt);
             }
         });
 
@@ -144,7 +145,8 @@ public class Huvudfonster extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLoggaUt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
+                        .addComponent(btnSkrivInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 47, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,7 +159,7 @@ public class Huvudfonster extends javax.swing.JFrame {
                     .addComponent(btnMeddelanden)
                     .addComponent(btnDoodle)
                     .addComponent(btnLoggaUt)
-                    .addComponent(jButton1))
+                    .addComponent(btnSkrivInlagg))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -224,10 +226,11 @@ public class Huvudfonster extends javax.swing.JFrame {
         importeradPanel.setLocation(1, 1);
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new SkapaInlagg(db).setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSkrivInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkrivInlaggActionPerformed
+        SkapaInlagg skapaInlagg = new SkapaInlagg(db);
+        skapaInlagg.setVisible(true);
+        
+    }//GEN-LAST:event_btnSkrivInlaggActionPerformed
 
     //Metod för att sätta text i huvudet på fönstret 
     private void setThisTitle() {
@@ -260,7 +263,7 @@ public class Huvudfonster extends javax.swing.JFrame {
     private javax.swing.JButton btnMeddelanden;
     private javax.swing.JButton btnMinProfil;
     private javax.swing.JButton btnMittFlode;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSkrivInlagg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelMain;

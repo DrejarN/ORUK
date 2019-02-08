@@ -17,7 +17,7 @@ public class LoggaIn extends javax.swing.JFrame {
     public LoggaIn(InfDB db) {
         initComponents();
         this.db = db;
-        fyllAnvandarnamnsLista();
+        fyllCmbxAnvandarnamn();
         setTitle("ORUK - Logga in");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
         this.setLocationRelativeTo(null);
@@ -39,8 +39,8 @@ public class LoggaIn extends javax.swing.JFrame {
         lblLosenord = new javax.swing.JLabel();
         btnLoggaIn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        cmbxAnvandarnamn = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        cmbxAnvandarnamn = new com.jidesoft.swing.AutoCompletionComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,24 +77,13 @@ public class LoggaIn extends javax.swing.JFrame {
             }
         });
 
-        cmbxAnvandarnamn.setEditable(true);
-        cmbxAnvandarnamn.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbxAnvandarnamnItemStateChanged(evt);
-            }
-        });
-        cmbxAnvandarnamn.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                cmbxAnvandarnamnFocusGained(evt);
-            }
-        });
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oruk/icons/oruklogostorre.png"))); // NOI18N
+
         cmbxAnvandarnamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbxAnvandarnamnActionPerformed(evt);
             }
         });
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oruk/icons/oruklogostorre.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,15 +92,16 @@ public class LoggaIn extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(cmbxAnvandarnamn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblLosenord)
-                    .addComponent(lblAnvandarnamn)
-                    .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel1)))
+                    .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                        .addComponent(lblLosenord)
+                        .addComponent(lblAnvandarnamn)
+                        .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                        .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(8, 8, 8)
+                            .addComponent(jLabel1))))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -124,8 +114,8 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblAnvandarnamn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(lblLosenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(losenord, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,11 +148,6 @@ public class LoggaIn extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //Metod som gör att fokus ges till lösenordstextrutan om man trycker enter i användarnamnsrutan
-    private void cmbxAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnActionPerformed
-        losenord.requestFocus();
-    }//GEN-LAST:event_cmbxAnvandarnamnActionPerformed
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         Crypto crypto = new BasicEncrypt();
@@ -214,38 +199,45 @@ public class LoggaIn extends javax.swing.JFrame {
         losenord.setText("");
     }//GEN-LAST:event_losenordFocusGained
 
-    private void cmbxAnvandarnamnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnFocusGained
+    private void cmbxAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnActionPerformed
         //
-    }//GEN-LAST:event_cmbxAnvandarnamnFocusGained
-
-    private void cmbxAnvandarnamnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnItemStateChanged
-        ComboBoxAutoComplete.enable(cmbxAnvandarnamn);
-    }//GEN-LAST:event_cmbxAnvandarnamnItemStateChanged
+    }//GEN-LAST:event_cmbxAnvandarnamnActionPerformed
 
     //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
-    private void fyllAnvandarnamnsLista() {        
-        try {
-            ArrayList listan = new ArrayList();
-            listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");
+    private void fyllCmbxAnvandarnamn() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
 
-            for (Object mailadress : listan) {
-                String anvandare = mailadress.toString();
-                cmbxAnvandarnamn.addItem(anvandare);
+                try {
+                    ArrayList listan = new ArrayList();
+                    listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");
+                    ArrayList<String> allaAnvandare = new ArrayList<>();
+                    
+                    cmbxAnvandarnamn.setStrict(false);
+                    for (Object mailadress : listan) {
+                        String anvandare = mailadress.toString();
+                        allaAnvandare.add(anvandare);
+                    }
+                    allaAnvandare.sort(String::compareToIgnoreCase);
+
+                    for (String namn : allaAnvandare) {
+                        cmbxAnvandarnamn.addItem(namn);
+                    }
+                    cmbxAnvandarnamn.setSelectedIndex(-1);
+
+                } catch (InfException ex) {
+                    JOptionPane.showMessageDialog(null, "Något gick fel!");
+                    System.out.println("Internt felmeddelande" + ex.getMessage());
+
+                }
+
             }
-            cmbxAnvandarnamn.setSelectedIndex(-1);
-            lblAnvandarnamn.requestFocus();
-            losenord.setText("SkrivLösenord");
-            
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
-            
-        }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
-    private javax.swing.JComboBox<String> cmbxAnvandarnamn;
+    private com.jidesoft.swing.AutoCompletionComboBox cmbxAnvandarnamn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

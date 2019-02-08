@@ -233,7 +233,6 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
         try {
             String id1 = db.getAutoIncrement("BILD", "BID");
-            String id2 = db.getAutoIncrement("PROFIL_BILD", "BID");
 
             File image = new File(filename);
             FileInputStream fis = new FileInputStream(image);
@@ -246,13 +245,12 @@ public class Profilinstallningar extends javax.swing.JPanel {
             photo = bos.toByteArray();
 
             String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
-            String query2 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id2 + ")";
-
-
-            
+            String query2 = "DELETE FROM PROFIL_BILD WHERE AID=(SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')";
+            String query3 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id1 + ")";
 
             db.insert(query1);
-            db.insert(query2);
+            db.delete(query2);
+            db.insert(query3);
         } catch (Exception ex) {
 
         }
@@ -322,7 +320,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
                 }
 
-              JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
+                JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
             } catch (InfException ex) {
 
             }

@@ -4,12 +4,12 @@ package oruk;
 import oru.inf.*;
 import javax.swing.*;
 
-public class nyAnvandare extends javax.swing.JFrame {
+public class NyAnvandare extends javax.swing.JFrame {
 
 
     private static InfDB db;
     
-    public nyAnvandare(InfDB db) {
+    public NyAnvandare(InfDB db) {
         initComponents();
         this.db = db;
     }

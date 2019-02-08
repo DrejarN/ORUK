@@ -9,6 +9,7 @@ import java.util.*;
 public class SkapaInlagg extends javax.swing.JFrame {
  
     private static InfDB db;
+    private String yaho;
 
     public SkapaInlagg(InfDB db) {
         initComponents();
@@ -56,6 +57,11 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("X");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Kategori");
 
@@ -154,6 +160,10 @@ public class SkapaInlagg extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Kunde ej publicera inlägget");
          }
     }//GEN-LAST:event_btnPubliceraActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new Huvudfonster(db, yaho).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
 

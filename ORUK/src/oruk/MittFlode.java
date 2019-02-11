@@ -17,9 +17,7 @@ import oru.inf.InfException;
  */
 public class MittFlode extends javax.swing.JPanel {
 
-    /**
-     * Creates new form MittFlode1
-     */
+    
     public MittFlode(InfDB db) {
         initComponents();
         this.db = db;
@@ -177,7 +175,7 @@ public class MittFlode extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInformellActionPerformed
 
-    private InfDB db;
+    private static InfDB db;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormell;
     private javax.swing.JButton btnForskning;

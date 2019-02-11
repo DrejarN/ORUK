@@ -1,5 +1,6 @@
 package oruk;
 
+import com.apple.eawt.Application;
 import java.awt.Toolkit;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -19,6 +20,8 @@ public class LoggaIn extends javax.swing.JFrame {
         ComboBoxAutoComplete.enable(cmbxAnvandarnamn);
         fyllCmbxAnvandarnamn();
         setTitle("ORUK - Logga in");
+        Application application = Application.getApplication();
+        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("icons/oruklogoliten.png"));
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
         this.setLocationRelativeTo(null);
     }

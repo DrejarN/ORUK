@@ -5,8 +5,11 @@
  */
 package oruk;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -139,9 +142,9 @@ public class MittFlode extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnForskningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForskningActionPerformed
+        
         JPanel importeradPanel = new ForskningUtbildningAnslag(db);
         importeradPanel.setBounds(panel_Inlagg.getBounds());
-
         panel_Inlagg.removeAll();
         panel_Inlagg.revalidate();
         panel_Inlagg.repaint();
@@ -150,7 +153,24 @@ public class MittFlode extends javax.swing.JPanel {
     }//GEN-LAST:event_btnForskningActionPerformed
 
     private void btnFormellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormellActionPerformed
-        
+        try {
+            ArrayList listan = new ArrayList();
+            listan = db.fetchColumn("SELECT IID FROM INLAGG");
+            
+            for (Object inlagg : listan) {
+                String rubrik = db.fetchSingle("SELECT RUBRIK FROM INLAGG WHERE IID=" + inlagg + " AND KATEGORI=3");
+                String text = db.fetchSingle("SELECT TEXT FROM INLAGG WHERE IID=" + inlagg + " AND KATEGORI=3");
+                
+                JPanel importeradPanel = new MittFlodeFormell(db, rubrik, text);
+                importeradPanel.setBounds(panel_Inlagg.getBounds());
+
+                panel_Inlagg.add(importeradPanel);
+                importeradPanel.setLocation(1, 1); 
+            }                         
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());           
+        }
     }//GEN-LAST:event_btnFormellActionPerformed
 
     private void btnInformellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformellActionPerformed

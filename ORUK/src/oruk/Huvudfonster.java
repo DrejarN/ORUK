@@ -5,6 +5,7 @@
  */
 package oruk;
 
+import com.apple.eawt.Application;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -30,6 +31,8 @@ public class Huvudfonster extends javax.swing.JFrame {
         this.anvandarnamn = anvandarnamn;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setThisTitle();
+        Application application = Application.getApplication();
+        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("icons/oruklogoliten.png"));
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
         setValkomstText();
     }

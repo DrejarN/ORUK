@@ -6,9 +6,7 @@
 package oruk;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -23,16 +21,15 @@ public class MinProfil extends javax.swing.JPanel {
     /**
      * Creates new form MinProfil1
      */
-    public MinProfil(InfDB db) throws IOException, SQLException {
+    public MinProfil(InfDB db) {
         initComponents();
         this.db = db;
         bild.setIcon(Profilinstallningar.getBild());
         setProfil();
-        
 
     }
-    
-    public void setProfil() throws IOException, InfException, SQLException {
+
+    public void setProfil() {
         try {
             String anvandare = Huvudfonster.getAnvandarnamn();
             String enStrang1 = "SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
@@ -51,26 +48,10 @@ public class MinProfil extends javax.swing.JPanel {
             lblEPost.setText(query4);
             lblTelefon.setText(query3);
             lblTitel.setText(query5);
-            
+
         } catch (InfException e) {
         }
 
-        try {
-
-            String anvandare = Huvudfonster.getAnvandarnamn();
-            String enStrang6 = "SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID='" + anvandare + "')";
-            ResultSet rs = db.getResultSet(enStrang6);
-            if(rs.next())
-            {
-                byte[] hej = rs.getBytes("BILDEN");
-                ImageIcon icon = new ImageIcon(hej);
-                bild.setIcon(icon);
-            
-            }
-
-        } catch (SQLException ex) {
-
-        }
     }
 
     /**

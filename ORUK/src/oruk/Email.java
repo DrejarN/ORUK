@@ -43,7 +43,7 @@ public void skickaMail() {
             String host = "smtp.gmail.com";
             String user = "orukadm1n@gmail.com";
             String pass = "Adm1n123";
-            String to = "jamie.jones@live.se";
+            String to = mailadress;
             String from = "orukadm1n@gmail.com";
             String subject = "TestMail";
             String messageText = "Testbody heheheheh";
@@ -83,6 +83,7 @@ public void skickaMail() {
 public void sendMailNotis(Integer notisNummer) {
     String AID = "";
     
+    //AID används ej atm.
     try {
         AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + mailadress + "' ");
     } catch(InfException ex) {
@@ -212,44 +213,6 @@ public void sendMailNotis(Integer notisNummer) {
             String from = "orukadm1n@gmail.com";
             String subject = "Notis från ORUK (går ej att svara på)";
             String messageText = "Du har fått ett nytt meddelande i ORUK. \n\nDet här meddelandet är skickat från ORUK då du har valt att få e-post när någon skickar ett meddelande till dig i ORUK. \nÖnskar du ändra dina notisinställningar gör du det i programmet.";
-            boolean sessionDebug = false;
-
-            Properties props = System.getProperties();
-
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", host);
-            props.put("mail.smtp.port", "587");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.required", "true");
-            
-            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-            Session mailSession = Session.getDefaultInstance(props, null);
-            mailSession.setDebug(sessionDebug);
-            Message msg = new MimeMessage(mailSession);
-            msg.setFrom(new InternetAddress(from));
-            InternetAddress[] address = {new InternetAddress(to)};
-            msg.setRecipients(Message.RecipientType.TO, address);
-            msg.setSubject(subject); msg.setSentDate(new Date());
-            msg.setText(messageText);
-            
-           Transport transport = mailSession.getTransport("smtp");
-           transport.connect(host, user, pass);
-           transport.sendMessage(msg, msg.getAllRecipients());
-           transport.close();
-           
-        }catch(Exception ex) {
-            System.out.println(ex);
-        }
-        
-    } else if(notisNummer == 5) {
-        try{
-            String host = "smtp.gmail.com";
-            String user = "orukadm1n@gmail.com";
-            String pass = "Adm1n123";
-            String to = mailadress;
-            String from = "orukadm1n@gmail.com";
-            String subject = "Notis från ORUK (går ej att svara på)";
-            String messageText = "Någon har skapat ett inlägg med en eller flera taggar du följer. \n\nDet här meddelandet är skickat från ORUK då du har valt att få e-post när skapar ett inlägg med en tagg du följer. \nÖnskar du ändra dina notisinställningar gör du det i programmet.";
             boolean sessionDebug = false;
 
             Properties props = System.getProperties();

@@ -219,14 +219,14 @@ public class Huvudfonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDoodleActionPerformed
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
-        JPanel importeradPanel = new LoggaUt();
-        importeradPanel.setBounds(panelMain.getBounds());
+        int response = JOptionPane.showConfirmDialog(null, "Vill du logga ut??", "Logga ut",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+     if (response == JOptionPane.NO_OPTION) {
 
-        panelMain.removeAll();
-        panelMain.revalidate();
-        panelMain.repaint();
-        panelMain.add(importeradPanel);
-        importeradPanel.setLocation(1, 1);
+    } else if (response == JOptionPane.YES_OPTION) {
+        dispose();
+        new LoggaIn(db).setVisible(true);
+      }
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     private void btnSkrivInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkrivInlaggActionPerformed

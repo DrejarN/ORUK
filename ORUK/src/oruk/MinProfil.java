@@ -23,10 +23,11 @@ public class MinProfil extends javax.swing.JPanel {
     /**
      * Creates new form MinProfil1
      */
-    public MinProfil(InfDB db) {
+    public MinProfil(InfDB db) throws IOException, SQLException {
         initComponents();
         this.db = db;
         bild.setIcon(Profilinstallningar.getBild());
+        setProfil();
         
 
     }

@@ -11,7 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -19,7 +21,7 @@ import oru.inf.InfDB;
  */
 public class Profilinstallningar extends javax.swing.JPanel {
 
-    private final InfDB db;
+    private static InfDB db;
     private static String filename;
     private byte[] photo;
 
@@ -30,16 +32,14 @@ public class Profilinstallningar extends javax.swing.JPanel {
         initComponents();
         this.db = db;
     }
-    
-    public static ImageIcon getBild()
-    {
+
+    public static ImageIcon getBild() {
         ImageIcon icon = new ImageIcon(filename);
-        Image img = icon.getImage().getScaledInstance(255, 255, 255);
+        Image img = icon.getImage().getScaledInstance(187, 187, 187);
         ImageIcon image = new ImageIcon(img);
-        
+
         return image;
-        
-    
+
     }
 
     /**
@@ -56,17 +56,22 @@ public class Profilinstallningar extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtNamn = new javax.swing.JTextField();
+        txtFornamn = new javax.swing.JTextField();
         txtTitel = new javax.swing.JTextField();
         txtEpost = new javax.swing.JTextField();
         txtTelefon = new javax.swing.JTextField();
         btnSpara = new javax.swing.JButton();
         btnLaddaUpp = new javax.swing.JButton();
+        txtLosenord = new javax.swing.JTextField();
+        jblLosenord = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtEfternamn = new javax.swing.JTextField();
+        btnLaddaUpp1 = new javax.swing.JButton();
 
         panelProfilInstallningar.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Namn:");
+        jLabel1.setText("Förnamn:");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Titel:");
@@ -77,8 +82,8 @@ public class Profilinstallningar extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel4.setText("Telefonnummer:");
 
-        txtNamn.setBackground(new java.awt.Color(203, 217, 241));
-        txtNamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtFornamn.setBackground(new java.awt.Color(203, 217, 241));
+        txtFornamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         txtTitel.setBackground(new java.awt.Color(203, 217, 241));
         txtTitel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -103,10 +108,30 @@ public class Profilinstallningar extends javax.swing.JPanel {
         });
 
         btnLaddaUpp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnLaddaUpp.setText("Ladda upp profilbild");
+        btnLaddaUpp.setText("Välj profilbild");
         btnLaddaUpp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaddaUppActionPerformed(evt);
+            }
+        });
+
+        txtLosenord.setBackground(new java.awt.Color(203, 217, 241));
+        txtLosenord.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jblLosenord.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jblLosenord.setText("Lösenord:");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setText("Efternamn:");
+
+        txtEfternamn.setBackground(new java.awt.Color(203, 217, 241));
+        txtEfternamn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        btnLaddaUpp1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnLaddaUpp1.setText("Spara profilbild");
+        btnLaddaUpp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaddaUpp1ActionPerformed(evt);
             }
         });
 
@@ -117,22 +142,26 @@ public class Profilinstallningar extends javax.swing.JPanel {
             .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jblLosenord)
                     .addComponent(jLabel3)
-                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
-                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(79, 79, 79)
-                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNamn)
-                            .addComponent(txtTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                            .addComponent(txtEpost)
-                            .addComponent(txtTitel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLaddaUpp)
-                            .addComponent(btnSpara, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel5))
+                .addGap(39, 39, 39)
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSpara, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnLaddaUpp)
+                        .addComponent(btnLaddaUpp1)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelProfilInstallningarLayout.setVerticalGroup(
@@ -141,22 +170,40 @@ public class Profilinstallningar extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLaddaUpp))
-                .addGap(18, 18, 18)
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55))
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLaddaUpp1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSpara))
-                .addGap(18, 18, 18)
-                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(90, Short.MAX_VALUE))
+                    .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelProfilInstallningarLayout.createSequentialGroup()
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelProfilInstallningarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblLosenord))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProfilInstallningarLayout.createSequentialGroup()
+                        .addComponent(btnSpara)
+                        .addGap(23, 23, 23))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -167,7 +214,9 @@ public class Profilinstallningar extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelProfilInstallningar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelProfilInstallningar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -180,9 +229,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
+        String anvandare = Huvudfonster.getAnvandarnamn();
 
         try {
-            String id = db.getAutoIncrement("BILD", "BID");
+            String id1 = db.getAutoIncrement("BILD", "BID");
+
             File image = new File(filename);
             FileInputStream fis = new FileInputStream(image);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -193,33 +244,112 @@ public class Profilinstallningar extends javax.swing.JPanel {
             }
             photo = bos.toByteArray();
 
-            String query = "INSERT INTO BILD VALUES(" + id + ", '" + photo + "')";
+            String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
+            String query2 = "DELETE FROM PROFIL_BILD WHERE AID=(SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')";
+            String query3 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id1 + ")";
 
-            db.insert(query);
-
+            db.insert(query1);
+            db.delete(query2);
+            db.insert(query3);
         } catch (Exception ex) {
 
         }
     }//GEN-LAST:event_btnLaddaUppActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-       
+        if (Validering.arRutornaTomma(txtFornamn, txtEfternamn, txtTitel, txtEpost, txtTelefon, txtLosenord)) {
+        } else {
+            try {
+                String fornamn = txtFornamn.getText();
+                String efternamn = txtEfternamn.getText();
+                String titel = txtTitel.getText();
+                String ePost = txtEpost.getText();
+                String teleNR = txtTelefon.getText();
+                String losenord = txtLosenord.getText();
+                String anvandare = Huvudfonster.getAnvandarnamn();
+                String andraData = "";
+
+                if (fornamn.isEmpty()) {
+
+                } else {
+
+                    andraData = "UPDATE ANVANDARE SET FORNAMN='" + fornamn + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtFornamn.setText(null);
+                }
+
+                if (efternamn.isEmpty()) {
+
+                } else {
+                    andraData = "UPDATE ANVANDARE SET EFTERNAMN='" + efternamn + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtEfternamn.setText(null);
+
+                }
+
+                if (titel.isEmpty()) {
+
+                } else {
+                    andraData = "UPDATE ANVANDARE SET TITEL='" + titel + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtTitel.setText(null);
+
+                }
+
+                if (ePost.isEmpty()) {
+                } else {
+                    andraData = "UPDATE ANVANDARE SET MAILADRESS='" + ePost + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtEpost.setText(null);
+
+                }
+
+                if (teleNR.isEmpty()) {
+                } else {
+                    andraData = "UPDATE ANVANDARE SET TELEFONNUMMER='" + teleNR + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtTelefon.setText(null);
+
+                }
+
+                if (losenord.isEmpty()) {
+                } else if (Validering.sakertLosenord(txtLosenord)) {
+                    andraData = "UPDATE ANVANDARE SET LOSENORD='" + losenord + "' WHERE MAILADRESS='" + anvandare + "'";
+                    db.update(andraData);
+                    txtLosenord.setText(null);
+
+                }
+
+                JOptionPane.showMessageDialog(null, "Infomationen har ändrats");
+            } catch (InfException ex) {
+
+            }
+        }
+
+
     }//GEN-LAST:event_btnSparaActionPerformed
+
+    private void btnLaddaUpp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaddaUpp1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Din valda profilbild har sparats");
+    }//GEN-LAST:event_btnLaddaUpp1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaddaUpp;
+    private javax.swing.JButton btnLaddaUpp1;
     private javax.swing.JButton btnSpara;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jblLosenord;
     private javax.swing.JPanel panelProfilInstallningar;
+    private javax.swing.JTextField txtEfternamn;
     private javax.swing.JTextField txtEpost;
-    private javax.swing.JTextField txtNamn;
+    private javax.swing.JTextField txtFornamn;
+    private javax.swing.JTextField txtLosenord;
     private javax.swing.JTextField txtTelefon;
     private javax.swing.JTextField txtTitel;
     // End of variables declaration//GEN-END:variables
 }
-
-

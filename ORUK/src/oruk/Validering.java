@@ -1,6 +1,5 @@
 package oruk;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import javax.swing.JTextField;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JFileChooser;
+
 /**
  *
  * @author Christian Rudolphi & Mats Nilsson
@@ -451,98 +451,138 @@ public class Validering {
         return finnsinte;
 
     }
-  
+
     //Validerings metod som undersöker om det angivna värdet är ett heltal
-    public static boolean heltal(JTextField enruta){
+    public static boolean heltal(JTextField enruta) {
         boolean searching = true;
-        
-        try{
+
+        try {
             String enString = enruta.getText();
             Integer.parseInt(enString);
             enruta.requestFocus();
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Ange ett heltal");
             searching = false;
         }
         return searching;
     }
+
     //Validerings metod som undersöker om det angivna värdet är en String
-    public static boolean positivtTal(JTextField enruta){
+    public static boolean positivtTal(JTextField enruta) {
         boolean searching = true;
-        if(enruta.getText().substring(0,1).equals("-")){
-           searching = false;
-           enruta.requestFocus();  
-        }
-        else{
+        if (enruta.getText().substring(0, 1).equals("-")) {
+            searching = false;
+            enruta.requestFocus();
+        } else {
             JOptionPane.showMessageDialog(null, "Endast positiva värden");
         }
         return searching;
     }
-    
+
     //Validerings metod som undersöker om det angivna int talet är positivt
-    public static boolean enString(JTextField enruta){
+    public static boolean enString(JTextField enruta) {
         boolean searching = true;
-        if(!enruta.getText().matches("[a-zA-Z]+")){
+        if (!enruta.getText().matches("[a-zA-Z]+")) {
             JOptionPane.showMessageDialog(null, "Endast bokstäver mellan A-Z tillåtna");
             searching = false;
         }
         return searching;
     }
-    
+
     //Validerings metod som undersöker om metoden retunerar ett svar eller inte.
-    public static boolean kollaNullAL(ArrayList<String> resultat){
+    public static boolean kollaNullAL(ArrayList<String> resultat) {
         boolean searching = true;
-        if(resultat.isEmpty()){
-          searching = false;
-          JOptionPane.showMessageDialog(null, "Din sökning gav inga träffar. Försök med andra värden");
-        }
-        return searching;
-    }
-    //Valderings metod som kolla om en ArrayList<HaskMap<String,String>> är tom eller inte.
-    public static boolean kollaNullSS(ArrayList<HashMap<String,String>> resultat){
-        boolean searching = true;
-        if(resultat.isEmpty()){
+        if (resultat.isEmpty()) {
             searching = false;
             JOptionPane.showMessageDialog(null, "Din sökning gav inga träffar. Försök med andra värden");
         }
         return searching;
     }
+
+    //Valderings metod som kolla om en ArrayList<HaskMap<String,String>> är tom eller inte.
+    public static boolean kollaNullSS(ArrayList<HashMap<String, String>> resultat) {
+        boolean searching = true;
+        if (resultat.isEmpty()) {
+            searching = false;
+            JOptionPane.showMessageDialog(null, "Din sökning gav inga träffar. Försök med andra värden");
+        }
+        return searching;
+    }
+
     //Validerings metod 
-    public static boolean kollaStringVarde(String enstring){
+    public static boolean kollaStringVarde(String enstring) {
         boolean searching = true;
-        if(enstring == null){
-           searching = false;
-        }
-        return searching;
-    }
-    
-    public static String toUpperCase(String enstring){ 
-        StringBuffer s = new StringBuffer(); 
-        char ch = ' '; 
-        for(int i = 0; i < enstring.length(); i++) { 
-            if (ch == ' ' && enstring.charAt(i) != ' ') 
-                s.append(Character.toUpperCase(enstring.charAt(i))); 
-            else
-                s.append(enstring.charAt(i)); 
-            ch = enstring.charAt(i); 
-        } 
-        return s.toString().trim(); 
-    }
-    
-    public static boolean file(JFileChooser fil){
-        boolean searching = true;
-        if(fil.getName().isEmpty()){
+        if (enstring == null) {
             searching = false;
         }
         return searching;
     }
-    
-    public static boolean file2(JFileChooser fil){
+
+    public static String toUpperCase(String enstring) {
+        StringBuffer s = new StringBuffer();
+        char ch = ' ';
+        for (int i = 0; i < enstring.length(); i++) {
+            if (ch == ' ' && enstring.charAt(i) != ' ') {
+                s.append(Character.toUpperCase(enstring.charAt(i)));
+            } else {
+                s.append(enstring.charAt(i));
+            }
+            ch = enstring.charAt(i);
+        }
+        return s.toString().trim();
+    }
+
+    public static boolean file(JFileChooser fil) {
         boolean searching = true;
-        if(fil.getSelectedFile() == null){
+        if (fil.getName().isEmpty()) {
             searching = false;
         }
         return searching;
+    }
+
+    public static boolean file2(JFileChooser fil) {
+        boolean searching = true;
+        if (fil.getSelectedFile() == null) {
+            searching = false;
+        }
+        return searching;
+    }
+
+    public static boolean sakertLosenord(JTextField ruta) {
+        boolean ratt = false;
+        String losenord = ruta.getText();
+        boolean losenordLangd = losenord.length() >= 8 && losenord.length() <= 40;
+        boolean losenordNummer = losenord.matches("(.*)[0-9](.*)");
+
+        if (losenordLangd && losenordNummer) {
+            ratt = true;
+
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Ditt valda lösenord måste vara mellan 8-50 tecken och innehålla minst en siffra.");
+        
+        }
+
+        return ratt;
+
+    }
+    public static boolean arRutornaTomma(JTextField ruta1, JTextField ruta2, JTextField ruta3, JTextField ruta4, JTextField ruta5, JTextField ruta6) {
+        boolean resultat = false;
+        String enString1 = ruta1.getText();
+        String enString2 = ruta2.getText();
+        String enString3 = ruta3.getText();
+        String enString4 = ruta4.getText();
+        String enString5 = ruta5.getText();
+        String enString6 = ruta6.getText();
+
+        if (enString1.isEmpty() && enString2.isEmpty() && enString3.isEmpty() && enString4.isEmpty() && enString5.isEmpty() && enString6.isEmpty()) {
+            resultat = true;
+            JOptionPane.showMessageDialog(null, "Rutorna är tom");
+
+        }
+
+        return resultat;
     }
 }

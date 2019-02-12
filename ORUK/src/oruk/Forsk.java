@@ -1,24 +1,46 @@
-
 package oruk;
 
 import javax.swing.JOptionPane;
 import oru.inf.*;
 import java.util.*;
+import javax.swing.DefaultListModel;
 
 public class Forsk extends javax.swing.JFrame {
 
     private static InfDB db;
     private String namn;
-    
+    private ArrayList<HashMap<String, String>> enLista;
+
     public Forsk(InfDB db) {
         initComponents();
         this.db = db;
         this.namn = ForskningUtbildningAnslag.getTitel();
         yaho();
         yas();
+        fyllLista();
+        enLista = new ArrayList<>();
+
     }
-    
-    
+
+    private void fyllLista() {
+        DefaultListModel model = new DefaultListModel();
+        try {
+
+            enLista = db.fetchRows("SELECT KOMMENTAR, FORNAMN FROM KOMMENTERA_INLAGG JOIN ANVANDARE ON ANVANDARE.AID = KOMMENTERA_INLAGG.AID");
+
+            String svar = "";
+
+            for (int i = 0; i < enLista.size(); i++) {
+                svar += enLista.get(i).get("FORNAMN") + ": " + enLista.get(i).get("KOMMENTAR") + "\n\n";
+            }
+
+            txtKommentar.setText(svar);
+
+            //txtKommentar.append(svar);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +57,8 @@ public class Forsk extends javax.swing.JFrame {
         skrr = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtInlagg = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtKommentar = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,16 +87,17 @@ public class Forsk extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(344, Short.MAX_VALUE)
-                .addComponent(btnPublicera, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(344, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(skrr, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTitle))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(skrr, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTitle)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(259, 259, 259)
+                        .addComponent(btnPublicera, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -84,58 +109,71 @@ public class Forsk extends javax.swing.JFrame {
                 .addComponent(skrr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addComponent(btnPublicera)
-                .addGap(17, 17, 17))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
+
+        txtKommentar.setLineWrap(true);
+        txtKommentar.setWrapStyleWord(true);
+        txtKommentar.setColumns(20);
+        txtKommentar.setRows(5);
+        jScrollPane3.setViewportView(txtKommentar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 84, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void yaho(){
+    private void yaho() {
         skrr.setText(ForskningUtbildningAnslag.getTitel());
         txtInlagg.setEditable(false);
-       
+
     }
-   
-    private void yas(){
+
+    private void yas() {
         //String text1 = .getText();
         System.out.println(namn);
-        
-        try{
+
+        try {
             String fraga = "SELECT TEXT FROM INLAGG WHERE RUBRIK = 'Borttappad strumpa'";
             String XD = db.fetchSingle(fraga);
             System.out.println(XD);
             txtInlagg.append(XD);
-        }
-        catch(InfException e){
+        } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Kunde ej hämta inlägg");
         }
     }
-    
+
     private void btnPubliceraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraActionPerformed
-      
+
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPublicera;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel skrr;
     private javax.swing.JTextArea txtInlagg;
+    private javax.swing.JTextArea txtKommentar;
     // End of variables declaration//GEN-END:variables
 }

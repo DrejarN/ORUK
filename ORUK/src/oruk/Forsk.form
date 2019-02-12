@@ -87,7 +87,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Titel"/>
+            <Property name="text" type="java.lang.String" value="Rubrik"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnPublicera">
@@ -116,6 +116,10 @@
                 <Property name="rows" type="int" value="5"/>
                 <Property name="text" type="java.lang.String" value="&#xa;"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextArea()"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtInlagg.setLineWrap(true);&#xa;txtInlagg.setWrapStyleWord(true);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

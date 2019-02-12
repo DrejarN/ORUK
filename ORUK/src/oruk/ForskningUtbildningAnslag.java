@@ -107,7 +107,7 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
     private void fyllLista() {
         DefaultListModel model = new DefaultListModel();
         try {
-            enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG");
+            enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG WHERE KATEGORI='1' OR KATEGORI='2'");
             String svar = "";
             for (int i = 0; i < enLista.size(); i++) {
                 svar = enLista.get(i);

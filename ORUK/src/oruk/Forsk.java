@@ -8,26 +8,22 @@ import javax.swing.DefaultListModel;
 public class Forsk extends javax.swing.JFrame {
 
     private static InfDB db;
-    private String namn;
     private ArrayList<HashMap<String, String>> enLista;
-    private String inlagg;
     private String titel;
 
     public Forsk(InfDB db, String titel) {
         initComponents();
-        this.db = db;
-
+        this.db = db;       
+        enLista = new ArrayList<>();
+        this.titel = titel;
         yaho();
         yas();
         fyllLista();
-        enLista = new ArrayList<>();
-        this.titel = titel;
         
-
     }
 
     private void fyllLista() {
-        DefaultListModel model = new DefaultListModel();
+        
         try {
 
             enLista = db.fetchRows("SELECT KOMMENTAR, FORNAMN FROM KOMMENTERA_INLAGG JOIN ANVANDARE ON ANVANDARE.AID = KOMMENTERA_INLAGG.AID JOIN INLAGG ON KOMMENTERA_INLAGG.IID = INLAGG.IID WHERE KOMMENTERA_INLAGG.IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')");
@@ -154,9 +150,7 @@ public class Forsk extends javax.swing.JFrame {
     }
 
     private void yas() {
-        //String text1 = .getText();
-       
-
+        
         try {
             String fraga = "SELECT TEXT FROM INLAGG WHERE RUBRIK = '" + titel + "'";
             String XD = db.fetchSingle(fraga);

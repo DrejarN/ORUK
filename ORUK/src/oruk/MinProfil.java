@@ -33,7 +33,7 @@ public class MinProfil extends javax.swing.JPanel {
         initComponents();
         this.db = db;
 
-        setProfil();
+        bild.setIcon(Profilinstallningar.getBild());
 
     }
 

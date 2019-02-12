@@ -5,7 +5,6 @@
  */
 package oruk;
 
-import com.apple.eawt.Application;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,8 +30,6 @@ public class Huvudfonster extends javax.swing.JFrame {
         this.anvandarnamn = anvandarnamn;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setThisTitle();
-        Application application = Application.getApplication();
-        application.setDockIconImage(Toolkit.getDefaultToolkit().getImage("icons/oruklogoliten.png"));
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
         setValkomstText();
     }
@@ -196,7 +193,12 @@ public class Huvudfonster extends javax.swing.JFrame {
 
     private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
         // TODO add your handling code here:
-        JPanel importeradPanel = new MinProfil(db);
+        JPanel importeradPanel = null;
+        try {
+            importeradPanel = new MinProfil(db);
+        } catch (Exception ex) {
+          
+        }
         importeradPanel.setBounds(panelMain.getBounds());
 
         panelMain.removeAll();

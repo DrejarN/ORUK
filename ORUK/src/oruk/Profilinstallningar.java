@@ -35,7 +35,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
 
     public static ImageIcon getBild() {
         ImageIcon icon = new ImageIcon(filename);
-        Image img = icon.getImage().getScaledInstance(255, 255, 255);
+        Image img = icon.getImage().getScaledInstance(187, 187, 187);
         ImageIcon image = new ImageIcon(img);
 
         return image;

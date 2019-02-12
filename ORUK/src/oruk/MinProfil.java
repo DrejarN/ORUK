@@ -34,6 +34,7 @@ public class MinProfil extends javax.swing.JPanel {
         this.db = db;
 
         bild.setIcon(Profilinstallningar.getBild());
+        setProfil();
 
     }
 
@@ -68,7 +69,7 @@ public class MinProfil extends javax.swing.JPanel {
                 BufferedImage imag = ImageIO.read(new ByteArrayInputStream(img));
                 icon = new ImageIcon(imag);
 
-                bild.setIcon(icon);
+               // bild.setIcon(icon);
             }
 
         } catch (InfException e) {

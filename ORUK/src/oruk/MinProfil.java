@@ -5,8 +5,16 @@
  */
 package oruk;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.sql.Blob;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -21,15 +29,15 @@ public class MinProfil extends javax.swing.JPanel {
     /**
      * Creates new form MinProfil1
      */
-    public MinProfil(InfDB db) {
+    public MinProfil(InfDB db) throws SQLException, IOException, ClassNotFoundException {
         initComponents();
         this.db = db;
-        bild.setIcon(Profilinstallningar.getBild());
+
         setProfil();
 
     }
 
-    public void setProfil() {
+    private void setProfil() throws SQLException, IOException, ClassNotFoundException {
         try {
             String anvandare = Huvudfonster.getAnvandarnamn();
             String enStrang1 = "SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
@@ -48,6 +56,20 @@ public class MinProfil extends javax.swing.JPanel {
             lblEPost.setText(query4);
             lblTelefon.setText(query3);
             lblTitel.setText(query5);
+
+            ImageIcon icon;
+            byte[] img = null;
+            String enStrang6 = "SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID='" + anvandare + "')";
+            ResultSet rs = db.getResultSet(enStrang6);
+            if (rs.next()) {
+
+                Blob blob = rs.getBlob("BILDEN");
+                img = blob.getBytes(1, (int) blob.length());
+                BufferedImage imag = ImageIO.read(new ByteArrayInputStream(img));
+                icon = new ImageIcon(imag);
+
+                bild.setIcon(icon);
+            }
 
         } catch (InfException e) {
         }
@@ -122,7 +144,7 @@ public class MinProfil extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addComponent(bild)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N

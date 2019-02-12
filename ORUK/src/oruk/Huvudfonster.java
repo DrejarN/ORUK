@@ -7,6 +7,9 @@ package oruk;
 
 import com.apple.eawt.Application;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -196,7 +199,12 @@ public class Huvudfonster extends javax.swing.JFrame {
 
     private void btnMinProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinProfilActionPerformed
         // TODO add your handling code here:
-        JPanel importeradPanel = new MinProfil(db);
+        JPanel importeradPanel = null;
+        try {
+            importeradPanel = new MinProfil(db);
+        } catch (Exception ex) {
+          
+        }
         importeradPanel.setBounds(panelMain.getBounds());
 
         panelMain.removeAll();

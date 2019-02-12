@@ -10,15 +10,19 @@ public class Forsk extends javax.swing.JFrame {
     private static InfDB db;
     private String namn;
     private ArrayList<HashMap<String, String>> enLista;
+    private String inlagg;
+    private String titel;
 
-    public Forsk(InfDB db) {
+    public Forsk(InfDB db, String titel) {
         initComponents();
         this.db = db;
-        this.namn = ForskningUtbildningAnslag.getTitel();
+
         yaho();
         yas();
         fyllLista();
         enLista = new ArrayList<>();
+        this.titel = titel;
+        
 
     }
 
@@ -26,7 +30,7 @@ public class Forsk extends javax.swing.JFrame {
         DefaultListModel model = new DefaultListModel();
         try {
 
-            enLista = db.fetchRows("SELECT KOMMENTAR, FORNAMN FROM KOMMENTERA_INLAGG JOIN ANVANDARE ON ANVANDARE.AID = KOMMENTERA_INLAGG.AID");
+            enLista = db.fetchRows("SELECT KOMMENTAR, FORNAMN FROM KOMMENTERA_INLAGG JOIN ANVANDARE ON ANVANDARE.AID = KOMMENTERA_INLAGG.AID JOIN INLAGG ON KOMMENTERA_INLAGG.IID = INLAGG.IID WHERE KOMMENTERA_INLAGG.IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')");
 
             String svar = "";
 
@@ -116,6 +120,7 @@ public class Forsk extends javax.swing.JFrame {
 
         txtKommentar.setLineWrap(true);
         txtKommentar.setWrapStyleWord(true);
+        txtKommentar.setEditable(false);
         txtKommentar.setColumns(20);
         txtKommentar.setRows(5);
         jScrollPane3.setViewportView(txtKommentar);
@@ -143,17 +148,17 @@ public class Forsk extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void yaho() {
-        skrr.setText(ForskningUtbildningAnslag.getTitel());
+        skrr.setText(titel);
         txtInlagg.setEditable(false);
 
     }
 
     private void yas() {
         //String text1 = .getText();
-        System.out.println(namn);
+       
 
         try {
-            String fraga = "SELECT TEXT FROM INLAGG WHERE RUBRIK = 'Borttappad strumpa'";
+            String fraga = "SELECT TEXT FROM INLAGG WHERE RUBRIK = '" + titel + "'";
             String XD = db.fetchSingle(fraga);
             System.out.println(XD);
             txtInlagg.append(XD);

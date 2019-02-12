@@ -11,7 +11,7 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
 
     private InfDB db;
     private ArrayList<String> enLista;
-    private static String titel;
+    private String titel;
 
     
 
@@ -24,8 +24,6 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         this.db=db;
         enLista = new ArrayList<>(); 
         fyllLista();
-        this.titel = jList1.getSelectedValue();
-       
     }
 
     /**
@@ -97,18 +95,14 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeActionPerformed
-        new Forsk(db).setVisible(true);     
+        new Forsk(db, titel).setVisible(true);     
     }//GEN-LAST:event_btnSeActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
-        titel = jList1.getSelectedValue().toString();
+        titel = jList1.getSelectedValue();
           
     }//GEN-LAST:event_jList1MouseClicked
-    
-    public static String getTitel(){
-        return titel;
-    }
     
     private void fyllLista() {
         DefaultListModel model = new DefaultListModel();
@@ -116,7 +110,7 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
             enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG");
             String svar = "";
             for (int i = 0; i < enLista.size(); i++) {
-                svar = enLista.get(i) + "\n";
+                svar = enLista.get(i);
                 model.addElement(svar);
             }
             

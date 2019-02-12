@@ -42,7 +42,7 @@ public class Forsk extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        lblTitle.setText("Titel");
+        lblTitle.setText("Rubrik");
 
         btnPublicera.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnPublicera.setText("Kommentera inlägg");
@@ -52,6 +52,8 @@ public class Forsk extends javax.swing.JFrame {
             }
         });
 
+        txtInlagg.setLineWrap(true);
+        txtInlagg.setWrapStyleWord(true);
         txtInlagg.setColumns(20);
         txtInlagg.setRows(5);
         txtInlagg.setText("\n");

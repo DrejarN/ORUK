@@ -161,7 +161,9 @@ public class MittFlode extends javax.swing.JPanel {
                 
                 JPanel importeradPanel = new MittFlodeFormell(db, rubrik, text);
                 importeradPanel.setBounds(panel_Inlagg.getBounds());
-
+                panel_Inlagg.removeAll();
+                panel_Inlagg.revalidate();
+                panel_Inlagg.repaint();
                 panel_Inlagg.add(importeradPanel);
                 importeradPanel.setLocation(1, 1); 
             }                         

@@ -6,14 +6,12 @@
 package oruk;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -33,7 +31,7 @@ public class MinProfil extends javax.swing.JPanel {
         initComponents();
         this.db = db;
 
-        bild.setIcon(Profilinstallningar.getBild());
+        //bild.setIcon(Profilinstallningar.getBild());
         setProfil();
 
     }
@@ -57,20 +55,31 @@ public class MinProfil extends javax.swing.JPanel {
             lblEPost.setText(query4);
             lblTelefon.setText(query3);
             lblTitel.setText(query5);
-
-            ImageIcon icon;
-            byte[] img = null;
-            String enStrang6 = "SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID='" + anvandare + "')";
-            ResultSet rs = db.getResultSet(enStrang6);
-            if (rs.next()) {
-
-                Blob blob = rs.getBlob("BILDEN");
-                img = blob.getBytes(1, (int) blob.length());
-                BufferedImage imag = ImageIO.read(new ByteArrayInputStream(img));
-                icon = new ImageIcon(imag);
-
-               // bild.setIcon(icon);
+            
+            try
+            {
+                byte[] imageBytes;
+                Image image;
+                Class.forName("org.firebirdsql.jdbc.FBDriver");
+                Connection con = DriverManager.getConnection("jdbc:firebirdsql:localhost/3050:/Users/christianrudolphi/NetBeansProjects/ORUK/ORUK/ORUK.FDB", "sysdba", "masterkey");
+                PreparedStatement ps = con.prepareStatement("SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID='" + anvandare + "')");
+                ResultSet rs = ps.executeQuery();              
+                while(rs.next())
+                {
+                    imageBytes = rs.getBytes(1);
+                    image = getToolkit().createImage(imageBytes);
+                    ImageIcon icon = new ImageIcon(image);
+                    Image img = icon.getImage().getScaledInstance(187, 187, 187);
+                    ImageIcon bild1 = new ImageIcon(img);
+                    bild.setIcon(bild1);
+                
+                }
+            
             }
+            catch(Exception e)
+            {}
+
+           
 
         } catch (InfException e) {
         }

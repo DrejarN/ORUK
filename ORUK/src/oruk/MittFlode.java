@@ -26,6 +26,7 @@ public class MittFlode extends javax.swing.JPanel {
         box = new Box(BoxLayout.Y_AXIS);
         jScrollPane1.setViewportView(box);
         fyllCmbxTaggar();
+        ComboBoxAutoComplete.enable(cmbxTaggar);
     }
 
     /**

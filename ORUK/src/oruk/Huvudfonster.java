@@ -217,7 +217,14 @@ public class Huvudfonster extends javax.swing.JFrame {
     }
 
     private void btnDoodleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoodleActionPerformed
-        // TODO add your handling code here:
+        JPanel importeradPanel = new Doodle(db);
+        importeradPanel.setBounds(panelMain.getBounds());
+
+        panelMain.removeAll();
+        panelMain.revalidate();
+        panelMain.repaint();
+        panelMain.add(importeradPanel);
+        importeradPanel.setLocation(1, 1);
     }//GEN-LAST:event_btnDoodleActionPerformed
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed

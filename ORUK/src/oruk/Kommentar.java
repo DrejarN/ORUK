@@ -7,6 +7,9 @@ package oruk;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -14,19 +17,44 @@ import oru.inf.InfException;
  *
  * @author christianrudolphi
  */
-public class KommentarInlagg extends javax.swing.JFrame {
-    
-    private InfDB db;
-    private String titel;
-   
+public class Kommentar extends javax.swing.JFrame {
+
+    private static InfDB db;
+    private static ArrayList<HashMap<String, String>> enLista;
+    private static String inlaggsID;
 
     /**
-     * Creates new form KommentarInlagg
+     * Creates new form Kommentar
      */
-    public KommentarInlagg(InfDB db, String titel) {
+    public Kommentar(InfDB db, String inlaggsID) {
         initComponents();
-        this.db=db;
-        this.titel=titel;
+        this.db = db;
+        this.inlaggsID=inlaggsID;
+        enLista = new ArrayList<>();
+        fyllLista();
+
+    }
+
+    public static void fyllLista() {
+        String titel = BloggInlagg.getTitel();
+
+        try {
+
+            enLista = db.fetchRows("SELECT KOMMENTAR, FORNAMN FROM KOMMENTERA_INLAGG JOIN ANVANDARE ON ANVANDARE.AID = KOMMENTERA_INLAGG.AID JOIN INLAGG ON KOMMENTERA_INLAGG.IID = INLAGG.IID WHERE KOMMENTERA_INLAGG.IID='" + inlaggsID + "'");
+
+            String svar = "";
+            //enLista = db.fetchRows("SELECT KOMMENTAR FROM KOMMENTERA_INLAGG WHERE IID='" + inlaggsID + "'");
+
+            for (int i = 0; i < enLista.size(); i++) {
+                svar += enLista.get(i).get("FORNAMN") + ": " + enLista.get(i).get("KOMMENTAR") + "\n\n";
+            }
+
+            txtKommentar.setText(svar);
+
+            //txtKommentar.append(svar);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     /**
@@ -42,6 +70,8 @@ public class KommentarInlagg extends javax.swing.JFrame {
         btnPublicera = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtInlagg = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtKommentar = new javax.swing.JTextArea();
         btnStang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,6 +99,13 @@ public class KommentarInlagg extends javax.swing.JFrame {
         txtInlagg.setText("\n");
         jScrollPane2.setViewportView(txtInlagg);
 
+        txtKommentar.setLineWrap(true);
+        txtKommentar.setWrapStyleWord(true);
+        txtKommentar.setEditable(false);
+        txtKommentar.setColumns(20);
+        txtKommentar.setRows(5);
+        jScrollPane3.setViewportView(txtKommentar);
+
         btnStang.setText("Stäng");
         btnStang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,29 +118,37 @@ public class KommentarInlagg extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(282, 282, 282)
+                                .addComponent(btnPublicera, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnPublicera, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(219, 219, 219))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnStang)
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnStang)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnStang)
-                .addGap(70, 70, 70)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPublicera)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,53 +171,48 @@ public class KommentarInlagg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPubliceraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPubliceraMouseClicked
+       fyllLista();
+       txtInlagg.setText(null);
+       txtInlagg.requestFocus();
+       
+       
+
+    }//GEN-LAST:event_btnPubliceraMouseClicked
+
     private void btnPubliceraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraActionPerformed
         try {
-            String anvandare = Huvudfonster.getAnvandarnamn(); 
+            String anvandare = Huvudfonster.getAnvandarnamn();
             String aid = "SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
             String aid1 = db.fetchSingle(aid);
             String text = txtInlagg.getText();
             String id1 = db.getAutoIncrement("KOMMENTERA_INLAGG", "KIID");
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();           
-            String date = now.toString().substring(0,10);
-            String time = now.toString().substring(11,19);
-            System.out.println(anvandare);
-            System.out.println(aid1);
-            System.out.println(id1);
-            System.out.println(date);
-            System.out.println(time);
-            System.out.println(text);
-            System.out.println(titel);
-            
-            String enStrang = "INSERT INTO KOMMENTERA_INLAGG VALUES(" + id1 + ", '" + text + "', '" + date + "', '" + time + "', " + aid1 + ", (SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "'))";
-            db.insert(enStrang);
-            
-            
-            
-        } catch (InfException ex) {
-            
-        }
+            LocalDateTime now = LocalDateTime.now();
+            String date = now.toString().substring(0, 10);
+            String time = now.toString().substring(11, 19);
+           
 
+            String enStrang = "INSERT INTO KOMMENTERA_INLAGG VALUES(" + id1 + ", '" + text + "', '" + date + "', '" + time + "', " + aid1 + ", " + inlaggsID + ")";
+            db.insert(enStrang);
+
+        } catch (InfException ex) {
+
+        }
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
-    private void btnPubliceraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPubliceraMouseClicked
-        Forsk.fyllLista();
-        dispose();
-        
-    }//GEN-LAST:event_btnPubliceraMouseClicked
-
     private void btnStangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStangActionPerformed
-        dispose();
+            dispose();
     }//GEN-LAST:event_btnStangActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPublicera;
     private javax.swing.JButton btnStang;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea txtInlagg;
+    private static javax.swing.JTextArea txtKommentar;
     // End of variables declaration//GEN-END:variables
 }

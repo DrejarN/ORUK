@@ -12,7 +12,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -23,6 +28,7 @@ import oru.inf.InfException;
 public class MinProfil extends javax.swing.JPanel {
 
     private static InfDB db;
+    private Box box;
 
     /**
      * Creates new form MinProfil1
@@ -33,6 +39,9 @@ public class MinProfil extends javax.swing.JPanel {
 
         //bild.setIcon(Profilinstallningar.getBild());
         setProfil();
+        box = new Box(BoxLayout.Y_AXIS);
+        jScrollPane1.setViewportView(box);
+        skapaArrayList();
 
     }
 
@@ -55,31 +64,26 @@ public class MinProfil extends javax.swing.JPanel {
             lblEPost.setText(query4);
             lblTelefon.setText(query3);
             lblTitel.setText(query5);
-            
-            try
-            {
+
+            try {
                 byte[] imageBytes;
                 Image image;
                 Class.forName("org.firebirdsql.jdbc.FBDriver");
                 Connection con = DriverManager.getConnection("jdbc:firebirdsql:localhost/3050:/Users/christianrudolphi/NetBeansProjects/ORUK/ORUK/ORUK.FDB", "sysdba", "masterkey");
                 PreparedStatement ps = con.prepareStatement("SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID='" + anvandare + "')");
-                ResultSet rs = ps.executeQuery();              
-                while(rs.next())
-                {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
                     imageBytes = rs.getBytes(1);
                     image = getToolkit().createImage(imageBytes);
                     ImageIcon icon = new ImageIcon(image);
                     Image img = icon.getImage().getScaledInstance(187, 187, 187);
                     ImageIcon bild1 = new ImageIcon(img);
                     bild.setIcon(bild1);
-                
-                }
-            
-            }
-            catch(Exception e)
-            {}
 
-           
+                }
+
+            } catch (Exception e) {
+            }
 
         } catch (InfException e) {
         }
@@ -112,7 +116,8 @@ public class MinProfil extends javax.swing.JPanel {
         lblEPost = new javax.swing.JLabel();
         lblTelefon = new javax.swing.JLabel();
         lblTitel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblKommandeMoten = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
         panelMinProfil.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -191,7 +196,7 @@ public class MinProfil extends javax.swing.JPanel {
                             .addComponent(lblEPost)
                             .addComponent(lblEfternamn)
                             .addComponent(lblFornamn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 398, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNyttInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSeInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,8 +242,8 @@ public class MinProfil extends javax.swing.JPanel {
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel1.setText("Aktivitetsflöde");
+        lblKommandeMoten.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lblKommandeMoten.setText("Kommande möten:");
 
         javax.swing.GroupLayout panelMinProfilLayout = new javax.swing.GroupLayout(panelMinProfil);
         panelMinProfil.setLayout(panelMinProfilLayout);
@@ -247,11 +252,12 @@ public class MinProfil extends javax.swing.JPanel {
             .addGroup(panelMinProfilLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelMinProfilLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinProfilLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(panelMinProfilLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblKommandeMoten)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelMinProfilLayout.setVerticalGroup(
@@ -260,8 +266,9 @@ public class MinProfil extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addComponent(lblKommandeMoten)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -283,13 +290,47 @@ public class MinProfil extends javax.swing.JPanel {
         installningar.setVisible(true);
     }//GEN-LAST:event_btnInstallningarActionPerformed
 
+    private void skapaArrayList() {
+        try {
+            String anvandareid = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + Huvudfonster.getAnvandarnamn() + "'");
 
+            ArrayList listan = db.fetchColumn("SELECT MOTE.MID FROM MOTE\n"
+                                    + "JOIN MOTE_DELTAGANDE ON MOTE.MID=MOTE_DELTAGANDE.MID\n"
+                                    + "WHERE AID='" + anvandareid + "'");
+            
+            if (listan == null) {
+                JPanel importeradPanel = new Aktivitetsinlagg("Du har inga inbokade möten", "", "", "");
+                box.add(importeradPanel);
+                box.revalidate();
+               
+                
+            } 
+            else {
+                for (Object mote : listan) {
+                    String rubrik = db.fetchSingle("SELECT RUBRIK FROM MOTE WHERE MID='" + mote + "'");
+                    String datum = db.fetchSingle("SELECT DATUM FROM MOTE WHERE MID='" + mote + "'");
+                    String tid = db.fetchSingle("SELECT TID FROM MOTE WHERE MID='" + mote + "'");
+                    String text = db.fetchSingle("SELECT TEXT FROM MOTE WHERE MID='" + mote + "'");
+
+                    JPanel importeradPanel = new Aktivitetsinlagg(rubrik, datum, tid, text);
+
+                    box.add(importeradPanel);
+                    box.revalidate();
+                }
+            }
+
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
+        }
+    }
+
+    private ArrayList<JPanel> jpListan;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bild;
     private javax.swing.JButton btnInstallningar;
     private javax.swing.JButton btnNyttInlagg;
     private javax.swing.JButton btnSeInlagg;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -297,9 +338,11 @@ public class MinProfil extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEPost;
     private javax.swing.JLabel lblEfternamn;
     private javax.swing.JLabel lblFornamn;
+    private javax.swing.JLabel lblKommandeMoten;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblTitel;
     private javax.swing.JPanel panelMinProfil;

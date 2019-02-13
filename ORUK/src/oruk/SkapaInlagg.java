@@ -166,8 +166,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
          }         
          try{
              db.insert("INSERT INTO INLAGG VALUES ("+ettid+", '"+txtTitel.getText()+"', '"+txtInlagg.getText()+"', "+katid+", '"+date+"', '"+time+"')");
-             db.insert(query1);
-             db.insert(query3);
+             //db.insert(query1);
+             //db.insert(query3);
              db.insert("INSERT INTO GORA_INLAGG VALUES ("+ettaid+", "+ettid+")");
              this.setVisible(false);
              TaggaAnvandare taggaAnvandare = new TaggaAnvandare(db, ettid);

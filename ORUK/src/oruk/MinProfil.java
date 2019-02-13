@@ -101,7 +101,6 @@ public class MinProfil extends javax.swing.JPanel {
 
         panelMinProfil = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnSeInlagg = new javax.swing.JButton();
         btnInstallningar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -109,7 +108,6 @@ public class MinProfil extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         bild = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        btnNyttInlagg = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         lblFornamn = new javax.swing.JLabel();
         lblEfternamn = new javax.swing.JLabel();
@@ -122,9 +120,6 @@ public class MinProfil extends javax.swing.JPanel {
         panelMinProfil.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(203, 217, 241));
-
-        btnSeInlagg.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnSeInlagg.setText("Se blogginlägg");
 
         btnInstallningar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnInstallningar.setText("Inställningar");
@@ -165,9 +160,6 @@ public class MinProfil extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel5.setText("Telefon:");
 
-        btnNyttInlagg.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnNyttInlagg.setText("Nytt blogginlägg");
-
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel12.setText("Efternamn:");
 
@@ -180,28 +172,25 @@ public class MinProfil extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
-                .addGap(61, 61, 61)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblTitel)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3))
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitel)
                             .addComponent(lblTelefon)
                             .addComponent(lblEPost)
                             .addComponent(lblEfternamn)
                             .addComponent(lblFornamn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNyttInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSeInlagg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnInstallningar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                        .addContainerGap(522, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnInstallningar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,19 +199,12 @@ public class MinProfil extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnNyttInlagg)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(lblFornamn))
-                                .addGap(6, 6, 6)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnSeInlagg)
-                                .addGap(12, 12, 12)
-                                .addComponent(btnInstallningar))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblFornamn))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
@@ -238,7 +220,10 @@ public class MinProfil extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(lblTitel))))))
+                                    .addComponent(lblTitel)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(btnInstallningar)))))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
@@ -329,8 +314,6 @@ public class MinProfil extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bild;
     private javax.swing.JButton btnInstallningar;
-    private javax.swing.JButton btnNyttInlagg;
-    private javax.swing.JButton btnSeInlagg;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

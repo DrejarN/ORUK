@@ -19,7 +19,6 @@ import oru.inf.InfException;
  */
 public class MittFlode extends javax.swing.JPanel {
 
-    
     public MittFlode(InfDB db) {
         initComponents();
         this.db = db;
@@ -146,8 +145,7 @@ public class MittFlode extends javax.swing.JPanel {
                     .addComponent(cmbxTaggar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUppdatera))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -186,14 +184,32 @@ public class MittFlode extends javax.swing.JPanel {
             btnInformell.setSelected(true);
             jScrollPane1.repaint();
             box.removeAll();
-            ArrayList listan = new ArrayList();
-            listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=4");
 
-            for (Object inlagg : listan) {
-                JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
-                importeradPanel.setVisible(true);
-                box.add(importeradPanel);
-                box.revalidate();
+            if (cmbxTaggar.getSelectedItem().equals("Allt")) {
+                ArrayList listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=4");
+
+                for (Object inlagg : listan) {
+
+                    JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
+                    importeradPanel.setVisible(true);
+                    box.add(importeradPanel);
+                    box.revalidate();
+                }
+            } 
+            else {
+                String taggnamn = cmbxTaggar.getSelectedItem().toString();
+                String taggid = db.fetchSingle("SELECT TID FROM TAGG WHERE NAMN='" + taggnamn + "'");
+                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n" +
+                                                   "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n" +
+                                                   "WHERE INLAGG.KATEGORI='4'AND INLAGG_TAGG.TID='" + taggid + "'");
+
+                for (Object inlagg : listan2) {
+                    
+                    JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
+                    importeradPanel.setVisible(true);
+                    box.add(importeradPanel);
+                    box.revalidate();
+                }
             }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
@@ -208,15 +224,32 @@ public class MittFlode extends javax.swing.JPanel {
             btnInformell.setSelected(false);
             jScrollPane1.repaint();
             box.removeAll();
-            ArrayList listan = new ArrayList();
-            listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=3");
 
-            for (Object inlagg : listan) {
+            if (cmbxTaggar.getSelectedItem().equals("Allt")) {
+                ArrayList listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=3");
 
-                JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
-                importeradPanel.setVisible(true);
-                box.add(importeradPanel);
-                box.revalidate();
+                for (Object inlagg : listan) {
+
+                    JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
+                    importeradPanel.setVisible(true);
+                    box.add(importeradPanel);
+                    box.revalidate();
+                }
+            } 
+            else {
+                String taggnamn = cmbxTaggar.getSelectedItem().toString();
+                String taggid = db.fetchSingle("SELECT TID FROM TAGG WHERE NAMN='" + taggnamn + "'");
+                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n" +
+                                                   "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n" +
+                                                   "WHERE INLAGG.KATEGORI='3'AND INLAGG_TAGG.TID='" + taggid + "'");
+
+                for (Object inlagg : listan2) {
+                    
+                    JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
+                    importeradPanel.setVisible(true);
+                    box.add(importeradPanel);
+                    box.revalidate();
+                }
             }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
@@ -225,13 +258,12 @@ public class MittFlode extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFormellActionPerformed
 
     private void btnUppdateraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraActionPerformed
-        if(btnFormell.isSelected()){
+        if (btnFormell.isSelected()) {
             btnFormell.doClick();
-        }
-        else if(btnFormell.isSelected()){
+        } else if (btnInformell.isSelected()) {
             btnInformell.doClick();
         }
-        
+
     }//GEN-LAST:event_btnUppdateraActionPerformed
 
     private void fyllCmbxTaggar() {
@@ -240,22 +272,22 @@ public class MittFlode extends javax.swing.JPanel {
             ArrayList listan = new ArrayList();
             listan = db.fetchColumn("SELECT NAMN FROM TAGG");
             ArrayList<String> allaTaggar = new ArrayList<>();
-            
+
             for (Object mailadress : listan) {
                 String anvandare = mailadress.toString();
                 allaTaggar.add(anvandare);
             }
             allaTaggar.sort(String::compareToIgnoreCase);
-            
+
             for (String namn : allaTaggar) {
                 cmbxTaggar.addItem(namn);
-            } 
+            }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande" + ex.getMessage());           
+            System.out.println("Internt felmeddelande" + ex.getMessage());
         }
     }
-    
+
     private static InfDB db;
     private Box box;
     // Variables declaration - do not modify//GEN-BEGIN:variables

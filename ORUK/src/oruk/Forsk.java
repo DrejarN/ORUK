@@ -8,8 +8,8 @@ import javax.swing.DefaultListModel;
 public class Forsk extends javax.swing.JFrame {
 
     private static InfDB db;
-    private ArrayList<HashMap<String, String>> enLista;
-    private String titel;
+    private static ArrayList<HashMap<String, String>> enLista;
+    private static String titel;
 
     public Forsk(InfDB db, String titel) {
         initComponents();
@@ -22,7 +22,7 @@ public class Forsk extends javax.swing.JFrame {
         
     }
 
-    private void fyllLista() {
+    public static void fyllLista() {
         
         try {
 
@@ -163,16 +163,17 @@ public class Forsk extends javax.swing.JFrame {
 
     private void btnPubliceraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraActionPerformed
 
+        new KommentarInlagg(db, titel).setVisible(true);
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPublicera;
+    private static javax.swing.JButton btnPublicera;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel skrr;
     private javax.swing.JTextArea txtInlagg;
-    private javax.swing.JTextArea txtKommentar;
+    private static javax.swing.JTextArea txtKommentar;
     // End of variables declaration//GEN-END:variables
 }

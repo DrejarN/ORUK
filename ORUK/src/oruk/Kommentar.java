@@ -29,29 +29,32 @@ public class Kommentar extends javax.swing.JFrame {
     public Kommentar(InfDB db, String inlaggsID) {
         initComponents();
         this.db = db;
-        this.inlaggsID=inlaggsID;
+        this.inlaggsID = inlaggsID;
         enLista = new ArrayList<>();
         fyllLista();
 
     }
 
     public static void fyllLista() {
-        String titel = BloggInlagg.getTitel();
 
         try {
 
             enLista = db.fetchRows("SELECT KOMMENTAR, FORNAMN FROM KOMMENTERA_INLAGG JOIN ANVANDARE ON ANVANDARE.AID = KOMMENTERA_INLAGG.AID JOIN INLAGG ON KOMMENTERA_INLAGG.IID = INLAGG.IID WHERE KOMMENTERA_INLAGG.IID='" + inlaggsID + "'");
+            
+            if (enLista == null) {
+                txtKommentar.setText("Inlägget har inga kommentarer");
 
-            String svar = "";
-            //enLista = db.fetchRows("SELECT KOMMENTAR FROM KOMMENTERA_INLAGG WHERE IID='" + inlaggsID + "'");
+            } else {
 
-            for (int i = 0; i < enLista.size(); i++) {
-                svar += enLista.get(i).get("FORNAMN") + ": " + enLista.get(i).get("KOMMENTAR") + "\n\n";
+                String svar = "";
+
+                for (int i = 0; i < enLista.size(); i++) {
+                    svar += enLista.get(i).get("FORNAMN") + ": " + enLista.get(i).get("KOMMENTAR") + "\n\n";
+                }
+
+                txtKommentar.setText(svar);
             }
 
-            txtKommentar.setText(svar);
-
-            //txtKommentar.append(svar);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -172,11 +175,10 @@ public class Kommentar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPubliceraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPubliceraMouseClicked
-       fyllLista();
-       txtInlagg.setText(null);
-       txtInlagg.requestFocus();
-       
-       
+        fyllLista();
+        txtInlagg.setText(null);
+        txtInlagg.requestFocus();
+
 
     }//GEN-LAST:event_btnPubliceraMouseClicked
 
@@ -191,7 +193,6 @@ public class Kommentar extends javax.swing.JFrame {
             LocalDateTime now = LocalDateTime.now();
             String date = now.toString().substring(0, 10);
             String time = now.toString().substring(11, 19);
-           
 
             String enStrang = "INSERT INTO KOMMENTERA_INLAGG VALUES(" + id1 + ", '" + text + "', '" + date + "', '" + time + "', " + aid1 + ", " + inlaggsID + ")";
             db.insert(enStrang);
@@ -202,7 +203,7 @@ public class Kommentar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     private void btnStangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStangActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_btnStangActionPerformed
 
 

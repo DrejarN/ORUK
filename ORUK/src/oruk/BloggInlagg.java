@@ -33,7 +33,12 @@ public class BloggInlagg extends javax.swing.JPanel {
     public void kollaOmAdmin()
     {
         
-        if()
+        
+        {
+            
+        
+        }
+            
     
     }
     

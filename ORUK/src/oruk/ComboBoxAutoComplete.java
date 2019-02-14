@@ -145,7 +145,7 @@ public class ComboBoxAutoComplete extends PlainDocument {
             setSelectedItem(item);
         } else {
             // keep old item selected if there is no match
-            item = comboBox.getSelectedItem();
+           // item = comboBox.getSelectedItem();
             // imitate no insert (later on offs will be incremented by str.length(): selection won't move forward)
             offs = offs - str.length();
             // provide feedback to the user that his input has been received but can not be accepted

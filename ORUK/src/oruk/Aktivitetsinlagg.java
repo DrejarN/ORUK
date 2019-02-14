@@ -22,6 +22,16 @@ public class Aktivitetsinlagg extends javax.swing.JPanel {
         lblText.setText(text);
     }
 
+    public Aktivitetsinlagg(String rubrik) {
+        initComponents();
+        lblMotesRubrik.setText(rubrik);
+        lblDatum.setText("");
+        lblTid.setText("");
+        lblText.setText("");
+        jLabel1.setVisible(false);
+        jLabel2.setVisible(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

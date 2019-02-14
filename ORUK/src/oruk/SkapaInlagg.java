@@ -342,6 +342,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 String tid = db.getAutoIncrement("TAGG", "TID");
                 db.insert("INSERT INTO TAGG VALUES(" + tid + ", '" + ny + "')");
                 JOptionPane.showMessageDialog(null, ny + " har lagts till som ny tagg");
+                taggLista.add(tid);
                 cmbxTaggar.removeAllItems();
                 fyllCmbxTaggar();
             } else {

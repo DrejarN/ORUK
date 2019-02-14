@@ -117,13 +117,7 @@ public class Inbjudningar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlarActionPerformed
-        try {
-            this.setVisible(false);
-            TaggaTagg taggaTagg = new TaggaTagg(db, iid);
-            taggaTagg.setVisible(true);
-        } catch (InfException ex) {
-            Logger.getLogger(TaggaAnvandare.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnKlarActionPerformed
 
     private void cmbxAnvandarnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxAnvandarnamnActionPerformed

@@ -284,7 +284,7 @@ public class MinProfil extends javax.swing.JPanel {
                                     + "WHERE AID='" + anvandareid + "'");
             
             if (listan == null) {
-                JPanel importeradPanel = new Aktivitetsinlagg("Du har inga inbokade möten", "", "", "");
+                JPanel importeradPanel = new Aktivitetsinlagg("Du har inga inbokade möten");
                 box.add(importeradPanel);
                 box.revalidate();
                

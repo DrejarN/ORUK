@@ -3,6 +3,7 @@ package oruk;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -99,6 +100,11 @@ public class BloggInlagg extends javax.swing.JPanel {
         jLabel8.setText("tagg1 tagg2");
 
         btnTaBort.setText("Ta bort inlägg");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
 
         btnAndra.setText("Ändra inlägg");
         btnAndra.addActionListener(new java.awt.event.ActionListener() {
@@ -186,8 +192,35 @@ public class BloggInlagg extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
-        new AdminAndraInlagg(db, inlagg).setVisible(true);
+        new AdminAndraInlagg1(db, inlagg).setVisible(true);
     }//GEN-LAST:event_btnAndraActionPerformed
+
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        
+        int response = JOptionPane.showConfirmDialog(null, "Vill du ta bort inlägget?", "Ta bort inlägg",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+     if (response == JOptionPane.NO_OPTION) {
+
+    } else if (response == JOptionPane.YES_OPTION) {
+            try {
+                String data1 = "DELETE FROM GORA_INLAGG WHERE IID='" + inlagg + "'";
+                String data2 = "DELETE FROM KOMMENTERA_INLAGG WHERE IID='" + inlagg + "'";
+                String data3 = "DELETE FROM INLAGG WHERE IID='" + inlagg + "'";
+                db.delete(data1);
+                db.delete(data2);
+                db.delete(data3);
+                
+                JOptionPane.showMessageDialog(null, "Inlägget har tagits bort");
+                
+                
+            } catch (InfException ex) {
+                
+            }
+        
+      }
+        
+
+    }//GEN-LAST:event_btnTaBortActionPerformed
 
     private void setText() {
         try {

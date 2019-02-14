@@ -6,6 +6,7 @@
 package oruk;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -13,23 +14,30 @@ import oru.inf.InfException;
  *
  * @author christianrudolphi
  */
-public class AdminAndraInlagg extends javax.swing.JFrame {
+public class AdminAndraInlagg2 extends javax.swing.JFrame {
 
-    private static String inlaggsID;
-    private static InfDB db;
+    private final InfDB db;
+    private final String titel;
 
     /**
-     * Creates new form AdminAndraInlagg
+     * Creates new form AdminAndraInlagg2
      */
-    public AdminAndraInlagg(InfDB db, String inlaggsID) {
+    public AdminAndraInlagg2(InfDB db, String titel) {
         initComponents();
         this.db=db;
-        this.inlaggsID=inlaggsID;
+        this.titel=titel;
         fylllista();
     }
     
-     private void fylllista() {
+    private void fylllista() {
         try {
+            String rubrik = db.fetchSingle("SELECT RUBRIK FROM INLAGG WHERE IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')");
+            String inlagg = db.fetchSingle("SELECT TEXT FROM INLAGG WHERE IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')");
+            txtRubrik.setText(rubrik);
+            txtInlagg.setText(inlagg);
+            
+            
+            
             ArrayList<String> lista = db.fetchColumn("SELECT NAMN FROM KATEGORI");
             for (int i = 0; i < lista.size(); i++) {
                 kategori.addItem(lista.get(i));
@@ -62,7 +70,7 @@ public class AdminAndraInlagg extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnAndra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnAndra.setText("Kommentera inlägg");
+        btnAndra.setText("Ändra inlägg");
         btnAndra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraActionPerformed(evt);
@@ -160,11 +168,26 @@ public class AdminAndraInlagg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
+        try
+        {
+            String rubrik = txtRubrik.getText();
+            String text = txtInlagg.getText();
+            String kategori2 = (String) kategori.getSelectedItem();
+            String kID = db.fetchSingle("SELECT KID FROM KATEGORI WHERE NAMN = '" + kategori2 + "'");
 
-        
+            String andraData = "UPDATE INLAGG SET RUBRIK='" + rubrik + "', TEXT='" + text + "', KATEGORI='" + kID + "' WHERE IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')";
+            db.update(andraData);
+
+            JOptionPane.showMessageDialog(null, "Inlägget har ändrats");
+            
+
+        } catch(InfException e)
+        {}
+
     }//GEN-LAST:event_btnAndraActionPerformed
 
     private void btnStangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStangActionPerformed
+        ForskningUtbildningAnslag.fyllLista();
         dispose();
     }//GEN-LAST:event_btnStangActionPerformed
 

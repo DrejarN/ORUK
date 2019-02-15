@@ -1,6 +1,7 @@
 
 package oruk;
 
+import java.awt.Toolkit;
 import oru.inf.*;
 import java.util.*;
 import javax.swing.*;
@@ -16,6 +17,9 @@ public class DoodleFrame extends javax.swing.JFrame {
         this.motesnamnet = namnet;
         System.out.println(motesnamnet);
         txtTest.setText(motesnamnet);
+        setTitle("ORUK - Doodle");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("icons\\oruklogoliten.png"));
+        this.setLocationRelativeTo(null);
     }
 
     
@@ -37,28 +41,28 @@ public class DoodleFrame extends javax.swing.JFrame {
         panelMinProfil.setLayout(panelMinProfilLayout);
         panelMinProfilLayout.setHorizontalGroup(
             panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMinProfilLayout.createSequentialGroup()
-                .addGap(262, 262, 262)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinProfilLayout.createSequentialGroup()
+                .addContainerGap(347, Short.MAX_VALUE)
                 .addComponent(txtTest)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addGap(319, 319, 319))
         );
         panelMinProfilLayout.setVerticalGroup(
             panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMinProfilLayout.createSequentialGroup()
-                .addGap(157, 157, 157)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinProfilLayout.createSequentialGroup()
+                .addContainerGap(281, Short.MAX_VALUE)
                 .addComponent(txtTest)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addGap(267, 267, 267))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMinProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelMinProfil, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMinProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelMinProfil, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
         );
 
         pack();

@@ -21,14 +21,14 @@ import oru.inf.InfException;
  */
 public class Profilinstallningar extends javax.swing.JPanel {
 
-    private static InfDB db;
+    private static OrukDB db;
     private static String filename;
     private byte[] photo;
 
     /**
      * Creates new form Profilinstallningar2
      */
-    public Profilinstallningar(InfDB db) {
+    public Profilinstallningar(OrukDB db) {
         initComponents();
         this.db = db;
     }

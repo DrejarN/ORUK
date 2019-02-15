@@ -6,19 +6,18 @@
 package oruk;
 
 import javax.swing.JPanel;
-import oru.inf.InfDB;
 
 /**
  *
  * @author carlf
  */
 public class Installningar extends javax.swing.JFrame {
-     private InfDB db;
+     private OrukDB db;
 
     /**
      * Creates new form Installningar
      */
-    public Installningar(InfDB db) {
+    public Installningar(OrukDB db) {
         initComponents();
         this.db=db;
     }
@@ -39,7 +38,7 @@ public class Installningar extends javax.swing.JFrame {
         btnSekretess = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

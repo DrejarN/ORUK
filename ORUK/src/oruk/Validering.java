@@ -17,10 +17,10 @@ import javax.swing.JFileChooser;
 public class Validering {
 
     private static ArrayList<HashMap<String, String>> lista;
-    private static InfDB db;
+    private static OrukDB db;
     private static ArrayList svar;
 
-    public Validering(InfDB db) {
+    public Validering(OrukDB db) {
         this.lista = new ArrayList<>();
         this.svar = new ArrayList();
         this.db = db;

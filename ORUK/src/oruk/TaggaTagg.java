@@ -22,7 +22,7 @@ public class TaggaTagg extends javax.swing.JFrame {
     /**
      * Creates new form taggaAnvandare
      */
-    public TaggaTagg(InfDB db, String iid) throws InfException {
+    public TaggaTagg(OrukDB db, String iid) throws InfException {
         initComponents();
         this.db = db;
         this.iid = iid;
@@ -158,7 +158,7 @@ public class TaggaTagg extends javax.swing.JFrame {
         }
     }
 
-    private InfDB db;
+    private OrukDB db;
     private String iid;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKlar;

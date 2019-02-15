@@ -144,6 +144,7 @@
                                       <Component id="datum3" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="tid3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace pref="35" max="32767" attributes="0"/>

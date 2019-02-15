@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class SkapaInlagg extends javax.swing.JFrame {
 
-    private static InfDB db;
+    private static OrukDB db;
     private String mailadress;
     private static String filename;
     private byte[] photo;
@@ -24,7 +24,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
     private ArrayList taggLista;
     int index = 1;
 
-    public SkapaInlagg(InfDB db) {
+    public SkapaInlagg(OrukDB db) {
         initComponents();
         this.db = db;
         fylllista();
@@ -356,6 +356,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 String tid = db.getAutoIncrement("TAGG", "TID");
                 db.insert("INSERT INTO TAGG VALUES(" + tid + ", '" + ny + "')");
                 JOptionPane.showMessageDialog(null, ny + " har lagts till som ny tagg");
+                taggLista.add(tid);
                 cmbxTaggar.removeAllItems();
                 fyllCmbxTaggar();
             } else {

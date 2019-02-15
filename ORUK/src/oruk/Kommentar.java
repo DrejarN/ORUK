@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
@@ -19,14 +18,14 @@ import oru.inf.InfException;
  */
 public class Kommentar extends javax.swing.JFrame {
 
-    private static InfDB db;
+    private static OrukDB db;
     private static ArrayList<HashMap<String, String>> enLista;
     private static String inlaggsID;
 
     /**
      * Creates new form Kommentar
      */
-    public Kommentar(InfDB db, String inlaggsID) {
+    public Kommentar(OrukDB db, String inlaggsID) {
         initComponents();
         this.db = db;
         this.inlaggsID = inlaggsID;
@@ -77,7 +76,7 @@ public class Kommentar extends javax.swing.JFrame {
         txtKommentar = new javax.swing.JTextArea();
         btnStang = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

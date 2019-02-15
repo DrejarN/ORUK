@@ -30,7 +30,7 @@ public class NyAnvandare extends javax.swing.JFrame {
         mail1 = new javax.swing.JTextField();
         grad1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         fnamn.setText("Förnamn:");
 

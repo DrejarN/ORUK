@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 
 public class Doodle extends javax.swing.JPanel {
 
-    private static InfDB db;
+    private static OrukDB db;
     private ArrayList<String> enLista;
     private ArrayList<String> lista1;
     private String motesnamn;
@@ -22,7 +22,7 @@ public class Doodle extends javax.swing.JPanel {
     private String formatdatum3;
     private String motesID;
     
-    public Doodle(InfDB db) {
+    public Doodle(OrukDB db) {
         initComponents();
         this.db = db;
         this.enLista = new ArrayList<>();

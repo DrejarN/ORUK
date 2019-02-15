@@ -11,10 +11,10 @@ import java.util.*;
 
 public class LoggaIn extends javax.swing.JFrame {
     
-    private static InfDB db;
+    private static OrukDB db;
     private ArrayList<String> lista;
     
-    public LoggaIn(InfDB db) {
+    public LoggaIn(OrukDB db) {
         initComponents();
         this.db = db;
         ComboBoxAutoComplete.enable(cmbxAnvandarnamn);
@@ -87,9 +87,19 @@ public class LoggaIn extends javax.swing.JFrame {
         cmbxAnvandarnamn.setEditable(true);
 
         txtFldIpAdress.setText("Skriv in ipadress här");
+        txtFldIpAdress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFldIpAdressFocusGained(evt);
+            }
+        });
 
         btnLoggaInOnline.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnLoggaInOnline.setText("Logga in online");
+        btnLoggaInOnline.setText("Ansult till IP");
+        btnLoggaInOnline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoggaInOnlineActionPerformed(evt);
+            }
+        });
 
         btnAndraInloggsTyp.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         btnAndraInloggsTyp.setText("Avancerad inlogging");
@@ -104,20 +114,22 @@ public class LoggaIn extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLoggaInOnline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtFldIpAdress)
-                    .addComponent(cmbxAnvandarnamn, 0, 326, Short.MAX_VALUE)
-                    .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(lblLosenord)
-                    .addComponent(lblAnvandarnamn)
-                    .addComponent(losenord, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                    .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAndraInloggsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLoggaInOnline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFldIpAdress)
+                            .addComponent(cmbxAnvandarnamn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                            .addComponent(lblLosenord)
+                            .addComponent(lblAnvandarnamn)
+                            .addComponent(losenord)
+                            .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(179, 179, 179)
+                        .addComponent(btnAndraInloggsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,32 +150,33 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addComponent(txtFldIpAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(btnLoggaInOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAndraInloggsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addComponent(btnAndraInloggsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,6 +208,7 @@ public class LoggaIn extends javax.swing.JFrame {
                 if (str.contains(enc)) {
                     dispose();
                     new Huvudfonster(db, anv).setVisible(true);
+                    
                     break;
                     
                 } else {
@@ -236,6 +250,17 @@ public class LoggaIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAndraInloggsTypActionPerformed
 
+    private void txtFldIpAdressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldIpAdressFocusGained
+        txtFldIpAdress.setText("");
+    }//GEN-LAST:event_txtFldIpAdressFocusGained
+
+    private void btnLoggaInOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInOnlineActionPerformed
+        //
+        
+        
+        
+    }//GEN-LAST:event_btnLoggaInOnlineActionPerformed
+
     //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
     private void fyllCmbxAnvandarnamn() {
         try {
@@ -255,7 +280,7 @@ public class LoggaIn extends javax.swing.JFrame {
             cmbxAnvandarnamn.setSelectedIndex(-1);
             
         } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            JOptionPane.showMessageDialog(null, "Knas med anslutningen");
             System.out.println("Internt felmeddelande" + ex.getMessage());           
         }
     }

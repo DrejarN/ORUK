@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
@@ -22,7 +21,7 @@ public class Inbjudningar extends javax.swing.JFrame {
     /**
      * Creates new form taggaAnvandare
      */
-    public Inbjudningar(InfDB db, String iid, String ett, String tva, String tre, String d1, String d2, String d3, String id) throws InfException {
+    public Inbjudningar(OrukDB db, String iid, String ett, String tva, String tre, String d1, String d2, String d3, String id) throws InfException {
         initComponents();
         this.db = db;
         this.iid = iid;
@@ -182,7 +181,7 @@ public class Inbjudningar extends javax.swing.JFrame {
     private String etttid;
     private String tvatid;
     private String tretid;
-    private InfDB db;
+    private OrukDB db;
     private String iid;
     private String formatdatum1;
     private String formatdatum2;

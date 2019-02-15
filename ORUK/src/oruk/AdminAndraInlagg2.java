@@ -7,7 +7,6 @@ package oruk;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
@@ -16,13 +15,13 @@ import oru.inf.InfException;
  */
 public class AdminAndraInlagg2 extends javax.swing.JFrame {
 
-    private final InfDB db;
+    private final OrukDB db;
     private final String titel;
 
     /**
      * Creates new form AdminAndraInlagg2
      */
-    public AdminAndraInlagg2(InfDB db, String titel) {
+    public AdminAndraInlagg2(OrukDB db, String titel) {
         initComponents();
         this.db=db;
         this.titel=titel;
@@ -64,7 +63,7 @@ public class AdminAndraInlagg2 extends javax.swing.JFrame {
         txtRubrik = new javax.swing.JTextField();
         kategori = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

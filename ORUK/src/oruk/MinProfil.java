@@ -27,13 +27,13 @@ import oru.inf.InfException;
  */
 public class MinProfil extends javax.swing.JPanel {
 
-    private static InfDB db;
+    private static OrukDB db;
     private Box box;
 
     /**
      * Creates new form MinProfil1
      */
-    public MinProfil(InfDB db) throws SQLException, IOException, ClassNotFoundException {
+    public MinProfil(OrukDB db) throws SQLException, IOException, ClassNotFoundException {
         initComponents();
         this.db = db;
 
@@ -119,7 +119,7 @@ public class MinProfil extends javax.swing.JPanel {
 
         panelMinProfil.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(203, 217, 241));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         btnInstallningar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnInstallningar.setText("Inställningar");

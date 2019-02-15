@@ -10,7 +10,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
@@ -19,7 +18,7 @@ import oru.inf.InfException;
  */
 public class MittFlode extends javax.swing.JPanel {
 
-    public MittFlode(InfDB db) {
+    public MittFlode(OrukDB db) {
         initComponents();
         this.db = db;
         box = new Box(BoxLayout.Y_AXIS);
@@ -49,7 +48,7 @@ public class MittFlode extends javax.swing.JPanel {
 
         panelFlode.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(176, 203, 247));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         btnInformell.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnInformell.setText("Informell blogg");
@@ -288,7 +287,7 @@ public class MittFlode extends javax.swing.JPanel {
         }
     }
 
-    private static InfDB db;
+    private static OrukDB db;
     private Box box;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormell;

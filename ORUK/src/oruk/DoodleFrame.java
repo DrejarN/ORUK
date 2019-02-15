@@ -8,9 +8,9 @@ import javax.swing.*;
 public class DoodleFrame extends javax.swing.JFrame {
 
     private String motesnamnet;
-    private static InfDB db;
+    private static OrukDB db;
     
-    public DoodleFrame(InfDB db, String namnet) {
+    public DoodleFrame(OrukDB db, String namnet) {
         initComponents();
         this.db = db;
         this.motesnamnet = namnet;
@@ -26,7 +26,7 @@ public class DoodleFrame extends javax.swing.JFrame {
         panelMinProfil = new javax.swing.JPanel();
         txtTest = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panelMinProfil.setBackground(new java.awt.Color(255, 255, 255));
         panelMinProfil.setPreferredSize(new java.awt.Dimension(915, 592));

@@ -12,7 +12,7 @@
 package oruk;
 
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
+
 import oru.inf.InfException;
 
 /**
@@ -21,12 +21,12 @@ import oru.inf.InfException;
  */
 public class Notifikationsinstallningar extends javax.swing.JPanel {
 
-    private final InfDB db;
+    private final OrukDB db;
 
     /**
      * Creates new form Notifikationsinstallningar2
      */
-    public Notifikationsinstallningar(InfDB db) {
+    public Notifikationsinstallningar(OrukDB db) {
         initComponents();
         this.db=db;
     }

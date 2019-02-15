@@ -6,13 +6,17 @@
 package oruk;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -48,6 +52,7 @@ public class MinProfil extends javax.swing.JPanel {
     private void setProfil() throws SQLException, IOException, ClassNotFoundException {
         try {
             String anvandare = Huvudfonster.getAnvandarnamn();
+            String anvandare2 = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
             String enStrang1 = "SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
             String query1 = db.fetchSingle(enStrang1);
             String enStrang2 = "SELECT EFTERNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
@@ -65,28 +70,41 @@ public class MinProfil extends javax.swing.JPanel {
             lblTelefon.setText(query3);
             lblTitel.setText(query5);
 
-            try {
+            
                 byte[] imageBytes;
                 Image image;
-                Class.forName("org.firebirdsql.jdbc.FBDriver");
-                Connection con = DriverManager.getConnection("jdbc:firebirdsql:localhost/3050:/Users/christianrudolphi/NetBeansProjects/ORUK/ORUK/ORUK.FDB", "sysdba", "masterkey");
-                PreparedStatement ps = con.prepareStatement("SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID='" + anvandare + "')");
+                Class.forName("com.mysql.jdbc.Driver");
+                System.out.println("test1");
+                Connection con = DriverManager.getConnection("jdbc:mysql://" + "10.22.5.86" + ":3306/ORUKDB?zeroDateTimeBehavior=convertToNull", "oruk", "masterkey");
+                System.out.println("test2");
+                PreparedStatement ps = con.prepareStatement("SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID=" + anvandare2 + ")"); 
+                System.out.println("test3");               
+                System.out.println("test4");
                 ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    imageBytes = rs.getBytes(1);
+                System.out.println("test5");
+                while(rs.next())
+                {   System.out.println("test6");
+                    imageBytes = rs.getBytes("BILDEN");
+                    System.out.println("test7");    
                     image = getToolkit().createImage(imageBytes);
+                    System.out.println("test8");
                     ImageIcon icon = new ImageIcon(image);
-                    Image img = icon.getImage().getScaledInstance(187, 187, 187);
-                    ImageIcon bild1 = new ImageIcon(img);
-                    bild.setIcon(bild1);
+                    System.out.println("test9");                
+                    bild.setIcon(icon);
+                    System.out.println("test10");
+                            
+                
+                }
+                
+                
 
                 }
 
-            } catch (Exception e) {
+            catch (Exception e) {
             }
 
-        } catch (InfException e) {
-        }
+        
+        
 
     }
 
@@ -105,8 +123,6 @@ public class MinProfil extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        bild = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblFornamn = new javax.swing.JLabel();
@@ -114,6 +130,7 @@ public class MinProfil extends javax.swing.JPanel {
         lblEPost = new javax.swing.JLabel();
         lblTelefon = new javax.swing.JLabel();
         lblTitel = new javax.swing.JLabel();
+        bild = new javax.swing.JLabel();
         lblKommandeMoten = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
 
@@ -138,25 +155,6 @@ public class MinProfil extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel4.setText("E-postadress:");
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(bild)
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(bild)
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
-
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel5.setText("Telefon:");
 
@@ -168,9 +166,9 @@ public class MinProfil extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
+                .addComponent(bild)
+                .addGap(74, 74, 74)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +183,7 @@ public class MinProfil extends javax.swing.JPanel {
                             .addComponent(lblEPost)
                             .addComponent(lblEfternamn)
                             .addComponent(lblFornamn))
-                        .addContainerGap(522, Short.MAX_VALUE))
+                        .addContainerGap(573, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,36 +193,34 @@ public class MinProfil extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblFornamn))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(lblFornamn))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(lblEfternamn))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(lblEPost))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(lblTelefon))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(lblTitel)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(btnInstallningar)))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                            .addComponent(jLabel12)
+                            .addComponent(lblEfternamn))
+                        .addGap(1, 1, 1)
+                        .addComponent(bild)
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblEPost))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(lblTelefon))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lblTitel)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(btnInstallningar)))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         lblKommandeMoten.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
@@ -238,12 +234,10 @@ public class MinProfil extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinProfilLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(panelMinProfilLayout.createSequentialGroup()
                         .addComponent(lblKommandeMoten)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 568, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelMinProfilLayout.setVerticalGroup(
             panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +314,6 @@ public class MinProfil extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEPost;
     private javax.swing.JLabel lblEfternamn;

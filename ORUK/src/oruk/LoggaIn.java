@@ -86,7 +86,7 @@ public class LoggaIn extends javax.swing.JFrame {
 
         cmbxAnvandarnamn.setEditable(true);
 
-        txtFldIpAdress.setText("Skriv in ipadress här");
+        txtFldIpAdress.setText("217.175.124.38");
         txtFldIpAdress.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtFldIpAdressFocusGained(evt);
@@ -193,7 +193,7 @@ public class LoggaIn extends javax.swing.JFrame {
         try {
             lista = db.fetchColumn("SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS = '" + anv + "'");
         } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Användaren finns ej");
+            JOptionPane.showMessageDialog(null, "bläbläbläblä");
         }
         
         try {
@@ -255,9 +255,10 @@ public class LoggaIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFldIpAdressFocusGained
 
     private void btnLoggaInOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInOnlineActionPerformed
-        //
-        
-        
+        String nyIP = txtFldIpAdress.getText();
+        db=new OrukDB(nyIP);
+        this.dispose();
+        new LoggaIn(db).setVisible(true);
         
     }//GEN-LAST:event_btnLoggaInOnlineActionPerformed
 

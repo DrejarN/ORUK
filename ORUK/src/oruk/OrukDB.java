@@ -23,7 +23,7 @@ public class OrukDB
   private HashMap<String, Object> param;
   private int advancedmode;
   private String ipAdress;
-  
+  private int kolla = 1;
   
   public OrukDB(String ipAdress)   
   {
@@ -33,7 +33,8 @@ public class OrukDB
   }
 
  private void kopplaUpp(){
-    try {
+    try {   
+          
           loadDriver();
           initConnection();
       } catch (InfException ex) {
@@ -45,13 +46,14 @@ public class OrukDB
             loadDriver2();
             System.out.println("1");
             initConnection2();
+            kolla = 2;
             JOptionPane.showMessageDialog(null, "Anslutning offline gjord");
         } catch (InfException ex) {
             Logger.getLogger(OrukDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     else{
-    JOptionPane.showMessageDialog(null, "Anslutning online gjord");
+    
     }
  }
   
@@ -81,7 +83,7 @@ public class OrukDB
         File tempFile = new File("");
         System.out.println("4");
         String absoluta = tempFile.getAbsolutePath();
-System.out.println("absoluta");
+        System.out.println("absoluta");
         ipAdress = absoluta + relativa;
         System.out.println("ipAdress");
              
@@ -151,6 +153,8 @@ System.out.println("absoluta");
     return arr;
   }
  **/ 
+  
+  
   private void closeConnection()
     throws InfException
   {
@@ -172,7 +176,12 @@ System.out.println("absoluta");
     try
     {
       if ((this.con == null) || (this.con.isClosed())) {
-        initConnection();
+        if(kolla==1){
+            initConnection();
+        }
+        else{
+            initConnection2();
+        }
       }
     }
     catch (SQLException e)

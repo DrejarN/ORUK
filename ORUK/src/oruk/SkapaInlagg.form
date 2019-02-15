@@ -82,20 +82,22 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="btnLaggTillMedskribent" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblTillagdMedskribent" min="-2" pref="384" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="btnLaggTillTagg" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblTillagdTagg" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="btnLaggTillTagg" max="32767" attributes="0"/>
+                              <Component id="btnLaggTillMedskribent" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnTaBort1" max="32767" attributes="0"/>
+                              <Component id="btnTaBort2" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblTillagdMedskribent" pref="233" max="32767" attributes="0"/>
+                              <Component id="lblTillagdTagg" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="72" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -121,6 +123,7 @@
                       <Component id="cmbxAnvandarnamn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLaggTillMedskribent" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTillagdMedskribent" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="btnTaBort1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -128,6 +131,7 @@
                       <Component id="cmbxTaggar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLaggTillTagg" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTillagdTagg" max="32767" attributes="0"/>
+                      <Component id="btnTaBort2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="btnPublicera" min="-2" max="-2" attributes="0"/>
@@ -256,6 +260,22 @@
         <Component class="javax.swing.JLabel" name="lblTillagdMedskribent">
         </Component>
         <Component class="javax.swing.JLabel" name="lblTillagdTagg">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnTaBort1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ta Bort"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaBort1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnTaBort2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ta Bort"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaBort2ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
@@ -21,10 +20,10 @@ import oru.inf.InfException;
  */
 public class Filhantering {
     
-    private static InfDB db;
+    private static OrukDB db;
     
     
-    public Filhantering(InfDB db) {
+    public Filhantering(OrukDB db) {
         this.db = db;
     }
     

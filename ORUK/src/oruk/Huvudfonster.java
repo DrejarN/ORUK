@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
@@ -18,13 +17,13 @@ import oru.inf.InfException;
  */
 public class Huvudfonster extends javax.swing.JFrame {
 
-    private static InfDB db;
+    private static OrukDB db;
     private static String anvandarnamn;
 
     /**
      * Creates new form Huvudfönster
      */
-    public Huvudfonster(InfDB db, String anvandarnamn) {
+    public Huvudfonster(OrukDB db, String anvandarnamn) {
         initComponents();
         this.db = db;
         this.anvandarnamn = anvandarnamn;
@@ -55,7 +54,7 @@ public class Huvudfonster extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnMittFlode.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnMittFlode.setText("Mitt flöde");

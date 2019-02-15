@@ -4,12 +4,11 @@ package oruk;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 public class ForskningUtbildningAnslag extends javax.swing.JPanel {
 
-    private static InfDB db;
+    private static OrukDB db;
     private static ArrayList<String> enLista;
     private static String titel;
 
@@ -19,7 +18,7 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
      * Creates new form ForskningUtbildning
      * @param db
      */
-    public ForskningUtbildningAnslag(InfDB db) {
+    public ForskningUtbildningAnslag(OrukDB db) {
         initComponents();
         this.db=db;
         enLista = new ArrayList<>(); 

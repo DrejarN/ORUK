@@ -5,7 +5,6 @@
  */
 package oruk;
 
-import oru.inf.InfDB;
 import java.util.*;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -21,11 +20,11 @@ import oru.inf.InfException;
  */
 public class Email {
     
-private static InfDB db;
+private static OrukDB db;
 private String mailadress;
     
     
-public Email (InfDB db) {
+public Email (OrukDB db) {
         this.db = db;
         this.mailadress = Huvudfonster.getAnvandarnamn();
     }

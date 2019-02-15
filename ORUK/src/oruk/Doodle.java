@@ -7,6 +7,7 @@ import oru.inf.*;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.swing.SwingConstants;
 
 public class Doodle extends javax.swing.JPanel {
 
@@ -42,7 +43,6 @@ public class Doodle extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         mRubrik = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        mText = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         datum1 = new org.jdesktop.swingx.JXDatePicker();
         datum2 = new org.jdesktop.swingx.JXDatePicker();
@@ -57,15 +57,15 @@ public class Doodle extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        mText = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        inbokadeM = new javax.swing.JList<>();
+        jLabel11 = new javax.swing.JLabel();
 
         panelMinProfil.setBackground(new java.awt.Color(255, 255, 255));
         panelMinProfil.setPreferredSize(new java.awt.Dimension(915, 592));
 
-        motesLista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         motesLista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 motesListaMouseClicked(evt);
@@ -87,7 +87,7 @@ public class Doodle extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Möten");
+        jLabel1.setText("Mötesinbjudningar");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setText("Rubrik");
@@ -130,6 +130,22 @@ public class Doodle extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel10.setText("HH:MM:SS");
 
+        mText.setLineWrap(true);
+        mText.setWrapStyleWord(true);
+        mText.setColumns(20);
+        mText.setRows(5);
+        jScrollPane2.setViewportView(mText);
+
+        inbokadeM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inbokadeMMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(inbokadeM);
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel11.setText("Inbokade möten");
+
         javax.swing.GroupLayout panelMinProfilLayout = new javax.swing.GroupLayout(panelMinProfil);
         panelMinProfil.setLayout(panelMinProfilLayout);
         panelMinProfilLayout.setHorizontalGroup(
@@ -137,17 +153,23 @@ public class Doodle extends javax.swing.JPanel {
             .addGroup(panelMinProfilLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
+                    .addGroup(panelMinProfilLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelMinProfilLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)))
+                .addGap(64, 64, 64)
                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMinProfilLayout.createSequentialGroup()
-                        .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
                             .addComponent(jLabel8)
-                            .addComponent(mRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mText, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mRubrik)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                         .addGap(79, 79, 79)
                         .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -176,6 +198,19 @@ public class Doodle extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMinProfilLayout.createSequentialGroup()
+                        .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(95, 95, 95))
+                    .addGroup(panelMinProfilLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
@@ -191,9 +226,9 @@ public class Doodle extends javax.swing.JPanel {
                                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel10))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelMinProfilLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +236,7 @@ public class Doodle extends javax.swing.JPanel {
                                     .addComponent(datum1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(16, 16, 16)
                                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(datum2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tid2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,26 +245,18 @@ public class Doodle extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(datum3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tid3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 24, Short.MAX_VALUE))
-                            .addComponent(mText)))
-                    .addGroup(panelMinProfilLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(33, 33, 33)
-                .addGroup(panelMinProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(95, 95, 95))
+                                    .addComponent(tid3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMinProfilLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(144, 144, 144))))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMinProfil, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
+            .addComponent(panelMinProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 1058, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,12 +314,18 @@ public class Doodle extends javax.swing.JPanel {
         this.motesnamn = motesLista.getSelectedValue();
     }//GEN-LAST:event_motesListaMouseClicked
 
+    private void inbokadeMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inbokadeMMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inbokadeMMouseClicked
+
     public void fylllista(){
          DefaultListModel model = new DefaultListModel();
+         DefaultListModel model1 = new DefaultListModel();
         ArrayList<String> enLista = null;
-        
+        String AID = "";
+        ArrayList<String> enLista2 = null;
         try{
-            String AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '"+Huvudfonster.getAnvandarnamn()+"'");
+            AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '"+Huvudfonster.getAnvandarnamn()+"'");
             enLista = db.fetchColumn("SELECT DISTINCT RUBRIK FROM MOTE JOIN MOTE_FORFRAGA ON MOTE_FORFRAGA.MID = MOTE.MID WHERE MOTE_FORFRAGA.AID ="+AID);
             }
         catch(InfException e){
@@ -302,24 +335,41 @@ public class Doodle extends javax.swing.JPanel {
         try {
             String svar = "";
             for (int i = 0; i < enLista.size(); i++) {
-                svar = enLista.get(i) + "\n";
+                svar = enLista.get(i);
                 model.addElement(svar);
             }
             
             motesLista.setModel(model);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }  
+            JOptionPane.showMessageDialog(null, "Du har inga aktuella möten");
+        }
+        
+        try{
+             ArrayList<String> listan = db.fetchColumn("SELECT MOTE.RUBRIK FROM MOTE\n"
+                                    + "JOIN MOTE_DELTAGANDE ON MOTE.MID=MOTE_DELTAGANDE.MID\n"
+                                    + "WHERE AID='" + AID + "'");
+             String svar = "";
+             for(int i = 0; i < listan.size(); i++){
+                 svar = listan.get(i);
+                 model1.addElement(svar);
+             }
+             inbokadeM.setModel(model1);
+        }
+        catch(Exception e){
+        }
+
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swingx.JXDatePicker datum1;
     private org.jdesktop.swingx.JXDatePicker datum2;
     private org.jdesktop.swingx.JXDatePicker datum3;
+    private javax.swing.JList<String> inbokadeM;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -329,8 +379,10 @@ public class Doodle extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField mRubrik;
-    private javax.swing.JTextField mText;
+    private javax.swing.JTextArea mText;
     private javax.swing.JList<String> motesLista;
     private javax.swing.JPanel panelMinProfil;
     private javax.swing.JTextField tid1;

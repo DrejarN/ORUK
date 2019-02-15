@@ -289,27 +289,25 @@ public class Doodle extends javax.swing.JPanel {
 
     public void fylllista(){
          DefaultListModel model = new DefaultListModel();
-        ArrayList<String> MID = null;
+        ArrayList<String> enLista = null;
         
         try{
-            MID = db.fetchColumn("SELECT MID FROM MOTE");
+            String AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '"+Huvudfonster.getAnvandarnamn()+"'");
+            enLista = db.fetchColumn("SELECT DISTINCT RUBRIK FROM MOTE JOIN MOTE_FORFRAGA ON MOTE_FORFRAGA.MID = MOTE.MID WHERE MOTE_FORFRAGA.AID ="+AID);
             }
         catch(InfException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         
         try {
-              for(int x = 0; x < MID.size(); x++){
-            enLista = db.fetchColumn("SELECT RUBRIK FROM MOTE WHERE MID = "+MID.get(x));
             String svar = "";
             for (int i = 0; i < enLista.size(); i++) {
                 svar = enLista.get(i) + "\n";
                 model.addElement(svar);
             }
-              
             
             motesLista.setModel(model);
-        }} catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }  
     }

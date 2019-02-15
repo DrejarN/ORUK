@@ -9,9 +9,9 @@ import oru.inf.InfException;
 
 public class ForskningUtbildningAnslag extends javax.swing.JPanel {
 
-    private InfDB db;
-    private ArrayList<String> enLista;
-    private String titel;
+    private static InfDB db;
+    private static ArrayList<String> enLista;
+    private static String titel;
 
     
 
@@ -24,6 +24,31 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         this.db=db;
         enLista = new ArrayList<>(); 
         fyllLista();
+        kollaAdmin();
+    }
+    
+    public void kollaAdmin() {
+        try {
+            String anvandare = Huvudfonster.getAnvandarnamn();
+            btnAndra.setVisible(false);
+            btnTaBort.setVisible(false);
+
+            String data = "SELECT GRAD FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
+            String data1 = db.fetchSingle(data);
+            
+            if(data1.equals("S") || data1.equals("A"))
+            {
+                btnAndra.setVisible(true);
+                btnTaBort.setVisible(true);
+                
+            
+            }
+        
+        } 
+        catch (InfException ex) {
+
+        }
+
     }
 
     /**
@@ -39,6 +64,8 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         btnSe = new javax.swing.JButton();
+        btnAndra = new javax.swing.JButton();
+        btnTaBort = new javax.swing.JButton();
 
         panelForskning.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -61,25 +88,54 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
             }
         });
 
+        btnAndra.setText("Ändra inlägg");
+        btnAndra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraActionPerformed(evt);
+            }
+        });
+
+        btnTaBort.setText("Ta bort inlägg");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelForskningLayout = new javax.swing.GroupLayout(panelForskning);
         panelForskning.setLayout(panelForskningLayout);
         panelForskningLayout.setHorizontalGroup(
             panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelForskningLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnSe)
+                .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelForskningLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(btnSe))
+                    .addGroup(panelForskningLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTaBort))
+                    .addGroup(panelForskningLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAndra)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         panelForskningLayout.setVerticalGroup(
             panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelForskningLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
                 .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSe)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                    .addGroup(panelForskningLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnSe)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnAndra)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTaBort))
+                    .addGroup(panelForskningLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -103,8 +159,37 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         titel = jList1.getSelectedValue();
           
     }//GEN-LAST:event_jList1MouseClicked
+
+    private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
+        new AdminAndraInlagg2(db, titel).setVisible(true);
+    }//GEN-LAST:event_btnAndraActionPerformed
+
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Vill du ta bort inlägget?", "Ta bort inlägg",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+     if (response == JOptionPane.NO_OPTION) {
+
+    } else if (response == JOptionPane.YES_OPTION) {
+            try {
+                String data1 = "DELETE FROM GORA_INLAGG WHERE IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')";
+                String data2 = "DELETE FROM KOMMENTERA_INLAGG WHERE IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')";
+                String data3 = "DELETE FROM INLAGG WHERE IID=(SELECT IID FROM INLAGG WHERE RUBRIK='" + titel + "')";
+                db.delete(data1);
+                db.delete(data2);
+                db.delete(data3);
+                
+                JOptionPane.showMessageDialog(null, "Inlägget har tagits bort");
+                fyllLista();
+                
+                
+            } catch (InfException ex) {
+                
+            }
+        
+      }
+    }//GEN-LAST:event_btnTaBortActionPerformed
     
-    private void fyllLista() {
+    public static void fyllLista() {
         DefaultListModel model = new DefaultListModel();
         try {
             enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG WHERE KATEGORI='1' OR KATEGORI='2'");
@@ -121,8 +206,10 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndra;
     private javax.swing.JButton btnSe;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JButton btnTaBort;
+    private static javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelForskning;
     // End of variables declaration//GEN-END:variables

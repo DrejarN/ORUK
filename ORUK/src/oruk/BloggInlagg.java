@@ -3,6 +3,7 @@ package oruk;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -25,6 +26,31 @@ public class BloggInlagg extends javax.swing.JPanel {
         this.db = db;
         this.inlagg = inlagg;
         setText();
+        kollaAdmin();
+    }
+
+    public void kollaAdmin() {
+        try {
+            String anvandare = Huvudfonster.getAnvandarnamn();
+            btnAndra.setVisible(false);
+            btnTaBort.setVisible(false);
+
+            String data = "SELECT GRAD FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
+            String data1 = db.fetchSingle(data);
+            
+            if(data1.equals("S") || data1.equals("A"))
+            {
+                btnAndra.setVisible(true);
+                btnTaBort.setVisible(true);
+                
+            
+            }
+        
+        } 
+        catch (InfException ex) {
+
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -41,6 +67,8 @@ public class BloggInlagg extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnTaBort = new javax.swing.JButton();
+        btnAndra = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
@@ -71,6 +99,20 @@ public class BloggInlagg extends javax.swing.JPanel {
 
         jLabel8.setText("tagg1 tagg2");
 
+        btnTaBort.setText("Ta bort inlägg");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
+
+        btnAndra.setText("Ändra inlägg");
+        btnAndra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -83,7 +125,7 @@ public class BloggInlagg extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +137,12 @@ public class BloggInlagg extends javax.swing.JPanel {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAndra)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnTaBort)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -103,7 +150,10 @@ public class BloggInlagg extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTaBort)
+                    .addComponent(btnAndra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,6 +191,37 @@ public class BloggInlagg extends javax.swing.JPanel {
         new Kommentar(db, inlagg).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
+        new AdminAndraInlagg1(db, inlagg).setVisible(true);
+    }//GEN-LAST:event_btnAndraActionPerformed
+
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        
+        int response = JOptionPane.showConfirmDialog(null, "Vill du ta bort inlägget?", "Ta bort inlägg",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+     if (response == JOptionPane.NO_OPTION) {
+
+    } else if (response == JOptionPane.YES_OPTION) {
+            try {
+                String data1 = "DELETE FROM GORA_INLAGG WHERE IID='" + inlagg + "'";
+                String data2 = "DELETE FROM KOMMENTERA_INLAGG WHERE IID='" + inlagg + "'";
+                String data3 = "DELETE FROM INLAGG WHERE IID='" + inlagg + "'";
+                db.delete(data1);
+                db.delete(data2);
+                db.delete(data3);
+                
+                JOptionPane.showMessageDialog(null, "Inlägget har tagits bort");
+                
+                
+            } catch (InfException ex) {
+                
+            }
+        
+      }
+        
+
+    }//GEN-LAST:event_btnTaBortActionPerformed
+
     private void setText() {
         try {
             String skrivetAv = " ";
@@ -164,7 +245,7 @@ public class BloggInlagg extends javax.swing.JPanel {
                     String heltNamn = fornamn + " " + efternamn;
                     skrivetAv = heltNamn;
                     index++;
-                    
+
                 } else {
                     String fornamn = db.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE AID=" + aid);
                     String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE AID=" + aid);
@@ -175,15 +256,14 @@ public class BloggInlagg extends javax.swing.JPanel {
             jLabel6.setText(skrivetAv);
 
             ArrayList taggLista = db.fetchColumn("SELECT TID FROM INLAGG_TAGG WHERE IID='" + inlagg + "'");
-            
-            if(taggLista==null){
+
+            if (taggLista == null) {
                 taggar = "saknas";
-            }
-            else{
-            for (Object taggid : taggLista) {          
-                    String taggnamn = db.fetchSingle("SELECT NAMN FROM TAGG WHERE TID=" + taggid);                   
-                    taggar = taggar + " #" + taggnamn;               
-            }           
+            } else {
+                for (Object taggid : taggLista) {
+                    String taggnamn = db.fetchSingle("SELECT NAMN FROM TAGG WHERE TID=" + taggid);
+                    taggar = taggar + " #" + taggnamn;
+                }
             }
             jLabel8.setText(taggar);
         } catch (InfException ex) {
@@ -194,6 +274,8 @@ public class BloggInlagg extends javax.swing.JPanel {
     private InfDB db;
     private String inlagg;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndra;
+    private javax.swing.JButton btnTaBort;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -62,8 +62,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
         btnLaggTillTagg = new javax.swing.JButton();
         lblTillagdMedskribent = new javax.swing.JLabel();
         lblTillagdTagg = new javax.swing.JLabel();
-        btnTaBort1 = new javax.swing.JButton();
-        btnTaBort2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -116,20 +114,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
             }
         });
 
-        btnTaBort1.setText("Ta Bort");
-        btnTaBort1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaBort1ActionPerformed(evt);
-            }
-        });
-
-        btnTaBort2.setText("Ta Bort");
-        btnTaBort2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaBort2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,11 +149,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnLaggTillTagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnLaggTillMedskribent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTaBort1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTaBort2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(67, 67, 67)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblTillagdMedskribent, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                             .addComponent(lblTillagdTagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -194,15 +174,13 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     .addComponent(lblValjMedskribent)
                     .addComponent(cmbxAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLaggTillMedskribent)
-                    .addComponent(lblTillagdMedskribent, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTaBort1))
+                    .addComponent(lblTillagdMedskribent, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValjTagg)
                     .addComponent(cmbxTaggar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLaggTillTagg)
-                    .addComponent(lblTillagdTagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTaBort2))
+                    .addComponent(lblTillagdTagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(46, 46, 46)
                 .addComponent(btnPublicera)
                 .addGap(17, 17, 17))
@@ -371,15 +349,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLaggTillTaggActionPerformed
 
-    private void btnTaBort1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBort1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTaBort1ActionPerformed
-
-    private void btnTaBort2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBort2ActionPerformed
-
-
-    }//GEN-LAST:event_btnTaBort2ActionPerformed
-
     private void setThisTitle() {
         try {
             String anvandarnamn = Huvudfonster.getAnvandarnamn();
@@ -444,8 +413,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
     private javax.swing.JButton btnLaggTillMedskribent;
     private javax.swing.JButton btnLaggTillTagg;
     private javax.swing.JButton btnPublicera;
-    private javax.swing.JButton btnTaBort1;
-    private javax.swing.JButton btnTaBort2;
     private javax.swing.JComboBox<String> cmbxAnvandarnamn;
     private javax.swing.JComboBox<String> cmbxTaggar;
     private javax.swing.JPanel jPanel1;

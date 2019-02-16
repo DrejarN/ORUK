@@ -6,11 +6,14 @@
 package oruk;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import oru.inf.InfException;
+import static oruk.AdminTaBortKommentar.fyllLista;
 
 /**
  *
@@ -25,6 +28,28 @@ public class MittFlode extends javax.swing.JPanel {
         jScrollPane1.setViewportView(box);
         fyllCmbxTaggar();
         ComboBoxAutoComplete.enable(cmbxTaggar);
+        kollaAdmin();
+    }
+
+    public void kollaAdmin() {
+        try {
+            String anvandare = Huvudfonster.getAnvandarnamn();
+            btnRedigera.setVisible(false);
+            btnTaBort.setVisible(false);
+
+            String data = "SELECT GRAD FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'";
+            String data1 = db.fetchSingle(data);
+
+            if (data1.equals("S") || data1.equals("A")) {
+                btnRedigera.setVisible(true);
+                btnTaBort.setVisible(true);
+
+            }
+
+        } catch (InfException ex) {
+
+        }
+
     }
 
     /**
@@ -45,6 +70,8 @@ public class MittFlode extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         cmbxTaggar = new javax.swing.JComboBox<>();
         btnUppdatera = new javax.swing.JButton();
+        btnRedigera = new javax.swing.JButton();
+        btnTaBort = new javax.swing.JButton();
 
         panelFlode.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -112,6 +139,20 @@ public class MittFlode extends javax.swing.JPanel {
             }
         });
 
+        btnRedigera.setText("Redigera");
+        btnRedigera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedigeraActionPerformed(evt);
+            }
+        });
+
+        btnTaBort.setText("Ta Bort");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelFlodeLayout = new javax.swing.GroupLayout(panelFlode);
         panelFlode.setLayout(panelFlodeLayout);
         panelFlodeLayout.setHorizontalGroup(
@@ -131,6 +172,10 @@ public class MittFlode extends javax.swing.JPanel {
                         .addComponent(cmbxTaggar, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUppdatera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRedigera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTaBort)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelFlodeLayout.setVerticalGroup(
@@ -142,7 +187,9 @@ public class MittFlode extends javax.swing.JPanel {
                 .addGroup(panelFlodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cmbxTaggar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUppdatera))
+                    .addComponent(btnUppdatera)
+                    .addComponent(btnRedigera)
+                    .addComponent(btnTaBort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
         );
@@ -194,16 +241,15 @@ public class MittFlode extends javax.swing.JPanel {
                     box.add(importeradPanel);
                     box.revalidate();
                 }
-            } 
-            else {
+            } else {
                 String taggnamn = cmbxTaggar.getSelectedItem().toString();
                 String taggid = db.fetchSingle("SELECT TID FROM TAGG WHERE NAMN='" + taggnamn + "'");
-                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n" +
-                                                   "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n" +
-                                                   "WHERE INLAGG.KATEGORI='4'AND INLAGG_TAGG.TID='" + taggid + "'");
+                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n"
+                        + "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n"
+                        + "WHERE INLAGG.KATEGORI='4'AND INLAGG_TAGG.TID='" + taggid + "'");
 
                 for (Object inlagg : listan2) {
-                    
+
                     JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
                     importeradPanel.setVisible(true);
                     box.add(importeradPanel);
@@ -234,16 +280,15 @@ public class MittFlode extends javax.swing.JPanel {
                     box.add(importeradPanel);
                     box.revalidate();
                 }
-            } 
-            else {
+            } else {
                 String taggnamn = cmbxTaggar.getSelectedItem().toString();
                 String taggid = db.fetchSingle("SELECT TID FROM TAGG WHERE NAMN='" + taggnamn + "'");
-                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n" +
-                                                   "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n" +
-                                                   "WHERE INLAGG.KATEGORI='3'AND INLAGG_TAGG.TID='" + taggid + "'");
+                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n"
+                        + "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n"
+                        + "WHERE INLAGG.KATEGORI='3'AND INLAGG_TAGG.TID='" + taggid + "'");
 
                 for (Object inlagg : listan2) {
-                    
+
                     JPanel importeradPanel = new BloggInlagg(db, inlagg.toString());
                     importeradPanel.setVisible(true);
                     box.add(importeradPanel);
@@ -265,8 +310,39 @@ public class MittFlode extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnUppdateraActionPerformed
 
-    private void fyllCmbxTaggar() {
+    private void btnRedigeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraActionPerformed
+        String tagg = cmbxTaggar.getSelectedItem().toString();
+        new AdminRedigeraTagg(db, tagg).setVisible(true);
+    }//GEN-LAST:event_btnRedigeraActionPerformed
+
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         try {
+
+            int response = JOptionPane.showConfirmDialog(null, "Vill du ta bort taggen?", "Ta bort tagg",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.NO_OPTION) {
+
+            } else if (response == JOptionPane.YES_OPTION) {
+
+                String tagg = cmbxTaggar.getSelectedItem().toString();
+                String andraData1 = "DELETE FROM INLAGG_TAGG WHERE TID=(SELECT TID FROM TAGG WHERE NAMN='" + tagg + "')";
+                String andraData2 = "DELETE FROM TAGG WHERE NAMN='" + tagg + "'";
+                db.delete(andraData1);
+                db.delete(andraData2);
+                JOptionPane.showMessageDialog(null, "Taggen har tagits bort");
+                fyllCmbxTaggar();
+            }}catch (InfException ex) {
+            Logger.getLogger(MittFlode.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnTaBortActionPerformed
+
+    
+
+    public static void fyllCmbxTaggar() {
+        try {
+            cmbxTaggar.removeAllItems();
             cmbxTaggar.addItem("Allt");
             ArrayList listan = new ArrayList();
             listan = db.fetchColumn("SELECT NAMN FROM TAGG");
@@ -293,8 +369,10 @@ public class MittFlode extends javax.swing.JPanel {
     private javax.swing.JButton btnFormell;
     private javax.swing.JButton btnForskning;
     private javax.swing.JButton btnInformell;
+    private javax.swing.JButton btnRedigera;
+    private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnUppdatera;
-    private javax.swing.JComboBox<String> cmbxTaggar;
+    private static javax.swing.JComboBox<String> cmbxTaggar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

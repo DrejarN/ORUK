@@ -131,6 +131,11 @@ public class MittFlode extends javax.swing.JPanel {
         jLabel1.setText("Visa inlägg taggat med:");
 
         cmbxTaggar.setEditable(true);
+        cmbxTaggar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbxTaggarActionPerformed(evt);
+            }
+        });
 
         btnUppdatera.setText("Uppdatera");
         btnUppdatera.addActionListener(new java.awt.event.ActionListener() {
@@ -337,6 +342,10 @@ public class MittFlode extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_btnTaBortActionPerformed
+
+    private void cmbxTaggarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxTaggarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbxTaggarActionPerformed
 
     
 

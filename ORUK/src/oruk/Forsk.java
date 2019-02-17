@@ -60,7 +60,6 @@ public class Forsk extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblTitle = new javax.swing.JLabel();
         btnPublicera = new javax.swing.JButton();
         skrr = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -73,9 +72,6 @@ public class Forsk extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        lblTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        lblTitle.setText("Rubrik");
-
         btnPublicera.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnPublicera.setText("Kommentera inlägg");
         btnPublicera.addActionListener(new java.awt.event.ActionListener() {
@@ -84,11 +80,14 @@ public class Forsk extends javax.swing.JFrame {
             }
         });
 
+        skrr.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
+
         txtInlagg.setLineWrap(true);
         txtInlagg.setWrapStyleWord(true);
         txtInlagg.setColumns(20);
         txtInlagg.setRows(5);
         txtInlagg.setText("\n");
+        txtInlagg.setBorder(null);
         jScrollPane1.setViewportView(txtInlagg);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -98,30 +97,25 @@ public class Forsk extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(skrr, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTitle)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(btnPublicera, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(skrr, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(btnPublicera, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(73, 73, 73)
                 .addComponent(skrr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(btnPublicera)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         txtKommentar.setLineWrap(true);
@@ -181,7 +175,6 @@ public class Forsk extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel skrr;
     private javax.swing.JTextArea txtInlagg;
     private static javax.swing.JTextArea txtKommentar;

@@ -23,6 +23,7 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         this.db=db;
         enLista = new ArrayList<>(); 
         fyllLista();
+        fyllLista2();
         kollaAdmin();
     }
     
@@ -65,9 +66,13 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         btnSe = new javax.swing.JButton();
         btnAndra = new javax.swing.JButton();
         btnTaBort = new javax.swing.JButton();
+        cBoxKategori = new javax.swing.JComboBox<>();
+        btnUppdatera = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         panelForskning.setBackground(new java.awt.Color(255, 255, 255));
 
+        jList1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -80,7 +85,7 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
-        btnSe.setText("Se projekt");
+        btnSe.setText("Se inlägg");
         btnSe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeActionPerformed(evt);
@@ -101,51 +106,78 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
             }
         });
 
+        cBoxKategori.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        cBoxKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Forskning & Utbildning" }));
+        cBoxKategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBoxKategoriActionPerformed(evt);
+            }
+        });
+
+        btnUppdatera.setText("Uppdatera");
+        btnUppdatera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUppdateraActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setText("Sortera efter:");
+
         javax.swing.GroupLayout panelForskningLayout = new javax.swing.GroupLayout(panelForskning);
         panelForskning.setLayout(panelForskningLayout);
         panelForskningLayout.setHorizontalGroup(
             panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelForskningLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(panelForskningLayout.createSequentialGroup()
+                        .addComponent(cBoxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnUppdatera, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelForskningLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(btnSe))
-                    .addGroup(panelForskningLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTaBort))
-                    .addGroup(panelForskningLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAndra)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                    .addComponent(btnAndra, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSe, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         panelForskningLayout.setVerticalGroup(
             panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelForskningLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cBoxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUppdatera))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelForskningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelForskningLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(btnSe)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnAndra)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTaBort))
-                    .addGroup(panelForskningLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(114, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelForskningLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelForskningLayout.createSequentialGroup()
+                        .addComponent(btnSe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnAndra, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelForskning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelForskning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelForskning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panelForskning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,6 +219,69 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
         
       }
     }//GEN-LAST:event_btnTaBortActionPerformed
+
+    private void btnUppdateraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraActionPerformed
+        // TODO add your handling code here:
+        
+                DefaultListModel model = new DefaultListModel();
+        model.removeAllElements();
+        if (cBoxKategori.getSelectedItem().equals("Forskning & Utbildning")) {
+            try {
+                enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG WHERE KATEGORI='1' OR KATEGORI='2'");
+                String svar = "";
+                for (int i = 0; i < enLista.size(); i++) {
+                    svar = enLista.get(i);
+                    model.addElement(svar);
+                }
+
+                jList1.setModel(model);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+        if (cBoxKategori.getSelectedItem().equals("Forskning")) {
+            try {
+                enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG WHERE KATEGORI='1'");
+                String svar = "";
+                for (int i = 0; i < enLista.size(); i++) {
+                    svar = enLista.get(i);
+                    model.addElement(svar);
+                }
+
+                jList1.setModel(model);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        } if(cBoxKategori.getSelectedItem().equals("Utbildning")) {
+            try {
+                enLista = db.fetchColumn("SELECT RUBRIK FROM INLAGG WHERE KATEGORI='2'");
+                String svar = "";
+                for (int i = 0; i < enLista.size(); i++) {
+                    svar = enLista.get(i);
+                    model.addElement(svar);
+                }
+
+                jList1.setModel(model);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnUppdateraActionPerformed
+
+    private void cBoxKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxKategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cBoxKategoriActionPerformed
+    
+     public void fyllLista2() {
+        try{
+            ArrayList<String> lista = db.fetchColumn("SELECT NAMN FROM KATEGORI WHERE KID = '1' OR KID = '2'");
+            for(int i = 0; i < lista.size(); i++){
+                cBoxKategori.addItem(lista.get(i));
+            }
+        }
+        catch(InfException e){
+        }
+    }
     
     public static void fyllLista() {
         DefaultListModel model = new DefaultListModel();
@@ -208,6 +303,9 @@ public class ForskningUtbildningAnslag extends javax.swing.JPanel {
     private javax.swing.JButton btnAndra;
     private javax.swing.JButton btnSe;
     private javax.swing.JButton btnTaBort;
+    private javax.swing.JButton btnUppdatera;
+    private javax.swing.JComboBox<String> cBoxKategori;
+    private javax.swing.JLabel jLabel1;
     private static javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelForskning;

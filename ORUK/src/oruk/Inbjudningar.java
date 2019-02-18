@@ -39,7 +39,7 @@ public class Inbjudningar extends javax.swing.JFrame {
         this.formatdatum2 = d2;
         this.formatdatum3 = d3;
         this.motesID = id;
-        System.out.println(this.formatdatum1 + " " + this.etttid + ":00");
+        System.out.println(this.formatdatum1 + " " + this.etttid + ".0");
     }
 
     @SuppressWarnings("unchecked")
@@ -136,9 +136,9 @@ public class Inbjudningar extends javax.swing.JFrame {
            
             String AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE FORNAMN = '"+fornamn+"' AND EFTERNAMN = '"+efternamn+"'");
 
-                   db.insert("INSERT INTO MOTE_FORFRAGA VALUES ("+ FID + ", " + AID + ", " + this.motesID + ", null, '" + this.formatdatum1 + " " + this.etttid + ":00')");
-                   db.insert("INSERT INTO MOTE_FORFRAGA VALUES ("+ FID2 + ", " + AID + ", " + this.motesID + ", null, '" + this.formatdatum2 + " " + this.tvatid + ":00')");
-                   db.insert("INSERT INTO MOTE_FORFRAGA VALUES ("+ FID3 + ", " + AID + ", " + this.motesID + ", null, '" + this.formatdatum3 + " " + this.tretid + ":00')");
+                   db.insert("INSERT INTO MOTE_FORFRAGA VALUES ("+ FID + ", " + AID + ", " + this.motesID + ", null, '" + this.formatdatum1 + " " + this.etttid + ".0')");
+                   db.insert("INSERT INTO MOTE_FORFRAGA VALUES ("+ FID2 + ", " + AID + ", " + this.motesID + ", null, '" + this.formatdatum2 + " " + this.tvatid + ".0')");
+                   db.insert("INSERT INTO MOTE_FORFRAGA VALUES ("+ FID3 + ", " + AID + ", " + this.motesID + ", null, '" + this.formatdatum3 + " " + this.tretid + ".0')");
                 
             JOptionPane.showMessageDialog(null, anvandare + " är inbjuden till ditt möte");
         } catch (InfException ex) {

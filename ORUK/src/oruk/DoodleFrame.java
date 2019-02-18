@@ -29,6 +29,7 @@ public class DoodleFrame extends javax.swing.JFrame {
     private void fyllDatumTid(){
         try{
            String MID = db.fetchSingle("SELECT MID FROM MOTE WHERE RUBRIK = '"+motesnamnet+"'");
+            System.out.println(MID);
            lista1 = db.fetchColumn("SELECT DATUM FROM MOTE_FORFRAGA WHERE MID = "+MID);
            for(int i = 0; i < lista1.size(); i++){
               String datum = lista1.get(i).substring(0,10);
@@ -439,7 +440,6 @@ public class DoodleFrame extends javax.swing.JFrame {
               for(int i = 0; i < aid.size(); i++){
               db.insert("INSERT INTO MOTE_DELTAGANDE VALUES ("+aid.get(i)+", "+ MID+")");
               }
-              JOptionPane.showMessageDialog(null, "Yes");
           }
            catch(InfException e){
                JOptionPane.showMessageDialog(null, e.getMessage());
@@ -449,7 +449,7 @@ public class DoodleFrame extends javax.swing.JFrame {
                db.delete("DELETE FROM MOTE_FORFRAGA WHERE MID = "+MID);
            }
            catch(InfException e){
-               JOptionPane.showMessageDialog(null, "Vi får aldrig exceptions");
+               JOptionPane.showMessageDialog(null, e.getMessage());
            }
     }//GEN-LAST:event_orgKnappActionPerformed
 

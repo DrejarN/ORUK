@@ -92,6 +92,11 @@ public class LoggaIn extends javax.swing.JFrame {
                 txtFldIpAdressFocusGained(evt);
             }
         });
+        txtFldIpAdress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFldIpAdressActionPerformed(evt);
+            }
+        });
 
         btnLoggaInOnline.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnLoggaInOnline.setText("Ansult till IP");
@@ -150,7 +155,7 @@ public class LoggaIn extends javax.swing.JFrame {
                 .addComponent(txtFldIpAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(btnLoggaInOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(btnAndraInloggsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -163,7 +168,9 @@ public class LoggaIn extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,9 +181,7 @@ public class LoggaIn extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -261,6 +266,10 @@ public class LoggaIn extends javax.swing.JFrame {
         new LoggaIn(db).setVisible(true);
         
     }//GEN-LAST:event_btnLoggaInOnlineActionPerformed
+
+    private void txtFldIpAdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldIpAdressActionPerformed
+        btnLoggaInOnline.doClick();
+    }//GEN-LAST:event_txtFldIpAdressActionPerformed
 
     //Metod som körs i konstruktorn för att fylla JComboBoxen med användarnamn
     private void fyllCmbxAnvandarnamn() {

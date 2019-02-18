@@ -38,7 +38,8 @@ public class MinProfil extends javax.swing.JPanel {
         box = new Box(BoxLayout.Y_AXIS);
         jScrollPane1.setViewportView(box);
         skapaArrayList();
-
+        fyllCmbxAnvandare();
+        ComboBoxAutoComplete.enable(cmbxAnvandare);
     }
 
     private void setProfil() throws SQLException, IOException, ClassNotFoundException {
@@ -57,41 +58,39 @@ public class MinProfil extends javax.swing.JPanel {
             String query5 = db.fetchSingle(enStrang5);
             String enStrang6 = "SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID=" + anvandare2 + ")";
             db.retriveImage(enStrang6);
-            
+
             String bildnamn = "/bild0.jpg";
-            
+
             File tempFile = new File("");
             String sok = tempFile.getAbsolutePath();
-            String absoluta = sok+bildnamn;
-            
+            String absoluta = sok + bildnamn;
+
             ImageIcon icon = new ImageIcon(absoluta);
             Image img = icon.getImage().getScaledInstance(187, 187, 187);
             ImageIcon image = new ImageIcon(img);
-            
+
             lblFornamn.setText(query1);
             lblEfternamn.setText(query2);
             lblEPost.setText(query4);
             lblTelefon.setText(query3);
             lblTitel.setText(query5);
             bild.setIcon(image);
-            
+
             /**
-                byte[] imageBytes;
-                Image image2;
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://" + "10.22.5.86" + ":3306/ORUKDB?zeroDateTimeBehavior=convertToNull", "oruk", "masterkey");
-                PreparedStatement ps = con.prepareStatement("SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID=" + anvandare2 + ")"); 
-                ResultSet rs = ps.executeQuery();
-                while(rs.next())
-                {   
-                   imageBytes = rs.getBytes("BILDEN");   
-                    image2 = getToolkit().createImage(imageBytes);
-                    ImageIcon icon2 = new ImageIcon(image2);     
-                    bild.setIcon(icon2);  
-                }**/
-                }
-            catch (Exception e) {
-            }
+             * byte[] imageBytes; Image image2;
+             * Class.forName("com.mysql.jdbc.Driver"); Connection con =
+             * DriverManager.getConnection("jdbc:mysql://" + "10.22.5.86" +
+             * ":3306/ORUKDB?zeroDateTimeBehavior=convertToNull", "oruk",
+             * "masterkey"); PreparedStatement ps = con.prepareStatement("SELECT
+             * BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE
+             * AID=" + anvandare2 + ")"); ResultSet rs = ps.executeQuery();
+             * while(rs.next()) { imageBytes = rs.getBytes("BILDEN"); image2 =
+             * getToolkit().createImage(imageBytes); ImageIcon icon2 = new
+             * ImageIcon(image2); bild.setIcon(icon2);  
+                }*
+             */
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -117,7 +116,9 @@ public class MinProfil extends javax.swing.JPanel {
         lblTelefon = new javax.swing.JLabel();
         lblTitel = new javax.swing.JLabel();
         bild = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cmbxAnvandare = new javax.swing.JComboBox<>();
+        btnVisaProfil = new javax.swing.JButton();
         lblKommandeMoten = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
 
@@ -148,10 +149,24 @@ public class MinProfil extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel12.setText("Efternamn:");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        lblFornamn.setText("Fornamn");
+
+        lblEfternamn.setText("Efternamn");
+
+        lblEPost.setText("E-post");
+
+        lblTelefon.setText("telenr");
+
+        lblTitel.setText("titel");
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
+        jLabel1.setText("Visa annan profil:");
+
+        btnVisaProfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnVisaProfil.setText("Visa profil");
+        btnVisaProfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVisaProfilActionPerformed(evt);
             }
         });
 
@@ -160,65 +175,78 @@ public class MinProfil extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(bild)
-                .addGap(74, 74, 74)
+                .addContainerGap()
+                .addComponent(bild, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel3))
-                        .addGap(61, 61, 61)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitel)
-                            .addComponent(lblTelefon)
-                            .addComponent(lblEPost)
+                            .addComponent(lblFornamn)
                             .addComponent(lblEfternamn)
-                            .addComponent(lblFornamn))))
+                            .addComponent(lblTelefon)
+                            .addComponent(lblTitel)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEPost)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnInstallningar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton1)))
-                .addGap(53, 53, 53))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnInstallningar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVisaProfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbxAnvandare, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(27, 27, 27))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblFornamn))
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(lblEfternamn))
-                        .addGap(1, 1, 1)
-                        .addComponent(bild)
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(lblEPost))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(lblTelefon))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(lblTitel)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(btnInstallningar)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                        .addComponent(cmbxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVisaProfil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnInstallningar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bild, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblFornamn)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(lblEfternamn))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(lblTitel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(lblTelefon))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(lblEPost))
+                                .addGap(52, 52, 52)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         lblKommandeMoten.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
@@ -242,10 +270,11 @@ public class MinProfil extends javax.swing.JPanel {
             .addGroup(panelMinProfilLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblKommandeMoten)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -267,27 +296,70 @@ public class MinProfil extends javax.swing.JPanel {
         installningar.setVisible(true);
     }//GEN-LAST:event_btnInstallningarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //db.retriveImage();
-        //System.out.println("retrivä imädg klickad");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaProfilActionPerformed
+        try {
+            String anvandare = cmbxAnvandare.getSelectedItem().toString();
+            ArrayList listan = db.fetchColumn("SELECT AID FROM ANVANDARE");
+
+            for (Object anvandarid : listan) {
+                String fornamn = db.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE AID=" + anvandarid);
+                String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE AID=" + anvandarid);
+
+                if (anvandare.contains(fornamn) && anvandare.contains(efternamn)) {
+                    String enStrang1 = "SELECT FORNAMN FROM ANVANDARE WHERE AID='" + anvandarid + "'";
+                    String query1 = db.fetchSingle(enStrang1);
+                    String enStrang2 = "SELECT EFTERNAMN FROM ANVANDARE WHERE AID='" + anvandarid + "'";
+                    String query2 = db.fetchSingle(enStrang2);
+                    String enStrang3 = "SELECT TELEFONNUMMER FROM ANVANDARE WHERE AID='" + anvandarid + "'";
+                    String query3 = db.fetchSingle(enStrang3);
+                    String enStrang4 = "SELECT MAILADRESS FROM ANVANDARE WHERE AID='" + anvandarid + "'";
+                    String query4 = db.fetchSingle(enStrang4);
+                    String enStrang5 = "SELECT TITEL FROM ANVANDARE WHERE AID='" + anvandarid + "'";
+                    String query5 = db.fetchSingle(enStrang5);
+                    String enStrang6 = "SELECT BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE AID=" + anvandarid + ")";
+                    db.retriveImage(enStrang6);
+
+                    String bildnamn = "/bild0.jpg";
+
+                    File tempFile = new File("");
+                    String sok = tempFile.getAbsolutePath();
+                    String absoluta = sok + bildnamn;
+
+                    ImageIcon icon = new ImageIcon(absoluta);
+                    Image img = icon.getImage().getScaledInstance(187, 187, 187);
+                    ImageIcon image = new ImageIcon(img);
+
+                    lblFornamn.setText(query1);
+                    lblEfternamn.setText(query2);
+                    lblEPost.setText(query4);
+                    lblTelefon.setText(query3);
+                    lblTitel.setText(query5);
+                    bild.setIcon(image);
+                    
+                    box.removeAll();
+                    JPanel importeradPanel = new Aktivitetsinlagg("Du har inte behörighet att se denna kalender");
+                    box.add(importeradPanel);
+                    box.revalidate();
+                }
+            }          
+        } catch (InfException ex) {
+        }
+    }//GEN-LAST:event_btnVisaProfilActionPerformed
 
     private void skapaArrayList() {
         try {
             String anvandareid = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + Huvudfonster.getAnvandarnamn() + "'");
 
             ArrayList listan = db.fetchColumn("SELECT MOTE.MID FROM MOTE\n"
-                                    + "JOIN MOTE_DELTAGANDE ON MOTE.MID=MOTE_DELTAGANDE.MID\n"
-                                    + "WHERE AID='" + anvandareid + "'");
-            
+                    + "JOIN MOTE_DELTAGANDE ON MOTE.MID=MOTE_DELTAGANDE.MID\n"
+                    + "WHERE AID='" + anvandareid + "'");
+
             if (listan == null) {
                 JPanel importeradPanel = new Aktivitetsinlagg("Du har inga inbokade möten");
                 box.add(importeradPanel);
                 box.revalidate();
-               
-                
-            } 
-            else {
+
+            } else {
                 for (Object mote : listan) {
                     String rubrik = db.fetchSingle("SELECT RUBRIK FROM MOTE WHERE MID='" + mote + "'");
                     String datum = db.fetchSingle("SELECT DATUM FROM MOTE WHERE MID='" + mote + "'");
@@ -307,11 +379,36 @@ public class MinProfil extends javax.swing.JPanel {
         }
     }
 
+    private void fyllCmbxAnvandare() {
+        try {
+            ArrayList listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");
+            ArrayList<String> allaAnvandare = new ArrayList<>();
+
+            for (Object mailadress : listan) {
+                String fornamn = db.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + mailadress + "'");
+                String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE MAILADRESS='" + mailadress + "'");
+                String anvandare = fornamn + " " + efternamn;
+                allaAnvandare.add(anvandare);
+            }
+            allaAnvandare.sort(String::compareToIgnoreCase);
+
+            for (String namn : allaAnvandare) {
+                cmbxAnvandare.addItem(namn);
+            }
+            cmbxAnvandare.setSelectedIndex(-1);
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());
+        }
+    }
+
     private ArrayList<JPanel> jpListan;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bild;
     private javax.swing.JButton btnInstallningar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVisaProfil;
+    private javax.swing.JComboBox<String> cmbxAnvandare;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

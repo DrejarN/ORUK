@@ -276,7 +276,7 @@ public class MittFlode extends javax.swing.JPanel {
             box.removeAll();
 
             if (cmbxTaggar.getSelectedItem().equals("Allt")) {
-                ArrayList listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=3");
+                ArrayList listan = db.fetchColumn("SELECT IID, DATUM, TID FROM INLAGG WHERE KATEGORI=3 ORDER BY DATE(DATUM) DESC, TIME(TID) DESC");
 
                 for (Object inlagg : listan) {
 
@@ -288,9 +288,10 @@ public class MittFlode extends javax.swing.JPanel {
             } else {
                 String taggnamn = cmbxTaggar.getSelectedItem().toString();
                 String taggid = db.fetchSingle("SELECT TID FROM TAGG WHERE NAMN='" + taggnamn + "'");
-                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n"
+                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID, INLAGG.DATUM, INLAGG.TID FROM INLAGG \n"
                         + "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n"
-                        + "WHERE INLAGG.KATEGORI='3'AND INLAGG_TAGG.TID='" + taggid + "'");
+                        + "WHERE INLAGG.KATEGORI='3'AND INLAGG_TAGG.TID='" + taggid + "'"
+                                + "ORDER BY DATE(DATUM) DESC, TIME(INLAGG.TID) DESC;");
 
                 for (Object inlagg : listan2) {
 

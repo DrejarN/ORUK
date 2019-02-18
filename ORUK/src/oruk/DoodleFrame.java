@@ -11,6 +11,7 @@ public class DoodleFrame extends javax.swing.JFrame {
     private String motesnamnet;
     private static OrukDB db;
     private ArrayList<String> lista1;
+    private Email email;
     
     public DoodleFrame(OrukDB db, String namnet) {
         initComponents();
@@ -24,11 +25,13 @@ public class DoodleFrame extends javax.swing.JFrame {
         orgKnapp.setVisible(false);
         visaKnappOmOrg();
         antalSomKan();
+        this.email = new Email(db);
     }
 
     private void fyllDatumTid(){
         try{
            String MID = db.fetchSingle("SELECT MID FROM MOTE WHERE RUBRIK = '"+motesnamnet+"'");
+            System.out.println(MID);
            lista1 = db.fetchColumn("SELECT DATUM FROM MOTE_FORFRAGA WHERE MID = "+MID);
            for(int i = 0; i < lista1.size(); i++){
               String datum = lista1.get(i).substring(0,10);
@@ -439,7 +442,6 @@ public class DoodleFrame extends javax.swing.JFrame {
               for(int i = 0; i < aid.size(); i++){
               db.insert("INSERT INTO MOTE_DELTAGANDE VALUES ("+aid.get(i)+", "+ MID+")");
               }
-              JOptionPane.showMessageDialog(null, "Yes");
           }
            catch(InfException e){
                JOptionPane.showMessageDialog(null, e.getMessage());
@@ -449,7 +451,27 @@ public class DoodleFrame extends javax.swing.JFrame {
                db.delete("DELETE FROM MOTE_FORFRAGA WHERE MID = "+MID);
            }
            catch(InfException e){
-               JOptionPane.showMessageDialog(null, "Vi får aldrig exceptions");
+               JOptionPane.showMessageDialog(null, e.getMessage());
+           }
+          
+           ArrayList<String> emaill = null;
+           ArrayList<String> AIDs = null;
+           try{
+               AIDs = db.fetchColumn("SELECT AID FROM ANVANDARE_NOTIS");
+               for(int i = 0; i < AIDs.size(); i++){
+                   String finns = db.fetchSingle("SELECT AID FROM ANVANDARE_NOTIS WHERE NID = 3 AND AID ="+ AIDs.get(i));
+                   if(finns != null){
+                       emaill = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE JOIN MOTE_DELTAGANDE ON ANVANDARE.AID = MOTE_DELTAGANDE.AID AND MID =" +MID+ " AND ANVANDARE.AID = "+AIDs.get(i));
+                      
+                       for(int x = 0; x < emaill.size(); x++){
+                           System.out.println(emaill.get(x));
+                           email.sendMailNotis(3, emaill.get(x));
+                       }
+                   }
+               }
+           }
+           catch(InfException e){
+               JOptionPane.showMessageDialog(null, "Något gick fel");
            }
     }//GEN-LAST:event_orgKnappActionPerformed
 

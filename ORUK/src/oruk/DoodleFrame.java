@@ -465,7 +465,7 @@ public class DoodleFrame extends javax.swing.JFrame {
                       
                        for(int x = 0; x < emaill.size(); x++){
                            System.out.println(emaill.get(x));
-                           email.sendMailNotis(3, emaill.get(x));
+                           email.sendMailNotisMote(3, emaill.get(x));
                        }
                    }
                }

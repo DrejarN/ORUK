@@ -79,7 +79,7 @@ public void skickaMail() {
     
 //Används som validering på metoder i andra klasser som triggar en notis.
 //Ange NID på den notis du vill ska triggas i anropsparametern.
-public void sendMailNotis(Integer notisNummer) {
+public void sendMailNotis(Integer notisNummer, String mailadressen) {
     String AID = "";
     
     //AID används ej atm.
@@ -170,7 +170,7 @@ public void sendMailNotis(Integer notisNummer) {
             String host = "smtp.gmail.com";
             String user = "orukadm1n@gmail.com";
             String pass = "Adm1n123";
-            String to = mailadress;
+            String to = mailadressen;
             String from = "orukadm1n@gmail.com";
             String subject = "Notis från ORUK (går ej att svara på)";
             String messageText = "Du har blivit inbjuden till ett möte. \n\nDet här meddelandet är skickat från ORUK då du har valt att få e-post när någon bjuder in dig till ett möte. \nÖnskar du ändra dina notisinställningar gör du det i programmet.";
@@ -279,8 +279,5 @@ public void sendMailNotis(Integer notisNummer) {
             System.out.println(ex);
         }
     } 
-}
-
-    
-    
+  }
 }

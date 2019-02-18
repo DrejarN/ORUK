@@ -11,6 +11,7 @@ public class DoodleFrame extends javax.swing.JFrame {
     private String motesnamnet;
     private static OrukDB db;
     private ArrayList<String> lista1;
+    private Email email;
     
     public DoodleFrame(OrukDB db, String namnet) {
         initComponents();
@@ -24,6 +25,7 @@ public class DoodleFrame extends javax.swing.JFrame {
         orgKnapp.setVisible(false);
         visaKnappOmOrg();
         antalSomKan();
+        this.email = new Email(db);
     }
 
     private void fyllDatumTid(){
@@ -450,6 +452,26 @@ public class DoodleFrame extends javax.swing.JFrame {
            }
            catch(InfException e){
                JOptionPane.showMessageDialog(null, e.getMessage());
+           }
+          
+           ArrayList<String> emaill = null;
+           ArrayList<String> AIDs = null;
+           try{
+               AIDs = db.fetchColumn("SELECT AID FROM ANVANDARE_NOTIS");
+               for(int i = 0; i < AIDs.size(); i++){
+                   String finns = db.fetchSingle("SELECT AID FROM ANVANDARE_NOTIS WHERE NID = 3 AND AID ="+ AIDs.get(i));
+                   if(finns != null){
+                       emaill = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE JOIN MOTE_DELTAGANDE ON ANVANDARE.AID = MOTE_DELTAGANDE.AID AND MID =" +MID+ " AND ANVANDARE.AID = "+AIDs.get(i));
+                      
+                       for(int x = 0; x < emaill.size(); x++){
+                           System.out.println(emaill.get(x));
+                           email.sendMailNotis(3, emaill.get(x));
+                       }
+                   }
+               }
+           }
+           catch(InfException e){
+               JOptionPane.showMessageDialog(null, "Något gick fel");
            }
     }//GEN-LAST:event_orgKnappActionPerformed
 

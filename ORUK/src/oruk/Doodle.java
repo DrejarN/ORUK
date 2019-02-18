@@ -315,7 +315,7 @@ public class Doodle extends javax.swing.JPanel {
             new Inbjudningar(db, MID, etttid, tvatid, tretid, this.formatdatum1, this.formatdatum2, this.formatdatum3, this.motesID).setVisible(true);
         }
         catch(InfException e){
-
+            JOptionPane.showMessageDialog(null, "Något gick fel");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

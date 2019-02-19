@@ -186,6 +186,8 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     
     String AID = "";
     String badaboom = "";
+    String finnsVarde1 = null;
+    String finnsVarde2 = null;
     
     try {
         String mailadress = Huvudfonster.getAnvandarnamn(); //Hämta userhelvetet
@@ -252,11 +254,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         badaboom = "NEJ";
     }
         try {
-            String finnsVarde = db.fetchSingle("SELECT EMAIL FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
-            if(finnsVarde == null) {
-                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, EMAIL) VALUES ("+AID+", "+badaboom+") ");
+            finnsVarde1 = db.fetchSingle("SELECT EMAIL FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
+            if(finnsVarde1 == null) {
+                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, EMAIL) VALUES ("+AID+", '"+badaboom+"') ");
             } else {
-                db.update("UPDATE NOTIS_EMAIL_SMS SET EMAIL = "+badaboom+" WHERE AID = "+AID+" "); 
+                db.update("UPDATE NOTIS_EMAIL_SMS SET EMAIL = '"+badaboom+"' WHERE AID = "+AID+" "); 
             }   
         } catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Error vid uppdatering av Email-notiser");
@@ -268,11 +270,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         badaboom = "NEJ";
     }
         try {
-            String finnsVarde = db.fetchSingle("SELECT SMS FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
-            if(finnsVarde == null) {
-                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, SMS) VALUES ("+AID+", "+badaboom+") ");
+            finnsVarde2 = db.fetchSingle("SELECT SMS FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
+            if(finnsVarde2 == null) {
+                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, SMS) VALUES ("+AID+", '"+badaboom+"') ");
             } else {
-                db.update("UPDATE NOTIS_EMAIL_SMS SET SMS = "+badaboom+" WHERE AID = "+AID+" "); 
+                db.update("UPDATE NOTIS_EMAIL_SMS SET SMS = '"+badaboom+"' WHERE AID = "+AID+" "); 
             }   
         } catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Error vid uppdatering av SMS-notiser");
@@ -280,7 +282,7 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     
     if(!jCheckBox1.isSelected() && !jCheckBox3.isSelected() && !jCheckBox6.isSelected() && jCheckBox9.isSelected()) {
         try {
-            stangAvNotiser();
+            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = "+AID+" ");
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Kontrollera din inmatning.");
         }
@@ -289,19 +291,6 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     JOptionPane.showMessageDialog(null, "Dina ändringar har sparats.");
     }//GEN-LAST:event_btnSparaActionPerformed
 
-    private void stangAvNotiser() { //Tar bort alla notiser för en användare
-        String AID = "";
-        
-        if(jCheckBox9.isSelected()) {
-            try {
-                AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + Huvudfonster.getAnvandarnamn() + "' ");
-                db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = "+AID+" ");
-                JOptionPane.showMessageDialog(null, "Dina ändringar har sparats");
-            } catch(InfException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-        }
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

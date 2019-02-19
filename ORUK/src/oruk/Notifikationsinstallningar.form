@@ -45,9 +45,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCheckBox2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jCheckBox3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCheckBox4" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jCheckBox6" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -59,8 +57,8 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jCheckBox8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbSMS" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jCheckBox9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -87,25 +85,19 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbSMS" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCheckBox6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jCheckBox4" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jCheckBox9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jCheckBox9" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="80" max="32767" attributes="0"/>
                   <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -130,19 +122,9 @@
             <Property name="text" type="java.lang.String" value="Jag &#xf6;nskar f&#xe5; notifikationer:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Vid varje ny kommentar p&#xe5; ett inl&#xe4;gg jag f&#xf6;ljer"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vid ny m&#xf6;tesinbjudan"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Vid nytt meddelande"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox6">
@@ -158,12 +140,12 @@
             <Property name="text" type="java.lang.String" value="Jag &#xf6;nskar f&#xe5; notifikationer via:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox7">
+        <Component class="javax.swing.JCheckBox" name="cbEmail">
           <Properties>
             <Property name="text" type="java.lang.String" value="E-post"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox8">
+        <Component class="javax.swing.JCheckBox" name="cbSMS">
           <Properties>
             <Property name="text" type="java.lang.String" value="SMS"/>
           </Properties>

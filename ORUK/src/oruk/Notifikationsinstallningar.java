@@ -43,13 +43,11 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
-        jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox6 = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
+        cbEmail = new javax.swing.JCheckBox();
+        cbSMS = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jCheckBox9 = new javax.swing.JCheckBox();
         btnSpara = new javax.swing.JButton();
@@ -66,20 +64,16 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Jag önskar få notifikationer:");
 
-        jCheckBox2.setText("Vid varje ny kommentar på ett inlägg jag följer");
-
         jCheckBox3.setText("Vid ny mötesinbjudan");
-
-        jCheckBox4.setText("Vid nytt meddelande");
 
         jCheckBox6.setText("Vid nya inlägg från en blogg jag följer");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Jag önskar få notifikationer via:");
 
-        jCheckBox7.setText("E-post");
+        cbEmail.setText("E-post");
 
-        jCheckBox8.setText("SMS");
+        cbSMS.setText("SMS");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Stäng av alla notifikationer");
@@ -103,9 +97,7 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2)
                             .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox4)
                             .addComponent(jCheckBox6)
                             .addComponent(jLabel1))
                         .addGap(60, 60, 60)
@@ -115,8 +107,8 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                                 .addContainerGap(12, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox8)
-                                    .addComponent(jCheckBox7)
+                                    .addComponent(cbSMS)
+                                    .addComponent(cbEmail)
                                     .addComponent(jLabel3)
                                     .addComponent(jCheckBox9))
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -134,21 +126,17 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox7))
+                    .addComponent(cbEmail))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox8))
+                    .addComponent(cbSMS)
+                    .addComponent(jCheckBox6))
                 .addGap(18, 18, 18)
                 .addComponent(jCheckBox3)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jLabel3))
+                .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox9)
-                    .addComponent(jCheckBox6))
+                .addComponent(jCheckBox9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(btnSpara)
                 .addGap(23, 23, 23))
@@ -197,6 +185,7 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     //Skapa SQL frågor för alla notiser.
     
     String AID = "";
+    String badaboom = "";
     
     try {
         String mailadress = Huvudfonster.getAnvandarnamn(); //Hämta userhelvetet
@@ -223,23 +212,6 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         System.out.println("Något gick fel vid hanteringen av den första notisen i listan.");
     }
     
-    //NID#2, Jag vill ha notiser vi nya inlägg i informellabloggen
-    try {
-        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 2;  ");
-        System.out.println(query); 
-            if(query == null){
-                if(jCheckBox2.isSelected()) {
-                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 2); ");
-                }
-                    } else {
-                        if(!jCheckBox2.isSelected()) {
-                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 2; ");
-                        }
-                    }     
-    } catch(InfException ex) {
-        System.out.println("Något gick fel vid hanteringen av den andra notisen i listan.");
-    }
-    
     //NID#3, Jag vill ha notiser vid ny mötesinbjudan
     try {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 3;  ");
@@ -255,23 +227,6 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                     }     
     } catch(InfException ex) {
         System.out.println("Något gick fel vid hanteringen av den tredje notisen i listan.");
-    }
-    
-    //NID#4, Jag vill ha notiser vid nytt meddelande
-    try {
-        String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 4;  ");
-        System.out.println(query); 
-            if(query == null){
-                if(jCheckBox4.isSelected()) {
-                    db.insert("INSERT INTO ANVANDARE_NOTIS (AID, NID) VALUES (" + AID + ", 4); ");
-                }
-                    } else {
-                        if(!jCheckBox4.isSelected()) {
-                            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 4; ");
-                        }
-                    }     
-    } catch(InfException ex) {
-        System.out.println("Något gick fel vid hanteringen av den fjärde notisen i listan.");
     }
     
     //NID#6, Jag vill ha notiser vid nya inlägg från blogg jag följer
@@ -290,20 +245,72 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     } catch(InfException ex) {
         System.out.println("Något gick fel vid hanteringen av den sjätte notisen i listan.");
     }
+    
+    if(cbEmail.isSelected()) {
+        badaboom = "JA";
+    } else {
+        badaboom = "NEJ";
+    }
+        try {
+            String finnsVarde = db.fetchSingle("SELECT EMAIL FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
+            if(finnsVarde == null) {
+                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, EMAIL) VALUES ("+AID+", "+badaboom+") ");
+            } else {
+                db.update("UPDATE NOTIS_EMAIL_SMS SET EMAIL = "+badaboom+" WHERE AID = "+AID+" "); 
+            }   
+        } catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Error vid uppdatering av Email-notiser");
+        }
+        
+    if(cbSMS.isSelected()) {
+        badaboom = "JA";
+    } else {
+        badaboom = "NEJ";
+    }
+        try {
+            String finnsVarde = db.fetchSingle("SELECT SMS FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
+            if(finnsVarde == null) {
+                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, SMS) VALUES ("+AID+", "+badaboom+") ");
+            } else {
+                db.update("UPDATE NOTIS_EMAIL_SMS SET SMS = "+badaboom+" WHERE AID = "+AID+" "); 
+            }   
+        } catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Error vid uppdatering av SMS-notiser");
+        }
+    
+    if(!jCheckBox1.isSelected() && !jCheckBox3.isSelected() && !jCheckBox6.isSelected() && jCheckBox9.isSelected()) {
+        try {
+            stangAvNotiser();
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Kontrollera din inmatning.");
+        }
+    }
+    
     JOptionPane.showMessageDialog(null, "Dina ändringar har sparats.");
     }//GEN-LAST:event_btnSparaActionPerformed
 
+    private void stangAvNotiser() { //Tar bort alla notiser för en användare
+        String AID = "";
+        
+        if(jCheckBox9.isSelected()) {
+            try {
+                AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + Huvudfonster.getAnvandarnamn() + "' ");
+                db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = "+AID+" ");
+                JOptionPane.showMessageDialog(null, "Dina ändringar har sparats");
+            } catch(InfException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSpara;
+    private javax.swing.JCheckBox cbEmail;
+    private javax.swing.JCheckBox cbSMS;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -78,7 +78,7 @@ public class MittFlode extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         btnInformell.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnInformell.setText("Informell blogg");
+        btnInformell.setText("Informellt flöde");
         btnInformell.setPreferredSize(new java.awt.Dimension(230, 40));
         btnInformell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +96,7 @@ public class MittFlode extends javax.swing.JPanel {
         });
 
         btnFormell.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnFormell.setText("Formell blogg");
+        btnFormell.setText("Formellt flöde");
         btnFormell.setPreferredSize(new java.awt.Dimension(230, 40));
         btnFormell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +237,7 @@ public class MittFlode extends javax.swing.JPanel {
             box.removeAll();
 
             if (cmbxTaggar.getSelectedItem().equals("Allt")) {
-                ArrayList listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=4");
+                ArrayList listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=4 ORDER BY DATUM DESC, TID DESC");
 
                 for (Object inlagg : listan) {
 
@@ -277,7 +277,7 @@ public class MittFlode extends javax.swing.JPanel {
             box.removeAll();
 
             if (cmbxTaggar.getSelectedItem().equals("Allt")) {
-                ArrayList listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=3");
+                ArrayList listan = db.fetchColumn("SELECT IID FROM INLAGG WHERE KATEGORI=3 ORDER BY DATUM DESC, TID DESC");
 
                 for (Object inlagg : listan) {
 

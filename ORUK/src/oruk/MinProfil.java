@@ -352,7 +352,7 @@ public class MinProfil extends javax.swing.JPanel {
 
             ArrayList listan = db.fetchColumn("SELECT MOTE.MID FROM MOTE\n"
                     + "JOIN MOTE_DELTAGANDE ON MOTE.MID=MOTE_DELTAGANDE.MID\n"
-                    + "WHERE AID='" + anvandareid + "'");
+                    + "WHERE AID='" + anvandareid + "' ORDER BY DATUM ASC, TID ASC");
 
             if (listan == null) {
                 JPanel importeradPanel = new Aktivitetsinlagg("Du har inga inbokade möten");

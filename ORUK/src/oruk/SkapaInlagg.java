@@ -90,7 +90,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         lblKategori.setText("Kategori");
 
-        btnBifogaFil.setText("Bifoga fil");
+        btnBifogaFil.setText("Bifoga bild");
         btnBifogaFil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBifogaFilActionPerformed(evt);

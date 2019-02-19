@@ -47,7 +47,6 @@ public class Huvudfonster extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnMittFlode = new javax.swing.JButton();
         btnMinProfil = new javax.swing.JButton();
-        btnMeddelanden = new javax.swing.JButton();
         btnDoodle = new javax.swing.JButton();
         btnLoggaUt = new javax.swing.JButton();
         panelMain = new javax.swing.JPanel();
@@ -74,16 +73,8 @@ public class Huvudfonster extends javax.swing.JFrame {
             }
         });
 
-        btnMeddelanden.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnMeddelanden.setText("Meddelanden");
-        btnMeddelanden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMeddelandenActionPerformed(evt);
-            }
-        });
-
         btnDoodle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnDoodle.setText("Doodle");
+        btnDoodle.setText("Möteshanterare");
         btnDoodle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDoodleActionPerformed(evt);
@@ -143,9 +134,7 @@ public class Huvudfonster extends javax.swing.JFrame {
                         .addComponent(btnDoodle, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSkrivInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMeddelanden, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
                         .addComponent(btnLoggaUt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -153,14 +142,12 @@ public class Huvudfonster extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMeddelanden, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMinProfil)
-                        .addComponent(btnMittFlode)
-                        .addComponent(btnDoodle)
-                        .addComponent(btnSkrivInlagg)
-                        .addComponent(btnLoggaUt)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMinProfil)
+                    .addComponent(btnMittFlode)
+                    .addComponent(btnDoodle)
+                    .addComponent(btnSkrivInlagg)
+                    .addComponent(btnLoggaUt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -208,10 +195,6 @@ public class Huvudfonster extends javax.swing.JFrame {
         panelMain.add(importeradPanel);
         importeradPanel.setLocation(1, 1);
     }//GEN-LAST:event_btnMinProfilActionPerformed
-
-    private void btnMeddelandenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeddelandenActionPerformed
-
-    }//GEN-LAST:event_btnMeddelandenActionPerformed
 
     public static String getAnvandarnamn() {
         return anvandarnamn;
@@ -278,7 +261,6 @@ public class Huvudfonster extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoodle;
     private javax.swing.JButton btnLoggaUt;
-    private javax.swing.JButton btnMeddelanden;
     private javax.swing.JButton btnMinProfil;
     private javax.swing.JButton btnMittFlode;
     private javax.swing.JButton btnSkrivInlagg;

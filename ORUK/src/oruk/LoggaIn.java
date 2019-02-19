@@ -99,7 +99,7 @@ public class LoggaIn extends javax.swing.JFrame {
         });
 
         btnLoggaInOnline.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnLoggaInOnline.setText("Ansult till IP");
+        btnLoggaInOnline.setText("Anslut till IP");
         btnLoggaInOnline.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoggaInOnlineActionPerformed(evt);

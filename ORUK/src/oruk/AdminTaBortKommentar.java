@@ -62,7 +62,7 @@ public class AdminTaBortKommentar extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         btnTaBort = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panelForskning.setBackground(new java.awt.Color(255, 255, 255));
 

@@ -49,12 +49,12 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         cbEmail = new javax.swing.JCheckBox();
         cbSMS = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox9 = new javax.swing.JCheckBox();
         btnSpara = new javax.swing.JButton();
+        taBortNotsier = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jCheckBox1.setText("Vid varje ny kommentar på ett inlägg jag skrivit");
+        jCheckBox1.setText("Vid nya inlägg i det formella flödet");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
@@ -66,24 +66,34 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
 
         jCheckBox3.setText("Vid ny mötesinbjudan");
 
-        jCheckBox6.setText("Vid nya inlägg från en blogg jag följer");
+        jCheckBox6.setText("Vid nya inlägg i det informella flödet");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Jag önskar få notifikationer via:");
 
         cbEmail.setText("E-post");
+        cbEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEmailActionPerformed(evt);
+            }
+        });
 
         cbSMS.setText("SMS");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Stäng av alla notifikationer");
 
-        jCheckBox9.setText("Ja");
-
         btnSpara.setText("Spara ändringar");
         btnSpara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSparaActionPerformed(evt);
+            }
+        });
+
+        taBortNotsier.setText("OK");
+        taBortNotsier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taBortNotsierActionPerformed(evt);
             }
         });
 
@@ -110,7 +120,7 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                                     .addComponent(cbSMS)
                                     .addComponent(cbEmail)
                                     .addComponent(jLabel3)
-                                    .addComponent(jCheckBox9))
+                                    .addComponent(taBortNotsier))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSpara)
@@ -135,9 +145,9 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                 .addComponent(jCheckBox3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBox9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(taBortNotsier)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(btnSpara)
                 .addGap(23, 23, 23))
         );
@@ -185,20 +195,18 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     //Skapa SQL frågor för alla notiser.
     
     String AID = "";
-    String badaboom1 = "";
-    String badaboom2 = "";
-    String finnsVarde1 = null;
-    String finnsVarde2 = null;
     
     try {
         String mailadress = Huvudfonster.getAnvandarnamn(); //Hämta userhelvetet
+        System.out.println(mailadress);
         AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + mailadress + "' ");
+        System.out.println(AID);
     
     } catch(InfException ex) {
         System.out.println("Kunde ej hitta AID");
     }
     
-    //NID#1, Jag vill ha notiser vid nya mötesinbjudningar
+    //NID#1, Jag vill ha notiser vid nya inlägg i det formella flödet
     try {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 1;  ");
         System.out.println(query); 
@@ -215,7 +223,7 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         System.out.println("Något gick fel vid hanteringen av den första notisen i listan.");
     }
     
-    //NID#3, Jag vill ha notiser vid ny mötesinbjudan
+    //NID#3, Jag vill ha notiser vid nya mötesinbjudningar
     try {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 3;  ");
         System.out.println(query); 
@@ -232,7 +240,7 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
         System.out.println("Något gick fel vid hanteringen av den tredje notisen i listan.");
     }
     
-    //NID#6, Jag vill ha notiser vid nya inlägg från blogg jag följer
+    //NID#6, Jag vill ha notiser vid nya inlägg i det informella flödet
     try {
         String query = db.fetchSingle("SELECT NID FROM ANVANDARE_NOTIS WHERE AID = " + AID + " AND NID = 6;  ");
         System.out.println(query); 
@@ -246,52 +254,74 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
                         }
                     }     
     } catch(InfException ex) {
+        JOptionPane.showMessageDialog(null, ex.getMessage());
         System.out.println("Något gick fel vid hanteringen av den sjätte notisen i listan.");
     }
     
     if(cbEmail.isSelected()) {
-        badaboom1 = "JA";
+        updateEmail("JA");
     } else {
-        badaboom1 = "NEJ";
+        updateEmail("NEJ");
     }
-        try {
-            finnsVarde1 = db.fetchSingle("SELECT EMAIL FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
-            if(finnsVarde1 == null) {
-                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, EMAIL) VALUES ("+AID+", '"+badaboom1+"') ");
-            } else {
-                db.update("UPDATE NOTIS_EMAIL_SMS SET EMAIL = '"+badaboom1+"' WHERE AID = "+AID+" "); 
-            }   
-        } catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Error vid uppdatering av Email-notiser");
-        }
-        
-    if(cbSMS.isSelected()) {
-        badaboom2 = "JA";
-    } else {
-        badaboom2 = "NEJ";
-    }
-        try {
-            finnsVarde2 = db.fetchSingle("SELECT SMS FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
-            if(finnsVarde2 == null) {
-                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, SMS) VALUES ("+AID+", '"+badaboom2+"') ");
-            } else {
-                db.update("UPDATE NOTIS_EMAIL_SMS SET SMS = '"+badaboom2+"' WHERE AID = "+AID+" "); 
-            }   
-        } catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Error vid uppdatering av SMS-notiser");
-        }
     
-    if(!jCheckBox1.isSelected() && !jCheckBox3.isSelected() && !jCheckBox6.isSelected() && jCheckBox9.isSelected()) {
-        try {
-            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = "+AID+" ");
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Kontrollera din inmatning.");
-        }
+    if(cbSMS.isSelected()) {
+        updateSMS("JA");
+    } else {
+        updateSMS("NEJ");
     }
     
     JOptionPane.showMessageDialog(null, "Dina ändringar har sparats.");
     }//GEN-LAST:event_btnSparaActionPerformed
 
+    private void cbEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEmailActionPerformed
+
+    private void taBortNotsierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortNotsierActionPerformed
+        
+        try {
+            String AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '"+Huvudfonster.getAnvandarnamn()+"' ");
+            db.delete("DELETE FROM ANVANDARE_NOTIS WHERE AID = "+AID+" ");
+            JOptionPane.showMessageDialog(null, "Dina ändringar har sparats.");
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Kontrollera din inmatning.");
+        }
+    }//GEN-LAST:event_taBortNotsierActionPerformed
+
+    
+    private void updateEmail(String bamboozle) {
+        String AID = "";
+        String arDenNull = null;
+        
+        
+        try {
+            AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '"+Huvudfonster.getAnvandarnamn()+"' ");
+            System.out.println(AID);
+            arDenNull = db.fetchSingle("SELECT AID FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
+            System.out.println(arDenNull);
+            
+            if(arDenNull == null ) {
+                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, EMAIL) VALUES ("+AID+", '"+bamboozle+"') ");
+            } else {
+                db.update("UPDATE NOTIS_EMAIL_SMS SET EMAIL = '"+bamboozle+"' WHERE AID = "+AID+" "); 
+            }
+                 
+        } catch(InfException e ) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void updateSMS(String bamboozle2) { //Kommer efter email
+        String AID = "";
+        
+        try {
+            AID = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '"+Huvudfonster.getAnvandarnamn()+"' ");
+            db.update("UPDATE NOTIS_EMAIL_SMS SET SMS = '"+bamboozle2+"' WHERE AID = "+AID+" ");
+            
+        } catch(InfException e ) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -301,10 +331,10 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton taBortNotsier;
     // End of variables declaration//GEN-END:variables
 }

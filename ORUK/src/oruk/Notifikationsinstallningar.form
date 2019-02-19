@@ -60,7 +60,7 @@
                                       <Component id="cbSMS" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="cbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="taBortNotsier" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -96,9 +96,9 @@
                   <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jCheckBox9" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="80" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="taBortNotsier" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="78" max="32767" attributes="0"/>
                   <Component id="btnSpara" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
@@ -108,7 +108,7 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="jCheckBox1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Vid varje ny kommentar p&#xe5; ett inl&#xe4;gg jag skrivit"/>
+            <Property name="text" type="java.lang.String" value="Vid nya inl&#xe4;gg i det formella fl&#xf6;det"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
@@ -129,7 +129,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Vid nya inl&#xe4;gg fr&#xe5;n en blogg jag f&#xf6;ljer"/>
+            <Property name="text" type="java.lang.String" value="Vid nya inl&#xe4;gg i det informella fl&#xf6;det"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -144,6 +144,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="E-post"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEmailActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="cbSMS">
           <Properties>
@@ -158,17 +161,20 @@
             <Property name="text" type="java.lang.String" value="St&#xe4;ng av alla notifikationer"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ja"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="btnSpara">
           <Properties>
             <Property name="text" type="java.lang.String" value="Spara &#xe4;ndringar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSparaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="taBortNotsier">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="OK"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="taBortNotsierActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

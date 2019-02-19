@@ -231,8 +231,8 @@ public class MittFlode extends javax.swing.JPanel {
     private void btnInformellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformellActionPerformed
         try {
             btnForskning.setSelected(false);
-            btnFormell.setSelected(false);
-            btnInformell.setSelected(true);
+            btnFormell.setSelected(true);
+            btnInformell.setSelected(false);
             jScrollPane1.repaint();
             box.removeAll();
 
@@ -249,9 +249,10 @@ public class MittFlode extends javax.swing.JPanel {
             } else {
                 String taggnamn = cmbxTaggar.getSelectedItem().toString();
                 String taggid = db.fetchSingle("SELECT TID FROM TAGG WHERE NAMN='" + taggnamn + "'");
-                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID FROM INLAGG \n"
+                ArrayList listan2 = db.fetchColumn("SELECT INLAGG.IID, INLAGG.DATUM, INLAGG.TID FROM INLAGG \n"
                         + "JOIN INLAGG_TAGG ON INLAGG_TAGG.IID=INLAGG.IID \n"
                         + "WHERE INLAGG.KATEGORI='4'AND INLAGG_TAGG.TID='" + taggid + "'");
+                                
 
                 for (Object inlagg : listan2) {
 

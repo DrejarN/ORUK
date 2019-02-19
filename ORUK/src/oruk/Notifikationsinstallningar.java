@@ -185,7 +185,8 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     //Skapa SQL frågor för alla notiser.
     
     String AID = "";
-    String badaboom = "";
+    String badaboom1 = "";
+    String badaboom2 = "";
     String finnsVarde1 = null;
     String finnsVarde2 = null;
     
@@ -249,32 +250,32 @@ public class Notifikationsinstallningar extends javax.swing.JPanel {
     }
     
     if(cbEmail.isSelected()) {
-        badaboom = "JA";
+        badaboom1 = "JA";
     } else {
-        badaboom = "NEJ";
+        badaboom1 = "NEJ";
     }
         try {
             finnsVarde1 = db.fetchSingle("SELECT EMAIL FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
             if(finnsVarde1 == null) {
-                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, EMAIL) VALUES ("+AID+", '"+badaboom+"') ");
+                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, EMAIL) VALUES ("+AID+", '"+badaboom1+"') ");
             } else {
-                db.update("UPDATE NOTIS_EMAIL_SMS SET EMAIL = '"+badaboom+"' WHERE AID = "+AID+" "); 
+                db.update("UPDATE NOTIS_EMAIL_SMS SET EMAIL = '"+badaboom1+"' WHERE AID = "+AID+" "); 
             }   
         } catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Error vid uppdatering av Email-notiser");
         }
         
     if(cbSMS.isSelected()) {
-        badaboom = "JA";
+        badaboom2 = "JA";
     } else {
-        badaboom = "NEJ";
+        badaboom2 = "NEJ";
     }
         try {
             finnsVarde2 = db.fetchSingle("SELECT SMS FROM NOTIS_EMAIL_SMS WHERE AID = "+AID+" ");
             if(finnsVarde2 == null) {
-                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, SMS) VALUES ("+AID+", '"+badaboom+"') ");
+                db.insert("INSERT INTO NOTIS_EMAIL_SMS (AID, SMS) VALUES ("+AID+", '"+badaboom2+"') ");
             } else {
-                db.update("UPDATE NOTIS_EMAIL_SMS SET SMS = '"+badaboom+"' WHERE AID = "+AID+" "); 
+                db.update("UPDATE NOTIS_EMAIL_SMS SET SMS = '"+badaboom2+"' WHERE AID = "+AID+" "); 
             }   
         } catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Error vid uppdatering av SMS-notiser");

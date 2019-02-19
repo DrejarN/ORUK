@@ -6,6 +6,8 @@
 package oruk;
 
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -238,8 +240,13 @@ public class Huvudfonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     private void btnSkrivInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkrivInlaggActionPerformed
-        SkapaInlagg skapaInlagg = new SkapaInlagg(db);
-        skapaInlagg.setVisible(true);
+        try {
+            String id = db.getAutoIncrement("INLAGG", "IID");
+            SkapaInlagg skapaInlagg = new SkapaInlagg(db, id);
+            skapaInlagg.setVisible(true);
+        } catch (InfException ex) {
+            Logger.getLogger(Huvudfonster.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnSkrivInlaggActionPerformed
 

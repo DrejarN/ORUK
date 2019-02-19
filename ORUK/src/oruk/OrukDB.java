@@ -1,47 +1,22 @@
 package oruk;
 
-import static com.sun.javafx.tk.Toolkit.getToolkit;
-import java.awt.Image;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import oru.inf.InfException;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 public class OrukDB {
@@ -131,6 +106,12 @@ public class OrukDB {
         } catch (SQLException e) {
             throw new InfException("Couldn't open Firebird database, check your path. Make sure to use .FDB in the end");
         }
+    }
+    
+    public String getIP()
+    {
+        return ipAdress;
+    
     }
 
     /**
@@ -246,6 +227,30 @@ public class OrukDB {
         }
         delete("DELETE FROM PROFIL_BILD WHERE AID=" + aid);
         insert("INSERT INTO PROFIL_BILD VALUES(" + aid + "," + bid2 + ")");
+    }
+    
+    public void insertBlogImage(File file, String iid) throws InfException {
+        String bid = getAutoIncrement("BILD", "BID");
+        int bid2 = Integer.parseInt(bid);
+        try {
+            checkConnection();
+            Statement st = con.createStatement();
+            FileInputStream fin = new FileInputStream(file);
+
+            PreparedStatement pre = con.prepareStatement("INSERT INTO BILD VALUES(?, ?)");
+
+            pre.setInt(1, bid2);
+            pre.setBinaryStream(2, (InputStream) fin, (int) file.length());
+            pre.executeUpdate();
+            System.out.println("Successfully inserted the file into the database!");
+            
+        } catch (Exception e1) {
+            System.out.println(e1.getMessage());
+        } finally {            
+            closeConnection();
+        }
+        
+        insert("INSERT INTO INLAGG_BILD VALUES(" + bid2 + "," + iid + ")");
     }
 
     public String retriveImage(String query){

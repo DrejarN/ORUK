@@ -1,9 +1,7 @@
 package oruk;
 
 import java.awt.Toolkit;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import oru.inf.*;
@@ -23,10 +21,13 @@ public class SkapaInlagg extends javax.swing.JFrame {
     private ArrayList namnLista;
     private ArrayList taggLista;
     int index = 1;
+    private String ettid;
+    private File image1;
 
-    public SkapaInlagg(OrukDB db) {
+    public SkapaInlagg(OrukDB db, String inlaggsID) {
         initComponents();
         this.db = db;
+        this.ettid = inlaggsID;
         fylllista();
         setThisTitle();
         this.setLocationRelativeTo(null);
@@ -36,8 +37,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
         fyllCmbxTaggar();
         ComboBoxAutoComplete.enable(cmbxAnvandarnamn);
         ComboBoxAutoComplete.enable(cmbxTaggar);
-        namnLista = new ArrayList<String>();
-        taggLista = new ArrayList<String>();
+        namnLista = new ArrayList<>();
+        taggLista = new ArrayList<>();
 
     }
 
@@ -219,11 +220,11 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         String valdkategori = (String) kategori.getSelectedItem();
         String katid = "";
-        String ettid = "";
+        //String ettid = "";
         String ettaid = "";
         try {
             katid = db.fetchSingle("SELECT KID FROM KATEGORI WHERE NAMN = '" + valdkategori + "'");
-            ettid = db.getAutoIncrement("INLAGG", "IID");
+            //ettid = db.getAutoIncrement("INLAGG", "IID");
             ettaid = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS = '" + Huvudfonster.getAnvandarnamn() + "'");
         } catch (InfException e) {
             JOptionPane.showConfirmDialog(null, "Hoppla");
@@ -255,41 +256,25 @@ public class SkapaInlagg extends javax.swing.JFrame {
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Kunde ej publicera inlägget");
         }
+        try {
+            db.insertBlogImage(image1, ettid);
+
+        } catch (InfException ex) {
+            Logger.getLogger(SkapaInlagg.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     private void btnBifogaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBifogaFilActionPerformed
+
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filename = f.getAbsolutePath();
         String anvandare = Huvudfonster.getAnvandarnamn();
-        String ettid = "";
+        File image = new File(filename);
+        this.image1 = image;
 
-        try {
-            ettid = db.getAutoIncrement("INLAGG", "IID");
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "fel");
-        }
 
-        try {
-            String id1 = db.getAutoIncrement("BILD", "BID");
-
-            File image = new File(filename);
-            FileInputStream fis = new FileInputStream(image);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                bos.write(buf, 0, readNum);
-
-            }
-            photo = bos.toByteArray();
-
-            query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
-            query3 = "INSERT INTO INLAGG_BILD VALUES(" + id1 + ", " + ettid + ")";
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-        }
     }//GEN-LAST:event_btnBifogaFilActionPerformed
 
     private void btnLaggTillMedskribentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillMedskribentActionPerformed

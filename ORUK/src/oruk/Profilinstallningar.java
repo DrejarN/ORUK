@@ -6,13 +6,12 @@
 package oruk;
 
 import java.awt.Image;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
@@ -31,6 +30,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
     public Profilinstallningar(OrukDB db) {
         initComponents();
         this.db = db;
+        setProfil();
     }
 
     public static ImageIcon getBild() {
@@ -39,6 +39,34 @@ public class Profilinstallningar extends javax.swing.JPanel {
         ImageIcon image = new ImageIcon(img);
 
         return image;
+
+    }
+
+    public static void setProfil() {
+        try {
+            String anvandare = Huvudfonster.getAnvandarnamn();
+            String fornamn = db.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
+            String efternamn = db.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
+            String teleNR = db.fetchSingle("SELECT TELEFONNUMMER FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
+            String ePost = db.fetchSingle("SELECT MAILADRESS FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
+            String losenord = db.fetchSingle("SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
+            String titel = db.fetchSingle("SELECT TITEL FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
+            
+                txtFornamn.setText(fornamn);
+                txtEfternamn.setText(efternamn);
+                txtTitel.setText(titel);
+                txtEpost.setText(ePost);
+                txtTelefon.setText(teleNR);
+                txtLosenord.setText(losenord);
+            
+            
+            
+            
+            
+        } catch (InfException ex) {
+            Logger.getLogger(Profilinstallningar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
     }
 
@@ -231,7 +259,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
         filename = f.getAbsolutePath();
         String anvandare = Huvudfonster.getAnvandarnamn();
         File image = new File(filename);
-        
+
         try {
             String aid = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
             db.insertProfilImage(image, aid);
@@ -242,17 +270,14 @@ public class Profilinstallningar extends javax.swing.JPanel {
             //for (int readNum; (readNum = fis.read(buf)) != -1;) {
             //bos.write(buf, 0, readNum);
 
-            }
-            //photo = bos.toByteArray();
-
-            //String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
-            //String query2 = "DELETE FROM PROFIL_BILD WHERE AID=(SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')";
-            //String query3 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id1 + ")";
-
-            //db.insert(query1);
-            //db.delete(query2);
-            //db.insert(query3);
-         catch (Exception ex) {
+        } //photo = bos.toByteArray();
+        //String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
+        //String query2 = "DELETE FROM PROFIL_BILD WHERE AID=(SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')";
+        //String query3 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id1 + ")";
+        //db.insert(query1);
+        //db.delete(query2);
+        //db.insert(query3);
+        catch (Exception ex) {
 
         }
     }//GEN-LAST:event_btnLaddaUppActionPerformed
@@ -346,11 +371,11 @@ public class Profilinstallningar extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jblLosenord;
     private javax.swing.JPanel panelProfilInstallningar;
-    private javax.swing.JTextField txtEfternamn;
-    private javax.swing.JTextField txtEpost;
-    private javax.swing.JTextField txtFornamn;
-    private javax.swing.JTextField txtLosenord;
-    private javax.swing.JTextField txtTelefon;
-    private javax.swing.JTextField txtTitel;
+    private static javax.swing.JTextField txtEfternamn;
+    private static javax.swing.JTextField txtEpost;
+    private static javax.swing.JTextField txtFornamn;
+    private static javax.swing.JTextField txtLosenord;
+    private static javax.swing.JTextField txtTelefon;
+    private static javax.swing.JTextField txtTitel;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,11 +1,5 @@
 package oruk;
 
-
-import java.io.File;
-import javax.swing.JOptionPane;
-import oru.inf.InfDB;
-import oru.inf.InfException;
-
 /**
  *
  * @author Christian Rudolphi & Mats Nilsson

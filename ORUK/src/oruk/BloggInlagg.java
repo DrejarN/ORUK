@@ -251,11 +251,13 @@ public class BloggInlagg extends javax.swing.JPanel {
                 String data1 = "DELETE FROM GORA_INLAGG WHERE IID='" + inlagg + "'";
                 String data2 = "DELETE FROM INLAGG_TAGG WHERE IID='" + inlagg + "'";
                 String data3 = "DELETE FROM KOMMENTERA_INLAGG WHERE IID='" + inlagg + "'";
-                String data4 = "DELETE FROM INLAGG WHERE IID='" + inlagg + "'";
+                String data4 = "DELETE FROM INLAGG_BILD WHERE IID='" + inlagg + "'";
+                String data5 = "DELETE FROM INLAGG WHERE IID='" + inlagg + "'";
                 db.delete(data1);
                 db.delete(data2);
                 db.delete(data3);
-                db.delete(data4);
+                db.delete(data4);               
+                db.delete(data5);
                 
                 JOptionPane.showMessageDialog(null, "Inlägget har tagits bort");
                 

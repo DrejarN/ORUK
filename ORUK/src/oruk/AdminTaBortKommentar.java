@@ -144,6 +144,7 @@ public class AdminTaBortKommentar extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Kommentaren har tagits bort");
                 fyllLista();
+                Kommentar.fyllLista();
 
             } catch (InfException ex) {
 

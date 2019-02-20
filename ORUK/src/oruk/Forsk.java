@@ -3,7 +3,6 @@ package oruk;
 import javax.swing.JOptionPane;
 import oru.inf.*;
 import java.util.*;
-import javax.swing.DefaultListModel;
 
 public class Forsk extends javax.swing.JFrame {
 

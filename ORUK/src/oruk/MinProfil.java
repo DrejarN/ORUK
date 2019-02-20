@@ -33,7 +33,7 @@ public class MinProfil extends javax.swing.JPanel {
         initComponents();
         this.db = db;
 
-        //bild.setIcon(Profilinstallningar.getBild());
+        
         setProfil();
         box = new Box(BoxLayout.Y_AXIS);
         jScrollPane1.setViewportView(box);
@@ -76,19 +76,7 @@ public class MinProfil extends javax.swing.JPanel {
             lblTitel.setText(query5);
             bild.setIcon(image);
 
-            /**
-             * byte[] imageBytes; Image image2;
-             * Class.forName("com.mysql.jdbc.Driver"); Connection con =
-             * DriverManager.getConnection("jdbc:mysql://" + "10.22.5.86" +
-             * ":3306/ORUKDB?zeroDateTimeBehavior=convertToNull", "oruk",
-             * "masterkey"); PreparedStatement ps = con.prepareStatement("SELECT
-             * BILDEN FROM BILD WHERE BID=(SELECT BID FROM PROFIL_BILD WHERE
-             * AID=" + anvandare2 + ")"); ResultSet rs = ps.executeQuery();
-             * while(rs.next()) { imageBytes = rs.getBytes("BILDEN"); image2 =
-             * getToolkit().createImage(imageBytes); ImageIcon icon2 = new
-             * ImageIcon(image2); bild.setIcon(icon2);  
-                }*
-             */
+           
         } catch (Exception e) {
         }
     }

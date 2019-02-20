@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,9 +46,9 @@ public class OrukDB {
         }
         if (this.con == null) {
             try {
-                System.out.println("kommer vi hit eller?");
+                
                 loadDriver2();
-                System.out.println("1");
+                
                 initConnection2();
                 kolla = 2;
                 JOptionPane.showMessageDialog(null, "Anslutning offline gjord");
@@ -69,20 +71,15 @@ public class OrukDB {
 
     private void initConnection2()
             throws InfException {
-        System.out.println("2");
+        
         //Skapar en string med den relativa sökvägen till vår databas
         String relativa = "/ORUK.FDB";
-        System.out.println("relativa");
         //Skapar en temporär fil som låter oss köra metoden för att hitta den absoluta sökvägen till vår databas.
         File tempFile = new File("");
-        System.out.println("4");
         String absoluta = tempFile.getAbsolutePath();
-        System.out.println("absoluta");
         ipAdress = absoluta + relativa;
-        System.out.println("ipAdress");
-
-        try {                                        //jdbc:firebirdsql:localhost/3050:" + databasen                 
-            System.out.println("6");
+        
+        try {                                                       
             this.con = DriverManager.getConnection("jdbc:firebirdsql://localhost:3050/" + ipAdress + "?columnLabelForName=true", "SYSDBA", "masterkey");
         } catch (SQLException e) {
             throw new InfException("Couldn't open Firebird database, check your path. Make sure to use .FDB in the end");
@@ -104,7 +101,7 @@ public class OrukDB {
         try {
             this.con = DriverManager.getConnection("jdbc:mysql://" + ipAdress + ":3306/ORUKDB?zeroDateTimeBehavior=convertToNull", "oruk", "masterkey");
         } catch (SQLException e) {
-            throw new InfException("Couldn't open Firebird database, check your path. Make sure to use .FDB in the end");
+            throw new InfException("Får ingen anslutning med servern");
         }
     }
     
@@ -114,25 +111,7 @@ public class OrukDB {
     
     }
 
-    /**
-     * private Object[] makeAdvanceConnect() throws InfException { try {
-     *
-     * }
-     * catch (Exception e) { throw new InfException(e); } StringBuilder
-     * conBuilder = new StringBuilder(); conBuilder.append("jdbc:firebirdsql:");
-     * conBuilder.append("//").append(this.param.get("HOST")).append("/").append(this.path);
-     *
-     * Properties props = new Properties(); props.setProperty("user",
-     * (String)this.param.get("USER")); props.setProperty("password",
-     * (String)this.param.get("PASSWORD")); props.setProperty("encoding",
-     * (String)this.param.get("ENCODING")); if
-     * (((Boolean)this.param.get("COLUMNLABELFORNAME")).booleanValue()) {
-     * props.setProperty("columnLabelForName", "true"); } Object[] arr = {
-     * conBuilder, props };
-     *
-     * return arr; }
-     *
-     */
+    
     private void closeConnection()
             throws InfException {
         try {
@@ -179,31 +158,7 @@ public class OrukDB {
         }
         return result;
     }
-/**
-    public ImageIcon fetchBlob2(String query)
-            throws InfException {
-                byte[] imageBytes = null;
-                Image image2 = null;
-                ImageIcon icon2 = null;
-                try{
-                PreparedStatement ps = con.prepareStatement(query); 
-                ResultSet rs = ps.executeQuery();
-                while(rs.next())
-                {   
-                   imageBytes = rs.getBytes("BILDEN");   
-                    image2 = getToolkit().createImage(imageBytes);
-                    icon2 = new ImageIcon(image2);     
-                     
-                }
-                }
-         catch (SQLException e) {
-            throw new InfException("fetchSingle statement didn't work - check your query");
-        } finally {
-            closeConnection();
-        }
-        return icon2;
-    }
-    */
+
 
     public void insertProfilImage(File file, String aid) throws InfException {
         String bid = getAutoIncrement("BILD", "BID");
@@ -220,7 +175,7 @@ public class OrukDB {
             pre.executeUpdate();
             System.out.println("Successfully inserted the file into the database!");
             
-        } catch (Exception e1) {
+        } catch (FileNotFoundException | SQLException e1) {
             System.out.println(e1.getMessage());
         } finally {            
             closeConnection();
@@ -228,6 +183,9 @@ public class OrukDB {
         delete("DELETE FROM PROFIL_BILD WHERE AID=" + aid);
         insert("INSERT INTO PROFIL_BILD VALUES(" + aid + "," + bid2 + ")");
     }
+    
+    
+    
     
     public void insertBlogImage(File file, String iid) throws InfException {
         String bid = getAutoIncrement("BILD", "BID");
@@ -244,7 +202,7 @@ public class OrukDB {
             pre.executeUpdate();
             System.out.println("Successfully inserted the file into the database!");
             
-        } catch (Exception e1) {
+        } catch (FileNotFoundException | SQLException e1) {
             System.out.println(e1.getMessage());
         } finally {            
             closeConnection();
@@ -252,6 +210,8 @@ public class OrukDB {
         
         insert("INSERT INTO INLAGG_BILD VALUES(" + bid2 + "," + iid + ")");
     }
+    
+    
 
     public String retriveImage(String query){
          String svar = null;
@@ -271,7 +231,7 @@ public class OrukDB {
                 f.close();
                 in.close();
             }
-        } catch (Exception ex) {
+        } catch (IOException | SQLException ex) {
             System.out.println(ex.getMessage());
         }
         System.out.println(svar);

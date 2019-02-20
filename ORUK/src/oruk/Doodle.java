@@ -7,8 +7,6 @@ import oru.inf.*;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
 
 public class Doodle extends javax.swing.JPanel {
 

@@ -50,9 +50,7 @@ public class Kommentar extends javax.swing.JFrame {
             {
                 btnTaBortKommentarer.setVisible(true);
                 lblKommentarer.setVisible(true);
-                
-                
-            
+          
             }
         
         } 

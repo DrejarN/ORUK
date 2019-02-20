@@ -263,20 +263,7 @@ public class Profilinstallningar extends javax.swing.JPanel {
         try {
             String aid = db.fetchSingle("SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "'");
             db.insertProfilImage(image, aid);
-            //File image = new File(filename);
-            //FileInputStream fis = new FileInputStream(image);
-            //ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            //byte[] buf = new byte[1024];
-            //for (int readNum; (readNum = fis.read(buf)) != -1;) {
-            //bos.write(buf, 0, readNum);
-
-        } //photo = bos.toByteArray();
-        //String query1 = "INSERT INTO BILD VALUES(" + id1 + ", '" + photo + "')";
-        //String query2 = "DELETE FROM PROFIL_BILD WHERE AID=(SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')";
-        //String query3 = "INSERT INTO PROFIL_BILD VALUES((SELECT AID FROM ANVANDARE WHERE MAILADRESS='" + anvandare + "')," + id1 + ")";
-        //db.insert(query1);
-        //db.delete(query2);
-        //db.insert(query3);
+        }
         catch (Exception ex) {
 
         }

@@ -13,7 +13,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import oru.inf.InfException;
-import static oruk.AdminTaBortKommentar.fyllLista;
 
 /**
  *
@@ -220,12 +219,7 @@ public class MittFlode extends javax.swing.JPanel {
         JPanel importeradPanel = new ForskningUtbildningAnslag(db);
         box.add(importeradPanel);
         box.revalidate();
-        //importeradPanel.setBounds(panel_Inlagg.getBounds());
-        //panel_Inlagg.removeAll();
-        //panel_Inlagg.revalidate();
-        //panel_Inlagg.repaint();
-        //panel_Inlagg.add(importeradPanel);
-        //importeradPanel.setLocation(1, 1);     
+           
     }//GEN-LAST:event_btnForskningActionPerformed
 
     private void btnInformellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformellActionPerformed

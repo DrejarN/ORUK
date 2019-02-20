@@ -6,7 +6,6 @@
 package oruk;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import oru.inf.InfException;

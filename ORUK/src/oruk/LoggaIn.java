@@ -1,6 +1,5 @@
 package oruk;
 
-
 import java.awt.Toolkit;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -10,10 +9,10 @@ import javax.swing.*;
 import java.util.*;
 
 public class LoggaIn extends javax.swing.JFrame {
-    
+
     private static OrukDB db;
     private ArrayList<String> lista;
-    
+
     public LoggaIn(OrukDB db) {
         initComponents();
         this.db = db;
@@ -194,28 +193,30 @@ public class LoggaIn extends javax.swing.JFrame {
         String dec = new String(crypto.decrypt(enc.getBytes()));
         String anv = (String) cmbxAnvandarnamn.getSelectedItem();
         byte[] bytes = null;
-        
+
         try {
             lista = db.fetchColumn("SELECT LOSENORD FROM ANVANDARE WHERE MAILADRESS = '" + anv + "'");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "bläbläbläblä");
         }
-        
+
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(baos);
             for (String element : lista) {
                 out.writeUTF(element);
+
             }
             bytes = baos.toByteArray();
             for (int i = 0; i < bytes.length; i++) {
                 String str = new String(crypto.encrypt(bytes));
-                if (str.contains(enc)) {
+
+                if (str.trim().equals(enc)) {
                     dispose();
                     new Huvudfonster(db, anv).setVisible(true);
-                    
+
                     break;
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Fel lösenord!");
                     break;
@@ -223,7 +224,7 @@ public class LoggaIn extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             JOptionPane.showConfirmDialog(null, "Hoppla!");
-        }        
+        }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     //Gör att btnLoggIn blir klickad om man trycker enter medan fokus är i lösenordstextfältet
@@ -241,13 +242,12 @@ public class LoggaIn extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbxAnvandarnamnActionPerformed
 
     private void btnAndraInloggsTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraInloggsTypActionPerformed
-        if(btnLoggaIn.isVisible()){
+        if (btnLoggaIn.isVisible()) {
             btnAndraInloggsTyp.setText("Vanlig inloggning");
             btnLoggaInOnline.setVisible(true);
             txtFldIpAdress.setVisible(true);
             btnLoggaIn.setVisible(false);
-        }
-        else{
+        } else {
             btnAndraInloggsTyp.setText("Avancerad inloggning");
             btnLoggaInOnline.setVisible(false);
             txtFldIpAdress.setVisible(false);
@@ -261,10 +261,10 @@ public class LoggaIn extends javax.swing.JFrame {
 
     private void btnLoggaInOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInOnlineActionPerformed
         String nyIP = txtFldIpAdress.getText();
-        db=new OrukDB(nyIP);
+        db = new OrukDB(nyIP);
         this.dispose();
         new LoggaIn(db).setVisible(true);
-        
+
     }//GEN-LAST:event_btnLoggaInOnlineActionPerformed
 
     private void txtFldIpAdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldIpAdressActionPerformed
@@ -277,21 +277,21 @@ public class LoggaIn extends javax.swing.JFrame {
             ArrayList listan = new ArrayList();
             listan = db.fetchColumn("SELECT MAILADRESS FROM ANVANDARE");
             ArrayList<String> allaAnvandare = new ArrayList<>();
-            
+
             for (Object mailadress : listan) {
                 String anvandare = mailadress.toString();
                 allaAnvandare.add(anvandare);
             }
             allaAnvandare.sort(String::compareToIgnoreCase);
-            
+
             for (String namn : allaAnvandare) {
                 cmbxAnvandarnamn.addItem(namn);
             }
             cmbxAnvandarnamn.setSelectedIndex(-1);
-            
+
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Knas med anslutningen");
-            System.out.println("Internt felmeddelande" + ex.getMessage());           
+            System.out.println("Internt felmeddelande" + ex.getMessage());
         }
     }
 
